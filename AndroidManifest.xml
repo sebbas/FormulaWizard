@@ -1,0 +1,141 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.ndroidstudios.android.formulawizard"
+    android:versionCode="3"
+    android:versionName="1.2" >
+
+    <uses-sdk
+        android:minSdkVersion="7"
+        android:targetSdkVersion="15" />
+
+    <application
+        android:icon="@drawable/formulawizard_icon"
+        android:label="@string/app_name"
+        android:theme="@style/Theme.Sherlock.Light.DarkActionBar" >
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/title_activity_main"   >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".AreaChooser" >
+        </activity>
+        <activity
+            android:name=".VolumeChooser" >
+        </activity>
+        <activity
+            android:name=".QuadraticCalculator" >
+        </activity>
+        <activity
+            android:name=".DistanceCalculator" >
+        </activity>
+        <activity
+            android:name=".BinomialChooser" >
+        </activity>
+        <activity
+            android:name=".PerimeterChooser" >
+        </activity>
+        <activity
+            android:name=".SlopeCalculator" >
+        </activity>
+        <activity
+            android:name=".PythagoreanTheorem" >
+        </activity>
+        <activity
+            android:name=".MidpointCalculator" >
+        </activity>
+        <activity
+            android:name=".MoreActivity" >
+        </activity>
+        <activity
+            android:name="CircleActivity" >
+        </activity>
+        <activity
+            android:name="ConeActivity" >
+        </activity>
+        <activity
+            android:name="CubeActivity" >
+        </activity>
+        <activity
+            android:name="CylinderActivity" >
+        </activity>
+        <activity
+            android:name="EllipseActivity" >
+        </activity>
+        <activity
+            android:name="RectangleActivity" >
+        </activity>
+        <activity
+            android:name="SquareActivity" >
+        </activity>
+        <activity
+            android:name="TrapezoidActivity" >
+        </activity>
+        <activity
+            android:name="TriangleActivity" >
+        </activity>
+        <activity
+            android:name="ConeVolumeActivity" >
+        </activity>
+        <activity
+            android:name="CubeVolumeActivity" >
+        </activity>
+        <activity
+            android:name="CylinderVolumeActivity" >
+        </activity>
+        <activity
+            android:name="EllipsoidVolumeActivity" >
+        </activity>
+        <activity
+            android:name="PrismVolumeActivity" >
+        </activity>
+        <activity
+            android:name="PyramidVolumeActivity" >
+        </activity>
+        <activity
+            android:name="SphereVolumeActivity" >
+        </activity>
+        <activity
+            android:name="CirclePerimeterActivity" >
+        </activity>
+        <activity
+            android:name="EllipsePerimeterActivity" >
+        </activity>
+        <activity
+            android:name="RectanglePerimeterActivity" >
+        </activity>
+        <activity
+            android:name="SquarePerimeterActivity" >
+        </activity>
+        <activity
+            android:name="TrapezoidPerimeterActivity" >
+        </activity>
+        <activity
+            android:name="TrianglePerimeterActivity" >
+        </activity>
+        <activity
+            android:name="Exponent2Activity" >
+        </activity>
+        <activity
+            android:name="Exponent3Activity" >
+        </activity>
+        <activity
+            android:name="Exponent2positiveActivity" >
+        </activity>
+        <activity
+            android:name="Exponent2negativeActivity" >
+        </activity>
+        <activity
+            android:name="Exponent3positiveActivity" >
+        </activity>
+        <activity
+            android:name="Exponent3negativeActivity" >
+        </activity>
+        <activity
+            android:name="VoiceRecognition" >
+        </activity>
+    </application>
+
+</manifest>
