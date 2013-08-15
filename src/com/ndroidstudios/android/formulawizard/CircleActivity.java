@@ -22,7 +22,7 @@ public class CircleActivity extends Activity {
 	
 	// Helper instance variables
 	private UIHelper uiHelper = new UIHelper();
-	private Formulas calculator = new Formulas();
+	private Formulas formulaHelper = new Formulas();
 	
 	/** Called when the activity is first created. */
     @Override
@@ -65,7 +65,7 @@ public class CircleActivity extends Activity {
 				uiHelper.setErrorText(mInfoText);
 			} else {
 				double radius = Double.parseDouble(mVariableA.getText().toString());
-				result = calculator.circleArea(radius);
+				result = formulaHelper.circleArea(radius);
 				mInfoText.setText("Area = " + result);				  
 			}
     	} catch (InvalidInputException e) {

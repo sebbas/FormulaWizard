@@ -13,7 +13,11 @@ public class CalculatorFragment extends SherlockFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		
+		
 		View rootView = inflater.inflate(R.layout.calculator, container, false);
+		
+		// TODO
+		
 		return rootView;
 	}
 

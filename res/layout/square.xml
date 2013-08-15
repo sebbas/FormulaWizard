@@ -17,7 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="@string/square"
+        android:text="@string/square_area"
         android:textColor="#000000"
         android:textSize="25sp" />
 	   
@@ -43,7 +43,7 @@
             android:layout_centerVertical="true"
 			android:layout_centerHorizontal="true"
             android:src="@drawable/square_formula"
-            android:contentDescription="@string/square" />
+            android:contentDescription="@string/square_area" />
         
 	</RelativeLayout>
     

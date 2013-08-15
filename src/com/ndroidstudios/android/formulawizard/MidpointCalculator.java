@@ -21,8 +21,7 @@ public class MidpointCalculator extends Activity {
 	private EditText mVariableD;
 	private Button mCalculateButton;
 	private TextView mInfoText;
-	private double result1;
-	private double result2;
+	private double[] results;
 	
 	// Helper instance variables
 	private UIHelper uiHelper = new UIHelper();
@@ -81,9 +80,8 @@ public class MidpointCalculator extends Activity {
 			double x2 = Double.parseDouble(mVariableB.getText().toString());
 			double y1 = Double.parseDouble(mVariableC.getText().toString());
 			double y2 = Double.parseDouble(mVariableD.getText().toString());
-			result1 = calculator.midpoint(x1, x2);
-			result2 = calculator.midpoint(y1, y2);
-			mInfoText.setText("Midpoint = " + result1 + ", " + result2);				  
+			results = calculator.midpoint(x1, x2, y1, y2);
+			mInfoText.setText("Midpoint = " + results[0] + ", " + results[1]);				  
 		}
     }
 }

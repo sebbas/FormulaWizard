@@ -12,6 +12,30 @@ public class Formulas {
 		private static final long serialVersionUID = 1L;
 	}
 	
+	public double plus(double a, double b) {
+		return a + b;
+	}
+	
+	public double minus(double a, double b) {
+		return a - b;
+	}
+	
+	public double multiply(double a, double b) {
+		return a * b;
+	}
+	
+	public double divide(double a, double b) {
+		return a / b;
+	}
+	
+	public double squareRoot(double value) throws InvalidInputException {
+		if (value >= 0) {
+			return Math.sqrt(value);
+		} else {
+			throw new InvalidInputException();
+		}
+	}
+	
 	public double circleArea(double radius) throws InvalidInputException {
 		if (radius >= 0) {
 			result = radius * radius * PI;
@@ -136,9 +160,10 @@ public class Formulas {
 		return result;
 	}
 	
-	public double midpoint(double x1, double x2) {
-		result = (x2 + x1) / 2;
-		return result;
+	public double[] midpoint(double x1, double x2, double y1, double y2) {
+		results[0] = (x2 + x1) / 2;
+		results[1] = (y2 + y1) / 2;
+		return results;
 	}
 	
 	public double prismVolume(double length, double width, double height) throws InvalidInputException {

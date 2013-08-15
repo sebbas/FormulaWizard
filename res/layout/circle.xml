@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:textColor="#000000"
-        android:text="@string/circle"
+        android:text="@string/circle_area"
         android:textSize="25sp" />
 	   
     <RelativeLayout
@@ -43,7 +43,7 @@
             android:layout_centerVertical="true"
 			android:layout_centerHorizontal="true"
             android:src="@drawable/circle_formula"
-            android:contentDescription="@string/circle" />
+            android:contentDescription="@string/circle_area" />
         
 	</RelativeLayout>
     

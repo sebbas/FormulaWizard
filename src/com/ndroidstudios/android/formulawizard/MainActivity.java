@@ -13,8 +13,6 @@ import android.widget.TextView;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.app.ActionBar.Tab;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
 import com.ndroidstudios.android.helper.VoiceHelper;
 
 public class MainActivity extends SherlockFragmentActivity {
@@ -41,10 +39,6 @@ public class MainActivity extends SherlockFragmentActivity {
 		mTabsAdapter.addTab(
 				bar.newTab().setText("Formulas"),
 				FormulaFragment.class, null);
-		mTabsAdapter.addTab(
-				bar.newTab()
-						.setText("Calculator"),
-				CalculatorFragment.class, null);
 		
 		// Only add voice tab if the device is voice recog capable
 		if(voiceHelper.isVoiceCapable()) {
@@ -52,6 +46,10 @@ public class MainActivity extends SherlockFragmentActivity {
 					bar.newTab()
 							.setText("Voice Calc"),
 					VoiceFragment.class, null);
+			
+		mTabsAdapter.addTab(
+				bar.newTab().setText("Settings"),
+				CalculatorFragment.class, null);
 		}
 	}
 	/*
