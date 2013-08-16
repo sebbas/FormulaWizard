@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.speech.RecognizerIntent;
 
 public class VoiceHelper {
@@ -28,6 +30,15 @@ public class VoiceHelper {
         //FOR TESTING PURPOSES ONLY
         return !voiceCapability;
     }
+	
+	public boolean isNetworkConnected() {
+		ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo ni = cm.getActiveNetworkInfo();
+		if (ni == null) {
+			return false;
+		} else
+			return true;
+		}
 }
 
 

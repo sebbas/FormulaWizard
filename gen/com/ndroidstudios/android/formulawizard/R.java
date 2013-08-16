@@ -1011,12 +1011,11 @@ containing a value of this type.
         public static final int abs__textButton=0x7f040013;
         public static final int abs__title=0x7f04001b;
         public static final int abs__up=0x7f04000b;
-        public static final int analyze=0x7f040065;
         public static final int area=0x7f040049;
         public static final int binomial=0x7f04004a;
-        public static final int calculate_button=0x7f040035;
+        public static final int calculate_button=0x7f040034;
         public static final int disableHome=0x7f040009;
-        public static final int display_result=0x7f040036;
+        public static final int display_result=0x7f040035;
         public static final int display_x1=0x7f040042;
         public static final int display_x2=0x7f040059;
         public static final int dummy=0x7f040052;
@@ -1028,18 +1027,21 @@ containing a value of this type.
         public static final int length=0x7f04004b;
         public static final int listMode=0x7f040002;
         public static final int midpoint=0x7f04004c;
+        public static final int more_info=0x7f040067;
+        public static final int more_text=0x7f040068;
         public static final int normal=0x7f040001;
         public static final int pager=0x7f040032;
         public static final int perimeter=0x7f04004d;
-        public static final int powered=0x7f040067;
-        public static final int progressBar1=0x7f040064;
+        public static final int progressBar1=0x7f040065;
         public static final int pythagoras=0x7f04004e;
         public static final int quadratic=0x7f040050;
+        public static final int result=0x7f040066;
+        public static final int result_layout=0x7f040064;
         public static final int showCustom=0x7f040008;
         public static final int showHome=0x7f040005;
         public static final int showTitle=0x7f040007;
         public static final int slope=0x7f04004f;
-        public static final int spinner1=0x7f040033;
+        public static final int spinner1=0x7f040039;
         public static final int string_x1=0x7f04003a;
         public static final int string_x2=0x7f04003c;
         public static final int string_y1=0x7f04003e;
@@ -1055,16 +1057,16 @@ containing a value of this type.
         public static final int variable_base4=0x7f04005e;
         public static final int variable_basearea=0x7f040057;
         public static final int variable_c=0x7f040058;
-        public static final int variable_height=0x7f040038;
+        public static final int variable_height=0x7f040037;
         public static final int variable_length=0x7f040055;
-        public static final int variable_radius=0x7f040034;
+        public static final int variable_radius=0x7f040033;
         public static final int variable_radius1=0x7f040043;
         public static final int variable_radius2=0x7f040044;
         public static final int variable_radius3=0x7f040045;
-        public static final int variable_side=0x7f040039;
+        public static final int variable_side=0x7f040038;
         public static final int variable_side1=0x7f040060;
         public static final int variable_side2=0x7f040061;
-        public static final int variable_slant=0x7f040037;
+        public static final int variable_slant=0x7f040036;
         public static final int variable_square=0x7f04005a;
         public static final int variable_width=0x7f040056;
         public static final int variable_x1=0x7f04003b;
@@ -1073,8 +1075,8 @@ containing a value of this type.
         public static final int variable_y2=0x7f040041;
         public static final int voice_button=0x7f040062;
         public static final int voice_prompt=0x7f040063;
-        public static final int voice_result=0x7f040066;
         public static final int volume=0x7f040051;
+        public static final int wolfram_icon=0x7f040069;
         public static final int wrap_content=0x7f040000;
     }
     public static final class integer {
@@ -1103,13 +1105,13 @@ containing a value of this type.
         public static final int abs__search_view=0x7f030013;
         public static final int abs__simple_dropdown_hint=0x7f030014;
         public static final int activity_main=0x7f030015;
-        public static final int calculator=0x7f030016;
-        public static final int circle=0x7f030017;
-        public static final int circle_perimeter=0x7f030018;
-        public static final int cone=0x7f030019;
-        public static final int cone_volume=0x7f03001a;
-        public static final int cube=0x7f03001b;
-        public static final int cube_volume=0x7f03001c;
+        public static final int circle=0x7f030016;
+        public static final int circle_perimeter=0x7f030017;
+        public static final int cone=0x7f030018;
+        public static final int cone_volume=0x7f030019;
+        public static final int cube=0x7f03001a;
+        public static final int cube_volume=0x7f03001b;
+        public static final int custom=0x7f03001c;
         public static final int cylinder=0x7f03001d;
         public static final int cylinder_volume=0x7f03001e;
         public static final int distance=0x7f03001f;
@@ -1188,6 +1190,7 @@ containing a value of this type.
         public static final int circle_perimeter=0x7f090034;
         public static final int cone_surface=0x7f090018;
         public static final int cone_volume=0x7f09002b;
+        public static final int connection_error=0x7f09004e;
         public static final int cube_surface=0x7f09001a;
         public static final int cube_volume=0x7f09002c;
         public static final int cylinder_surface=0x7f09001c;
@@ -1203,12 +1206,17 @@ containing a value of this type.
         public static final int input_not_complete=0x7f090045;
         public static final int input_prompt=0x7f090044;
         public static final int midpoint_points=0x7f090043;
+        public static final int more_info=0x7f09004c;
+        public static final int no_result=0x7f09004b;
         public static final int prism_volume=0x7f090030;
         public static final int pyramid_volume=0x7f090032;
         public static final int pythagorean_theorem=0x7f090041;
         public static final int quadratic_formula=0x7f090013;
+        public static final int query_error=0x7f090048;
+        public static final int query_notunderstood=0x7f090049;
         public static final int rectangle_area=0x7f090021;
         public static final int rectangle_perimeter=0x7f090037;
+        public static final int result=0x7f09004a;
         public static final int slope_line=0x7f090042;
         public static final int sphere_volume=0x7f090036;
         public static final int square_area=0x7f090023;
@@ -1240,6 +1248,7 @@ containing a value of this type.
         public static final int variable_square=0x7f090024;
         public static final int variable_width=0x7f090022;
         public static final int voice_prompt=0x7f090046;
+        public static final int wolfram_icon=0x7f09004d;
     }
     public static final class style {
         public static final int AppTheme=0x7f0a0059;

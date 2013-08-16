@@ -39,18 +39,17 @@ public class MainActivity extends SherlockFragmentActivity {
 		mTabsAdapter.addTab(
 				bar.newTab().setText("Formulas"),
 				FormulaFragment.class, null);
+			
+		mTabsAdapter.addTab(
+				bar.newTab().setText("Custom"),
+				CustomFragment.class, null);
 		
 		// Only add voice tab if the device is voice recog capable
 		if(voiceHelper.isVoiceCapable()) {
 			mTabsAdapter.addTab(
-					bar.newTab()
-							.setText("Voice Calc"),
-					VoiceFragment.class, null);
-			
-		mTabsAdapter.addTab(
-				bar.newTab().setText("Settings"),
-				CalculatorFragment.class, null);
-		}
+				bar.newTab().setText("Voice Calc"),
+				VoiceFragment.class, null);
+		}	
 	}
 	/*
 	@Override

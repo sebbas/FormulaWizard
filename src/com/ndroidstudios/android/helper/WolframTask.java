@@ -1,10 +1,18 @@
 package com.ndroidstudios.android.helper;
 
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.ndroidstudios.android.formulawizard.R;
 import com.wolfram.alpha.WAEngine;
 import com.wolfram.alpha.WAException;
 import com.wolfram.alpha.WAPlainText;
@@ -18,14 +26,22 @@ public class WolframTask extends AsyncTask<String, Void, String> {
 	// PUT YOUR APPID HERE:
     private static String appid = "OMITTED";
     private String output;
-    private TextView resultText;
-    private TextView analyzeText;
-    private ProgressBar progressBar;
+    private TextView mResultText;
+    private ProgressBar mProgressBar;
+    private LinearLayout mResultInfo;
+    private LinearLayout mMoreInfo;
+    private ImageView mWolframIcon;
+    private WAQuery mQuery;
+    private Context context;
 
-    public WolframTask (TextView resultText, TextView analyzeText, ProgressBar progressBar) {
-    	this.resultText = resultText;
-    	this.analyzeText = analyzeText;
-    	this.progressBar = progressBar;
+    public WolframTask (TextView resultText, ProgressBar progressBar, LinearLayout mResultInfo,
+    		LinearLayout mMoreInfo, ImageView mWolframIcon, Context context) {
+    	this.mResultText = resultText;
+    	this.mProgressBar = progressBar;
+    	this.mResultInfo = mResultInfo;
+    	this.mMoreInfo = mMoreInfo;
+    	this.mWolframIcon = mWolframIcon;
+    	this.context = context;
     }
     
     @Override
@@ -39,18 +55,39 @@ public class WolframTask extends AsyncTask<String, Void, String> {
     @Override
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
-        resultText.setVisibility(View.VISIBLE);
-        resultText.setText(result);
-        analyzeText.setVisibility(View.GONE);
-        progressBar.setVisibility(View.GONE);
+        mMoreInfo.setVisibility(View.VISIBLE);
+        mResultText.setText(Html.fromHtml(result));
+        mResultText.setMovementMethod(LinkMovementMethod.getInstance());
+        mProgressBar.setVisibility(View.GONE);
+        setIconLink();
     }
     
     @Override
     protected void onPreExecute() {
-    	resultText.setVisibility(View.GONE);
-    	analyzeText.setVisibility(View.VISIBLE);
-    	progressBar.setVisibility(View.VISIBLE);
     	super.onPreExecute();
+    	mMoreInfo.setVisibility(View.GONE);
+    	mResultInfo.setVisibility(View.VISIBLE);
+    	mResultText.setText(context.getResources().getString(R.string.analyze));
+    	mProgressBar.setVisibility(View.VISIBLE);
+    }
+    
+    private void setIconLink() {
+    	
+        mWolframIcon.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// Create the URL to the actual Wolfram Alpha results webpage
+				String queryWebsiteURL = mQuery.toWebsiteURL();
+		        System.out.println("Website is: " + queryWebsiteURL);
+		        
+				Intent intent = new Intent();
+				intent.setAction(Intent.ACTION_VIEW);
+				intent.addCategory(Intent.CATEGORY_BROWSABLE);
+				intent.setData(Uri.parse(queryWebsiteURL));
+				context.startActivity(intent);
+			}
+		});
     }
     
     public String getResultFromQuery(String queryString) {
@@ -68,31 +105,32 @@ public class WolframTask extends AsyncTask<String, Void, String> {
         // These properties will be set in all the WAQuery objects created from this WAEngine.
         engine.setAppID(appid);
         engine.addFormat("plaintext");
+        engine.addPodIndex(2);
 
         // Create the query.
-        WAQuery query = engine.createQuery();
+        mQuery = engine.createQuery();
         
         // Set properties of the query.
-        query.setInput(input);
+        mQuery.setInput(input);
         
         try {
             // For educational purposes, print out the URL we are about to send:
             System.out.println("Query URL:");
-            System.out.println(engine.toURL(query));
+            System.out.println(engine.toURL(mQuery));
             System.out.println("");
             
             // This sends the URL to the Wolfram|Alpha server, gets the XML result
             // and parses it into an object hierarchy held by the WAQueryResult object.
-            WAQueryResult queryResult = engine.performQuery(query);
+            WAQueryResult queryResult = engine.performQuery(mQuery);
             
             if (queryResult.isError()) {
                 System.out.println("Query error");
                 System.out.println("  error code: " + queryResult.getErrorCode());
                 System.out.println("  error message: " + queryResult.getErrorMessage());
-                output = "Query error";
+                output = context.getResources().getString(R.string.query_error);
             } else if (!queryResult.isSuccess()) {
                 System.out.println("Query was not understood; no results available.");
-                output = "Query was not understood";
+                output = context.getResources().getString(R.string.query_notunderstood);
             } else {
                 // Got a result.
                 System.out.println("Successful query. Pods follow:\n");
@@ -105,10 +143,8 @@ public class WolframTask extends AsyncTask<String, Void, String> {
                             for (Object element : subpod.getContents()) {
                                 if (element instanceof WAPlainText) {
                                     System.out.println(((WAPlainText) element).getText());
-                                    System.out.println("");
-                                    if (title.equals("Result")) {
-                                    	output = "Result = " + ((WAPlainText) element).getText();
-                                    }  
+                                    System.out.println("");                                    
+                                    output = pod.getTitle() + " = " + ((WAPlainText) element).getText();
                                 }
                             }
                         }
@@ -121,6 +157,16 @@ public class WolframTask extends AsyncTask<String, Void, String> {
         } catch (WAException e) {
             e.printStackTrace();
         }
-        return output;
+        return defineOutput(output);
+    }
+    
+    private String defineOutput(String output) {
+    	String result = "";
+    	if (output != "") {
+    		result = output;
+        } else {
+        	result = context.getResources().getString(R.string.no_result);
+        }
+    	return result;
     }
 }

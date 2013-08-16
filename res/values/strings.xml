@@ -57,5 +57,12 @@
     <string name="input_prompt">Press Calculate to get the answer!</string>
     <string name="input_not_complete">You have not defined all variables :(</string>
     <string name="voice_prompt">Ask the wizard a question!</string>   
-    <string name="analyze">Analyzing your input &#8230;</string>     
+    <string name="analyze">Analyzing your input &#8230;</string>
+    <string name="query_error">An error occurred while processing your query :(</string>
+    <string name="query_notunderstood">Your query was not understood :(</string>
+    <string name="result">Result</string>
+    <string name="no_result">No result found.</string>
+    <string name="more_info">More at&#160;</string>
+    <string name="wolfram_icon">Wolfram Alpha Icon</string>
+    <string name="connection_error">You are not connected to the internet. Please check your connection.</string>     
 </resources>
