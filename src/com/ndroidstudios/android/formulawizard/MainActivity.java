@@ -26,7 +26,6 @@ public class MainActivity extends SherlockFragmentActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
 		mViewPager = new ViewPager(this);
 		mViewPager.setId(R.id.pager);
 
@@ -42,7 +41,7 @@ public class MainActivity extends SherlockFragmentActivity {
 			
 		mTabsAdapter.addTab(
 				bar.newTab().setText("Custom"),
-				CustomFragment.class, null);
+				CustomFormulaFragment.class, null);
 		
 		// Only add voice tab if the device is voice recog capable
 		if(voiceHelper.isVoiceCapable()) {
@@ -51,13 +50,15 @@ public class MainActivity extends SherlockFragmentActivity {
 				VoiceFragment.class, null);
 		}	
 	}
-	/*
+	
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-	   com.actionbarsherlock.view.MenuInflater inflater = getSupportMenuInflater();
-	   inflater.inflate(R.menu.activity_main, (com.actionbarsherlock.view.Menu) menu);
-	   return super.onCreateOptionsMenu(menu);
-	}*/
+	protected void onDestroy() {
+		getSherlock().dispatchDestroy();
+		try {
+			super.onDestroy();
+		} catch (Exception $e) {
+	    }
+	}
 
 	public static class TabsAdapter extends FragmentPagerAdapter implements
 			ActionBar.TabListener, ViewPager.OnPageChangeListener {

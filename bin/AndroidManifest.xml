@@ -17,8 +17,7 @@
         android:theme="@style/Theme.Sherlock.Light.DarkActionBar" >
         <activity
             android:name=".MainActivity"
-            android:label="@string/title_activity_main"
-            android:configChanges="orientation|screenSize">
+            android:label="@string/title_activity_main">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -134,6 +133,9 @@
         </activity>
         <activity
             android:name="Exponent3negativeActivity" >
+        </activity>
+        <activity 
+            android:name="CustomFormulaEdit">
         </activity>
     </application>
 

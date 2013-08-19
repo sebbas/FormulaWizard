@@ -1,7 +1,10 @@
 package com.ndroidstudios.android.formulawizard;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,11 +13,12 @@ import com.actionbarsherlock.app.SherlockFragment;
 
 public class FormulaFragment extends SherlockFragment {
 
+	private View rootView;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		
-		View rootView = inflater.inflate(R.layout.menu_main, container, false);
+		rootView = inflater.inflate(R.layout.menu_main, container, false);
 		
 		// Set up area button and set on-click listener
         rootView.findViewById(R.id.area)
@@ -108,6 +112,12 @@ public class FormulaFragment extends SherlockFragment {
             
         
 		return rootView;
+	}
+	
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+		super.onConfigurationChanged(newConfig);
+		System.out.println("Configuration invalidated");
 	}
 	
 }

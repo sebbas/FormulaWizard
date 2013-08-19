@@ -64,5 +64,7 @@
     <string name="no_result">No result found.</string>
     <string name="more_info">More at&#160;</string>
     <string name="wolfram_icon">Wolfram Alpha Icon</string>
-    <string name="connection_error">You are not connected to the internet. Please check your connection.</string>     
+    <string name="connection_error">You are not connected to the internet. Please check your connection.</string>
+    <string name="add_formula">Add Formula</string>
+    <string name="cancel_formula">Cancel Formula</string>     
 </resources>

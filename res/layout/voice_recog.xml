@@ -21,6 +21,7 @@
 	    android:id="@+id/voice_button"
         android:layout_width="130dp"
         android:layout_height="130dp"
+        android:layout_marginTop="20dp"
         android:contentDescription="@string/voice_prompt"
         android:background="@drawable/formulawizard_button"
         android:src="@drawable/voice_selector" />
@@ -32,8 +33,7 @@
         android:layout_marginTop="10dp"
         android:textSize="20sp"
         android:gravity="center"
-        android:textStyle="bold"
-        android:text="@string/voice_prompt"/>
+        android:textStyle="bold"/>
     
     <LinearLayout 
         android:id="@+id/result_layout"
@@ -41,19 +41,20 @@
         android:layout_height="wrap_content"
         android:paddingTop="20dp"
         android:paddingBottom="20dp"
-        android:layout_gravity="center_horizontal"
-        android:visibility="gone">
+        android:layout_gravity="center_horizontal">
 
         <ProgressBar
             android:id="@+id/progressBar1"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content" 
+            android:visibility="gone"/>
         
         <TextView 
             android:id="@+id/result"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:layout_marginLeft="5dp"
             android:layout_gravity="center_vertical"
             android:textSize="20sp" />
     </LinearLayout>
@@ -63,8 +64,8 @@
 	    android:layout_width="wrap_content"
 		android:layout_height="30dp"
 		android:orientation="horizontal"
-		android:layout_marginBottom="30dp"
 		android:layout_gravity="center_horizontal"
+		android:layout_marginBottom="30dp"
 		android:visibility="gone">
     
 	    <TextView 
