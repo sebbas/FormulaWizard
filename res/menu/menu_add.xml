@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/menu_add"
-        android:icon="@drawable/ic_menu_add"
+        android:icon="@drawable/content_new"
         android:showAsAction="always"
         android:title="@string/add_formula"
         android:titleCondensed="@string/add_formula">

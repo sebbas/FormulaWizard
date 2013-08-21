@@ -1,9 +1,9 @@
 package com.ndroidstudios.android.formulawizard;
 
-import com.ndroidstudios.android.helper.Formulas;
+import com.ndroidstudios.android.helper.FormulaHelper;
 import com.ndroidstudios.android.helper.FontHelper;
 import com.ndroidstudios.android.helper.UIHelper;
-import com.ndroidstudios.android.helper.Formulas.InvalidInputException;
+import com.ndroidstudios.android.helper.FormulaHelper.InvalidInputException;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -20,11 +20,7 @@ public class CylinderActivity extends Activity {
 	private Button mCalculateButton;
 	private TextView mInfoText;
 	private double result;
-	
-	// Helper instance variables
-	private UIHelper uiHelper = new UIHelper();
-	private Formulas calculator = new Formulas();
-	
+
 	/** Called when the activity is first created. */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +33,7 @@ public class CylinderActivity extends Activity {
         mInfoText = (TextView)findViewById(R.id.display_result);
         
         registerButtonListener();
-        uiHelper.setDefaultText(mInfoText);
+        UIHelper.setDefaultText(mInfoText);
         FontHelper.overrideFonts(this, findViewById(android.R.id.content));
     }
 
@@ -63,12 +59,12 @@ public class CylinderActivity extends Activity {
     
     private void handleInput() {
     	try {
-    		if (uiHelper.editTextIsEmpty(mVariableA, mVariableB)) {
-				uiHelper.setErrorText(mInfoText);
+    		if (UIHelper.isEmpty(mVariableA, mVariableB)) {
+				UIHelper.setErrorText(mInfoText);
 			} else {
 				double radius = Double.parseDouble(mVariableA.getText().toString());
 				double height = Double.parseDouble(mVariableB.getText().toString());
-				result = calculator.cylinderSurface(radius, height);
+				result = FormulaHelper.cylinderSurface(radius, height);
 				mInfoText.setText("Surface = " + result);				  
 			}
     	} catch (InvalidInputException e) {

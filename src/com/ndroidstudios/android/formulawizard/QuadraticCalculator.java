@@ -1,9 +1,9 @@
 package com.ndroidstudios.android.formulawizard;
 
-import com.ndroidstudios.android.helper.Formulas;
+import com.ndroidstudios.android.helper.FormulaHelper;
 import com.ndroidstudios.android.helper.FontHelper;
 import com.ndroidstudios.android.helper.UIHelper;
-import com.ndroidstudios.android.helper.Formulas.InvalidInputException;
+import com.ndroidstudios.android.helper.FormulaHelper.InvalidInputException;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -24,10 +24,6 @@ public class QuadraticCalculator extends Activity {
 	private TextView mInfoText2;
 	private double[] results;
 	
-	// Helper instance variables
-	private UIHelper uiHelper = new UIHelper();
-	private Formulas calculator = new Formulas();
-	
 	/** Called when the activity is first created. */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +38,7 @@ public class QuadraticCalculator extends Activity {
         mInfoText2 = (TextView)findViewById(R.id.display_x2);
         
         registerButtonListener();
-        uiHelper.setDefaultText(mInfoText);
+        UIHelper.setDefaultText(mInfoText);
         FontHelper.overrideFonts(this, findViewById(android.R.id.content));
     }
 
@@ -68,13 +64,13 @@ public class QuadraticCalculator extends Activity {
     
     private void handleInput() {
     	try {
-    		if (uiHelper.editTextIsEmpty(mVariableA, mVariableB, mVariableC)) {
-				uiHelper.setErrorText(mInfoText);
+    		if (UIHelper.isEmpty(mVariableA, mVariableB, mVariableC)) {
+				UIHelper.setErrorText(mInfoText);
 			} else {
 				double a = Double.parseDouble(mVariableA.getText().toString());
 		    	double b = Double.parseDouble(mVariableB.getText().toString());
 		    	double c = Double.parseDouble(mVariableC.getText().toString());
-				results = calculator.quadratic(a, b, c);
+				results = FormulaHelper.quadratic(a, b, c);
 				mInfoText.setText(Html.fromHtml("<body>x<sub><small><small>1</small></small></sub> = </body>" + results[0]));
 				mInfoText2.setText(Html.fromHtml("<body>x<sub><small><small>2</small></small></sub> = </body>" + results[1]));			  
 			}

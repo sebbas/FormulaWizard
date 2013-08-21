@@ -166,6 +166,12 @@ public class DBAdapter {
 		return db.update(DATABASE_TABLE, newValues, where, null) != 0;
 	}
 	
+	// Return whether the database is empty or not
+	public boolean isEmpty() {
+		Cursor c = getAllRows();
+		return !c.moveToFirst();
+	}
+	
 	
 	
 	/////////////////////////////////////////////////////////////////////

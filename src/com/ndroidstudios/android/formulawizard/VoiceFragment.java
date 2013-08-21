@@ -44,12 +44,10 @@ public class VoiceFragment extends SherlockFragment {
 	private TextView mVoicePrompt;
 	private TextView mVoiceResult;
 	private ProgressBar mProgressBar;
-	private TextView mMoreText;
 	private LinearLayout mMoreInfo;
 	private ImageView mWolframIcon;
 	private VoiceHelper voiceHelper;
     private static final int REQUEST_CODE = 1234;
-    private View rootView;
     private Bundle mSavedInstanceState; // Since onRetainInstance does not support savedInstanceState, 
     									//	this is an alternative
 
@@ -59,20 +57,19 @@ public class VoiceFragment extends SherlockFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, 
     		Bundle savedInstanceState) {
-    	rootView = inflater.inflate(R.layout.voice_recog, container, false);
+    	View rootView = inflater.inflate(R.layout.voice_recog, container, false);
     	  	
     	// Find all the views in the layout
     	mVoicePrompt = (TextView) rootView.findViewById(R.id.voice_prompt);
     	mVoiceResult = (TextView) rootView.findViewById(R.id.result);
     	mProgressBar = (ProgressBar) rootView.findViewById(R.id.progressBar1);
-    	mMoreText = (TextView) rootView.findViewById(R.id.more_text);
     	mMoreInfo = (LinearLayout) rootView.findViewById(R.id.more_info);
     	mWolframIcon = (ImageView) rootView.findViewById(R.id.wolfram_icon);
         
         // Override the font of the header text
-        FontHelper.overrideFonts(this.getActivity(), mVoicePrompt);
-        FontHelper.overrideFonts(this.getActivity(), mVoiceResult);
-        FontHelper.overrideFonts(this.getActivity(), mMoreText);
+        FontHelper.overrideFonts(this.getActivity(), rootView.findViewById(R.id.voice_prompt));
+        FontHelper.overrideFonts(this.getActivity(), rootView.findViewById(R.id.more_text));
+        FontHelper.overrideFonts(this.getActivity(), rootView.findViewById(R.id.result));
     	         
         setRetainInstance(true);
         
@@ -150,14 +147,13 @@ public class VoiceFragment extends SherlockFragment {
        
     public void testOnActivityResult() {
     	ArrayList<String> wordList = new ArrayList<String>();
-		wordList.add("adfsa");
-		wordList.add("fsadf");
-		wordList.add("fsdf");
-		wordList.add("sfa");
-		wordList.add("fasdf");
-		wordList.add("sdf");
-		wordList.add("fsf?");	
-		wordList.add("dsf?");
+		wordList.add("What");
+		wordList.add("is");
+		wordList.add("the");
+		wordList.add("volume");
+		wordList.add("of");
+		wordList.add("the");
+		wordList.add("earth?");
 
 		String query = listToString(wordList);
 		setQueryText(wordList);

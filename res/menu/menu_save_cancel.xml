@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_save"
+        android:icon="@drawable/content_save"
+        android:showAsAction="always"
+        android:title="@string/save_formula"
+        android:titleCondensed="@string/save_formula">
+    </item> 
+    
+    <item
+        android:id="@+id/menu_cancel"
+        android:icon="@drawable/content_remove"
+        android:showAsAction="always"
+        android:title="@string/cancel_formula"
+        android:titleCondensed="@string/cancel_formula">
+    </item> 
+</menu>

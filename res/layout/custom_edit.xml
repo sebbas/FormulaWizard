@@ -1,88 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="5dp"
-    android:orientation="vertical" >
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical">
+    
+<LinearLayout 
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:orientation="vertical" 
+    android:focusable="true"
+	android:focusableInTouchMode="true">
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/formula_name_heading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Formula Name"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:maxWidth="300dp"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:text="@string/your_custom_formula"
+        android:textColor="#000000"
+        android:textSize="25sp" />
 
-    <EditText
-        android:id="@+id/editText1"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10" >
-    </EditText>
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Category"
-        android:layout_marginTop="10dp"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <Spinner
-        android:id="@+id/spinner1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Number of variables"
-        android:layout_marginTop="10dp"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <EditText
-        android:id="@+id/editText2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Variables"
-        android:layout_marginTop="10dp"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:layout_height="wrap_content" >
+    	
+        <ImageView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:adjustViewBounds="true"
+            android:layout_centerVertical="true"
+			android:layout_centerHorizontal="true"
+            android:src="@drawable/emptyboard"
+            android:contentDescription="@string/empty_board"/>
+        
+        <TextView
+            android:id="@+id/formula_on_chalkboard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:padding="25dp"
+            android:maxLines="4"
+            android:layout_centerVertical="true"
+			android:layout_centerHorizontal="true"
+			android:textSize="20sp"
+			android:textColor="@android:color/white"/>
+        
+	</RelativeLayout>
     
     <LinearLayout
-        android:id="@+id/variables"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:text="@string/name"
+            android:textColor="#000000"
+            android:textSize="25sp"/>
+
+        <EditText
+            android:id="@+id/formula_name_edit"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:ems="10"
+            android:hint="@string/editformula_name_hint"
+            android:inputType="text" />
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginTop="10dp"
+            android:text="@string/formula"
+            android:textColor="#000000"
+            android:textSize="25sp"/>
+
+        <EditText
+            android:id="@+id/formula_edit"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:ems="10"
+            android:hint="@string/editformula_formula_hint"
+            android:inputType="text" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/textView3"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Formula"
-        android:layout_marginTop="10dp"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:layout_gravity="center_horizontal"
+        android:orientation="vertical" >
 
-    <EditText
-        android:id="@+id/editText3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginTop="10dp"
+            android:text="@string/category"
+            android:textColor="#000000"
+            android:textSize="25sp"/>
 
-    <Button
-        android:id="@+id/button1"
-        android:layout_gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Save Formula" 
-        android:layout_marginTop="10dp"/>
-
+        <Spinner
+	        android:id="@+id/category_spinner"
+	        android:layout_width="300dp"
+	        android:layout_height="wrap_content" 
+	        android:entries="@array/category_content"
+	        android:prompt="@string/category_prompt"/>
+    </LinearLayout>
     
-
 </LinearLayout>
+</ScrollView>

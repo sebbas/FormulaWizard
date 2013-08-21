@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Formula Wizard</string>
-    <string name="hello_world">Hello world!</string>
     <string name="title_activity_main">Formula Wizard</string>
     <string name="variable_a">a</string>
     <string name="variable_b">b</string>
@@ -66,5 +65,19 @@
     <string name="wolfram_icon">Wolfram Alpha Icon</string>
     <string name="connection_error">You are not connected to the internet. Please check your connection.</string>
     <string name="add_formula">Add Formula</string>
-    <string name="cancel_formula">Cancel Formula</string>     
+    <string name="cancel_formula">Cancel Formula</string>
+    <string name="save_formula">Save Formula</string>
+    <string name="editformula_name_hint">E.g. Celsius to Fahrenheit</string>
+    <string name="editformula_formula_hint">E.g. Celsius * (9/5) + 32</string>
+    <string name="saved_successfully">Formula saved successfully!</string>
+    <string name="your_custom_formula">Your custom formula</string> 
+    <string name="name">Name:</string> 
+    <string name="formula">Formula:</string>
+    <string name="category">Category:</string>  
+    <string name="no_custom_formulas">No custom formulas in here.\nGo ahead and add some!</string>
+    <string name="alert_title">Dismiss custom formula</string>
+    <string name="alert_subtitle">All entered data will be lost</string>
+    <string name="proceed">Proceed</string>
+    <string name="cancel">Cancel</string>
+    <string name="input_not_complete2">Your input seems to be incomplete :(</string>
 </resources>

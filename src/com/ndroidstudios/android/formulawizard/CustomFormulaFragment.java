@@ -12,19 +12,21 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.ndroidstudios.android.helper.DBAdapter;
+import com.ndroidstudios.android.helper.FontHelper;
 
 public class CustomFormulaFragment extends SherlockFragment {
 	
+	private static int EDITFORMULA_REQ = 1;
+	
 	private DBAdapter myDB;
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		
 		setHasOptionsMenu(true);
-		View rootView = inflater.inflate(R.layout.custom_list, container, false);
-		
-		//openDB();
-		//populateListViewFromDB();
+		openDB();
+		View rootView = populateViewFromDB(inflater, container);
 		
 		return rootView;
 	}
@@ -40,11 +42,18 @@ public class CustomFormulaFragment extends SherlockFragment {
 		switch(item.getItemId()) {
 		case R.id.menu_add: 
 			Intent intent = new Intent(this.getActivity(), CustomFormulaEdit.class);
-			this.getActivity().startActivity(intent);
+			this.getActivity().startActivityForResult(intent, EDITFORMULA_REQ);
 			return true;
 		default: 	
 			return super.onOptionsItemSelected(item);
 		}
+	}
+
+	
+	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
 	}
 
 	@Override
@@ -54,9 +63,8 @@ public class CustomFormulaFragment extends SherlockFragment {
 	}
 
 	
-	
-	
 	private void openDB() {
+		myDB = new DBAdapter(this.getActivity());
 		myDB.open();
 	}
 	
@@ -64,8 +72,18 @@ public class CustomFormulaFragment extends SherlockFragment {
 		myDB.close();
 	}
 	
-	private void populateListViewFromDB() {
-		Cursor cursor = myDB.getAllRows();
+	private View populateViewFromDB(LayoutInflater inflater, ViewGroup container) {
+		View rootView;
+		if (myDB.isEmpty()) {
+			rootView = inflater.inflate(R.layout.custom_empty, container, false);
+			FontHelper.overrideFonts(this.getActivity(), rootView.findViewById(R.id.empty_list_info));
+			return rootView;
+		} else {
+			Cursor cursor = myDB.getAllRows();
+			rootView = inflater.inflate(R.layout.custom_empty, container, false);
+			return rootView;
+		}
+		
 		
 	}
 }

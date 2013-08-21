@@ -1,9 +1,9 @@
 package com.ndroidstudios.android.formulawizard;
 
-import com.ndroidstudios.android.helper.Formulas;
+import com.ndroidstudios.android.helper.FormulaHelper;
 import com.ndroidstudios.android.helper.FontHelper;
 import com.ndroidstudios.android.helper.UIHelper;
-import com.ndroidstudios.android.helper.Formulas.InvalidInputException;
+import com.ndroidstudios.android.helper.FormulaHelper.InvalidInputException;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -22,11 +22,7 @@ public class TrapezoidPerimeterActivity extends Activity {
 	private Button mCalculateButton;
 	private TextView mInfoText;
 	private double result;
-	
-	// Helper instance variables
-	private UIHelper uiHelper = new UIHelper();
-	private Formulas calculator = new Formulas();
-		
+
 	/** Called when the activity is first created. */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +37,7 @@ public class TrapezoidPerimeterActivity extends Activity {
         mInfoText = (TextView)findViewById(R.id.display_x1);
         
         registerButtonListener();
-        uiHelper.setDefaultText(mInfoText);
+        UIHelper.setDefaultText(mInfoText);
         FontHelper.overrideFonts(this, findViewById(android.R.id.content));  
     }
 
@@ -67,14 +63,14 @@ public class TrapezoidPerimeterActivity extends Activity {
     
     private void handleInput() {
     	try {
-    		if (uiHelper.editTextIsEmpty(mVariableA, mVariableB, mVariableC, mVariableD)) {
-				uiHelper.setErrorText(mInfoText);
+    		if (UIHelper.isEmpty(mVariableA, mVariableB, mVariableC, mVariableD)) {
+				UIHelper.setErrorText(mInfoText);
 			} else {
 				double base1 = Double.parseDouble(mVariableA.getText().toString());
 		    	double base2 = Double.parseDouble(mVariableB.getText().toString());
 		    	double base3 = Double.parseDouble(mVariableC.getText().toString());
 		    	double base4 = Double.parseDouble(mVariableC.getText().toString());
-				result = calculator.trapezoidPerimeter(base1, base2, base3, base4);
+				result = FormulaHelper.trapezoidPerimeter(base1, base2, base3, base4);
 				mInfoText.setText("Perimeter = " + result);				  
 			}
     	} catch (InvalidInputException e) {

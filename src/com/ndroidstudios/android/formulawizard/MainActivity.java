@@ -32,7 +32,7 @@ public class MainActivity extends SherlockFragmentActivity {
 		setContentView(mViewPager);
 		ActionBar bar = getSupportActionBar();
 		bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-
+		
 		mTabsAdapter = new TabsAdapter(this, mViewPager);
 
 		mTabsAdapter.addTab(

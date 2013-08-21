@@ -1,9 +1,9 @@
 package com.ndroidstudios.android.formulawizard;
 
-import com.ndroidstudios.android.helper.Formulas;
+import com.ndroidstudios.android.helper.FormulaHelper;
 import com.ndroidstudios.android.helper.FontHelper;
+import com.ndroidstudios.android.helper.FormulaHelper.InvalidInputException;
 import com.ndroidstudios.android.helper.UIHelper;
-import com.ndroidstudios.android.helper.Formulas.InvalidInputException;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -19,10 +19,6 @@ public class CirclePerimeterActivity extends Activity {
 	private Button mCalculateButton;
 	private TextView mInfoText;
 	private double result;
-	
-	// Helper instance variables
-	private UIHelper uiHelper = new UIHelper();
-	private Formulas calculator = new Formulas();
 		
 	/** Called when the activity is first created. */
     @Override
@@ -35,7 +31,7 @@ public class CirclePerimeterActivity extends Activity {
         mInfoText = (TextView)findViewById(R.id.display_result);
         
         registerButtonListener();
-        uiHelper.setDefaultText(mInfoText);
+        UIHelper.setDefaultText(mInfoText);
         FontHelper.overrideFonts(this, findViewById(android.R.id.content));
     }
 
@@ -63,11 +59,11 @@ public class CirclePerimeterActivity extends Activity {
     
     private void handleInput() {
     	try {
-    		if (uiHelper.editTextIsEmpty(mVariableA)) {
-				uiHelper.setErrorText(mInfoText);
+    		if (UIHelper.isEmpty(mVariableA)) {
+				UIHelper.setErrorText(mInfoText);
 			} else {
 				double radius = Double.parseDouble(mVariableA.getText().toString());
-				result = calculator.circlePerimeter(radius);
+				result = FormulaHelper.circlePerimeter(radius);
 				mInfoText.setText("Perimeter = " + result);				  
 			}
     	} catch (InvalidInputException e) {

@@ -1,6 +1,6 @@
 package com.ndroidstudios.android.formulawizard;
 
-import com.ndroidstudios.android.helper.Formulas;
+import com.ndroidstudios.android.helper.FormulaHelper;
 import com.ndroidstudios.android.helper.FontHelper;
 import com.ndroidstudios.android.helper.UIHelper;
 
@@ -20,11 +20,7 @@ public class Exponent3positiveActivity extends Activity {
 	private Button mCalculateButton;
 	private TextView mInfoText;
 	private double result;
-	
-	// Helper instance variables
-	private UIHelper uiHelper = new UIHelper();
-	private Formulas calculator = new Formulas();
-	
+
 	/** Called when the activity is first created. */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +33,7 @@ public class Exponent3positiveActivity extends Activity {
         mInfoText = (TextView)findViewById(R.id.display_x1);
         
         registerButtonListener();
-        uiHelper.setDefaultText(mInfoText);
+        UIHelper.setDefaultText(mInfoText);
         FontHelper.overrideFonts(this, findViewById(android.R.id.content));
     }
 
@@ -62,13 +58,13 @@ public class Exponent3positiveActivity extends Activity {
     }
     
     private void handleInput() {
-    	if (uiHelper.editTextIsEmpty(mVariableA, mVariableB)) {
-			uiHelper.setErrorText(mInfoText);
+    	if (UIHelper.isEmpty(mVariableA, mVariableB)) {
+			UIHelper.setErrorText(mInfoText);
 		} else {
 			double a = Double.parseDouble(mVariableA.getText().toString());
 			double b = Double.parseDouble(mVariableB.getText().toString());
-			result = calculator.exponent3Positive(a, b);
-			String resultFormated = calculator.formatResult(result);
+			result = FormulaHelper.exponent3Positive(a, b);
+			String resultFormated = FormulaHelper.formatResult(result);
 			mInfoText.setText(Html.fromHtml(String.format("(%s + %s)<sup><small>3</small></sup> = %s",
 	                a, b, resultFormated)));				  
 		}

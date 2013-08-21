@@ -62,8 +62,7 @@
     <LinearLayout    
         android:id="@+id/more_info"
 	    android:layout_width="wrap_content"
-		android:layout_height="30dp"
-		android:orientation="horizontal"
+		android:layout_height="wrap_content"
 		android:layout_gravity="center_horizontal"
 		android:layout_marginBottom="30dp"
 		android:visibility="gone">
@@ -76,12 +75,13 @@
 			android:freezesText="true"
 			android:textSize="20sp"
 			android:textStyle="italic"
+			android:layout_marginBottom="5dp"
 			android:text="@string/more_info"/>
 	    
 	    <ImageView 
 	        android:id="@+id/wolfram_icon"
 	        android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
+			android:layout_height="30dp"
 			android:src="@drawable/wolfram"
 			android:adjustViewBounds="true"
 			android:contentDescription="@string/wolfram_icon"/>
