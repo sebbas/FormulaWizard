@@ -27,16 +27,16 @@ public class DBAdapter {
 	 */
 	// TODO: Setup your fields here:
 	public static final String KEY_NAME = "name";
-	public static final String KEY_VARIABLES = "variables";
 	public static final String KEY_FORMULA = "formula";
+	public static final String KEY_CATEGORY = "category";
 	
 	// TODO: Setup your field numbers here (0 = KEY_ROWID, 1=...)
 	public static final int COL_NAME = 1;
-	public static final int COL_VARIABLES = 2;
-	public static final int COL_FORMULA = 3;
+	public static final int COL_FORMULA = 2;
+	public static final int COL_CATEGORY = 3;
 
 	
-	public static final String[] ALL_KEYS = new String[] {KEY_ROWID, KEY_NAME, KEY_VARIABLES, KEY_FORMULA};
+	public static final String[] ALL_KEYS = new String[] {KEY_ROWID, KEY_NAME, KEY_FORMULA, KEY_CATEGORY};
 	
 	// DB info: it's name, and the table we are using (just one).
 	public static final String DATABASE_NAME = "CustomFormulaDb";
@@ -59,8 +59,8 @@ public class DBAdapter {
 			//  - "not null" means it is a required field (must be given a value).
 			// NOTE: All must be comma separated (end of line!) Last one must have NO comma!!
 			+ KEY_NAME + " text not null, "
-			+ KEY_VARIABLES + " string not null, "
-			+ KEY_FORMULA + " string not null"
+			+ KEY_FORMULA + " string not null, "
+			+ KEY_CATEGORY + " string not null"
 			
 			// Rest  of creation:
 			+ ");";
@@ -92,7 +92,7 @@ public class DBAdapter {
 	}
 	
 	// Add a new set of values to the database.
-	public long insertRow(String name, String variables, String formula) {
+	public long insertRow(String name, String formula, String category) {
 		/*
 		 * CHANGE 3:
 		 */		
@@ -101,8 +101,8 @@ public class DBAdapter {
 		// Create row's data:
 		ContentValues initialValues = new ContentValues();
 		initialValues.put(KEY_NAME, name);
-		initialValues.put(KEY_VARIABLES, variables);
 		initialValues.put(KEY_FORMULA, formula);
+		initialValues.put(KEY_CATEGORY, category);
 		
 		// Insert it into the database.
 		return db.insert(DATABASE_TABLE, null, initialValues);
@@ -148,7 +148,7 @@ public class DBAdapter {
 	}
 	
 	// Change an existing row to be equal to new data.
-	public boolean updateRow(long rowId, String name, String variables, String formula) {
+	public boolean updateRow(long rowId, String name, String formula, String category) {
 		String where = KEY_ROWID + "=" + rowId;
 
 		/*
@@ -159,8 +159,8 @@ public class DBAdapter {
 		// Create row's data:
 		ContentValues newValues = new ContentValues();
 		newValues.put(KEY_NAME, name);
-		newValues.put(KEY_VARIABLES, variables);
 		newValues.put(KEY_FORMULA, formula);
+		newValues.put(KEY_CATEGORY, category);
 		
 		// Insert it into the database.
 		return db.update(DATABASE_TABLE, newValues, where, null) != 0;
@@ -169,9 +169,12 @@ public class DBAdapter {
 	// Return whether the database is empty or not
 	public boolean isEmpty() {
 		Cursor c = getAllRows();
-		return !c.moveToFirst();
+		if (c.moveToFirst()) {
+			return false;
+		} else {
+			return true;
+		}
 	}
-	
 	
 	
 	/////////////////////////////////////////////////////////////////////

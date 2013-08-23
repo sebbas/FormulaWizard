@@ -19,7 +19,7 @@ public class Exponent2Activity extends ListActivity {
 		getListView().setCacheColorHint(0);
  
 		String[] values = this.getResources().getStringArray(R.array.exponent_list);
-		setListAdapter(new CustomArrayAdapter(this, R.layout.list_view, values, R.id.label));
+		setListAdapter(new CustomArrayAdapter(this, R.layout.listview_item, values, R.id.label));
 	}
  
 	@Override

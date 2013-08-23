@@ -20,7 +20,6 @@ public class CustomArrayAdapter extends ArrayAdapter<String> {
 		super(context, viewResource, values);
 		this.context = context;
 		this.values = values;
-		System.out.println("Array is: " + Arrays.toString(this.values));
 		this.viewResource = viewResource;
 		this.rowViewResource = rowViewResource;
 	}

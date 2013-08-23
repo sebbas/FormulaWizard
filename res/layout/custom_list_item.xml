@@ -26,14 +26,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Name Text"
+        android:maxLines="2"
+        android:ellipsize="end"
         android:textAppearance="?android:attr/textAppearanceLarge" />
     
     <TextView
-        android:id="@+id/item_formula"
+        android:id="@+id/item_category"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Formula Text"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:text="Formula Category"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
     
     </LinearLayout>
     

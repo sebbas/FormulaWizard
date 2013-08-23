@@ -112,9 +112,9 @@ public class CustomFormulaEdit extends SherlockActivity {
 		case R.id.menu_save: 
 			if (allFieldsSet()) {
 				Intent saveIntent = new Intent();
-				saveIntent.putExtra("formula_name", mFormulaName.getText().toString());
-				saveIntent.putExtra("category", mCategorySpinner.getSelectedItem().toString());
+				saveIntent.putExtra("formula_name", mFormulaName.getText().toString());		
 				saveIntent.putExtra("formula", mFormula.getText().toString());
+				saveIntent.putExtra("category", mCategorySpinner.getSelectedItem().toString());
 				
 				setResult(RESULT_OK, saveIntent);
 				Toast.makeText(getApplicationContext(), this.getResources().
@@ -132,7 +132,7 @@ public class CustomFormulaEdit extends SherlockActivity {
 	}
 	
 	private boolean allFieldsSet() {
-		if (UIHelper.isEmpty(mFormulaName)) {
+		if (UIHelper.isEmpty(mFormulaName) || UIHelper.isEmpty(mFormula)) {
 			return false;
 		} else {
 			return true;
@@ -150,8 +150,8 @@ public class CustomFormulaEdit extends SherlockActivity {
 	private void startAlertPrompt() {
 		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
 		alertDialogBuilder
-			.setTitle(R.string.alert_title)
-			.setMessage(R.string.alert_subtitle)
+			.setTitle(R.string.alert_notsaved_title)
+			.setMessage(R.string.alert_notsaved_subtitle)
 			.setCancelable(false)
 			.setPositiveButton(R.string.proceed, new DialogInterface.OnClickListener() {
 				

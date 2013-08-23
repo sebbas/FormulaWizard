@@ -75,11 +75,15 @@
     <string name="formula">Formula:</string>
     <string name="category">Category:</string>  
     <string name="no_custom_formulas">No custom formulas in here.\nGo ahead and add some!</string>
-    <string name="alert_title">Dismiss custom formula</string>
-    <string name="alert_subtitle">All entered data will be lost</string>
+    <string name="alert_notsaved_title">Exit without saving?</string>
+    <string name="alert_notsaved_subtitle">All changes will be lost</string>
     <string name="proceed">Proceed</string>
     <string name="cancel">Cancel</string>
     <string name="input_not_complete2">Your input seems to be incomplete :(</string>
     <string name="select_category">Select a category</string>
     <string name="spinner_icon">Spinner icon</string>
+    <string name="alert_deleteformula_title">Delete this formula</string>
+    <string name="alert_deleteformula_subtitle">Do you really want to delete this formula?</string>
+    <string name="delete">Delete</string>
+    
 </resources>

@@ -137,6 +137,9 @@
         <activity 
             android:name="CustomFormulaEdit">
         </activity>
+        <activity 
+            android:name="CustomCalculator">
+        </activity>
     </application>
 
 </manifest>
