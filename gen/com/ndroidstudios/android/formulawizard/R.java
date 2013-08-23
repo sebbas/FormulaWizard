@@ -9,7 +9,12 @@ package com.ndroidstudios.android.formulawizard;
 
 public final class R {
     public static final class array {
-        public static final int category_content=0x7f0b0000;
+        public static final int area_list=0x7f0b0000;
+        public static final int binomial_list=0x7f0b0001;
+        public static final int category_content=0x7f0b0005;
+        public static final int exponent_list=0x7f0b0002;
+        public static final int perimeter_list=0x7f0b0003;
+        public static final int volume_list=0x7f0b0004;
     }
     public static final class attr {
         /**  Custom divider drawable to use for elements in the action bar. 
@@ -1035,6 +1040,7 @@ containing a value of this type.
         public static final int formula_name_heading=0x7f040039;
         public static final int formula_on_chalkboard=0x7f04003a;
         public static final int homeAsUp=0x7f040006;
+        public static final int image=0x7f040063;
         public static final int item_formula=0x7f040042;
         public static final int item_icon=0x7f040040;
         public static final int item_name=0x7f040041;
@@ -1042,20 +1048,21 @@ containing a value of this type.
         public static final int length=0x7f040054;
         public static final int listMode=0x7f040002;
         public static final int listView1=0x7f04003f;
-        public static final int menu_add=0x7f040073;
-        public static final int menu_cancel=0x7f040075;
-        public static final int menu_save=0x7f040074;
+        public static final int menu_add=0x7f040075;
+        public static final int menu_cancel=0x7f040077;
+        public static final int menu_save=0x7f040076;
         public static final int midpoint=0x7f040055;
-        public static final int more_info=0x7f040070;
-        public static final int more_text=0x7f040071;
+        public static final int more_info=0x7f040072;
+        public static final int more_text=0x7f040073;
         public static final int normal=0x7f040001;
         public static final int pager=0x7f040032;
         public static final int perimeter=0x7f040056;
-        public static final int progressBar1=0x7f04006e;
+        public static final int progressBar1=0x7f040070;
         public static final int pythagoras=0x7f040057;
         public static final int quadratic=0x7f040059;
-        public static final int result=0x7f04006f;
-        public static final int result_layout=0x7f04006d;
+        public static final int result=0x7f040071;
+        public static final int result_layout=0x7f04006f;
+        public static final int row_label=0x7f040064;
         public static final int showCustom=0x7f040008;
         public static final int showHome=0x7f040005;
         public static final int showTitle=0x7f040007;
@@ -1068,11 +1075,11 @@ containing a value of this type.
         public static final int useLogo=0x7f040004;
         public static final int variable_a=0x7f04004f;
         public static final int variable_b=0x7f040050;
-        public static final int variable_base=0x7f040068;
-        public static final int variable_base1=0x7f040064;
-        public static final int variable_base2=0x7f040065;
-        public static final int variable_base3=0x7f040066;
-        public static final int variable_base4=0x7f040067;
+        public static final int variable_base=0x7f04006a;
+        public static final int variable_base1=0x7f040066;
+        public static final int variable_base2=0x7f040067;
+        public static final int variable_base3=0x7f040068;
+        public static final int variable_base4=0x7f040069;
         public static final int variable_basearea=0x7f040060;
         public static final int variable_c=0x7f040061;
         public static final int variable_height=0x7f040037;
@@ -1082,19 +1089,19 @@ containing a value of this type.
         public static final int variable_radius2=0x7f04004d;
         public static final int variable_radius3=0x7f04004e;
         public static final int variable_side=0x7f040038;
-        public static final int variable_side1=0x7f040069;
-        public static final int variable_side2=0x7f04006a;
+        public static final int variable_side1=0x7f04006b;
+        public static final int variable_side2=0x7f04006c;
         public static final int variable_slant=0x7f040036;
-        public static final int variable_square=0x7f040063;
+        public static final int variable_square=0x7f040065;
         public static final int variable_width=0x7f04005f;
         public static final int variable_x1=0x7f040044;
         public static final int variable_x2=0x7f040046;
         public static final int variable_y1=0x7f040048;
         public static final int variable_y2=0x7f04004a;
-        public static final int voice_button=0x7f04006b;
-        public static final int voice_prompt=0x7f04006c;
+        public static final int voice_button=0x7f04006d;
+        public static final int voice_prompt=0x7f04006e;
         public static final int volume=0x7f04005a;
-        public static final int wolfram_icon=0x7f040072;
+        public static final int wolfram_icon=0x7f040074;
         public static final int wrap_content=0x7f040000;
     }
     public static final class integer {
@@ -1156,13 +1163,14 @@ containing a value of this type.
         public static final int sherlock_spinner_item=0x7f030034;
         public static final int slope=0x7f030035;
         public static final int sphere_volume=0x7f030036;
-        public static final int square=0x7f030037;
-        public static final int square_perimeter=0x7f030038;
-        public static final int trapezoid=0x7f030039;
-        public static final int trapezoid_perimeter=0x7f03003a;
-        public static final int triangle=0x7f03003b;
-        public static final int triangle_perimeter=0x7f03003c;
-        public static final int voice_recog=0x7f03003d;
+        public static final int spinner_row=0x7f030037;
+        public static final int square=0x7f030038;
+        public static final int square_perimeter=0x7f030039;
+        public static final int trapezoid=0x7f03003a;
+        public static final int trapezoid_perimeter=0x7f03003b;
+        public static final int triangle=0x7f03003c;
+        public static final int triangle_perimeter=0x7f03003d;
+        public static final int voice_recog=0x7f03003e;
     }
     public static final class menu {
         public static final int menu_add=0x7f0c0000;
@@ -1257,8 +1265,10 @@ containing a value of this type.
         public static final int result=0x7f09004a;
         public static final int save_formula=0x7f090051;
         public static final int saved_successfully=0x7f090054;
+        public static final int select_category=0x7f09005f;
         public static final int slope_line=0x7f090042;
         public static final int sphere_volume=0x7f090036;
+        public static final int spinner_icon=0x7f090060;
         public static final int square_area=0x7f090023;
         public static final int square_perimeter=0x7f090038;
         public static final int title_activity_main=0x7f09000f;

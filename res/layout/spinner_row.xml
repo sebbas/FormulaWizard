@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	 android:layout_width="fill_parent"
+	 android:layout_height="wrap_content"
+	 android:orientation="vertical"
+	 android:padding="3dip">
+	 
+    <ImageView
+         android:id="@+id/image"
+         android:layout_width="50dp"
+         android:layout_height="50dp"
+         android:contentDescription="@string/spinner_icon"
+         android:src="@drawable/formulawizard_button"/>
+    
+    <TextView
+        android:id="@+id/row_label"
+         android:layout_toRightOf="@+id/image"
+         android:layout_centerVertical="true"
+         android:padding="3dip"
+         android:layout_marginTop="2dip"
+         android:textColor="#000000"
+         android:text="@string/select_category"
+         android:layout_marginLeft="5dip"
+         android:textSize="20sp"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"/>
+    
+</RelativeLayout>
+

@@ -26,7 +26,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="160dp" >
     	
         <ImageView 
             android:layout_width="wrap_content"
@@ -40,12 +40,9 @@
         
         <TextView
             android:id="@+id/formula_on_chalkboard"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
+            android:layout_width="260dp"
+            android:layout_height="140dp"
             android:gravity="center"
-            android:padding="25dp"
-            android:maxLines="4"
             android:layout_centerVertical="true"
 			android:layout_centerHorizontal="true"
 			android:textSize="20sp"
@@ -71,7 +68,6 @@
             android:id="@+id/formula_name_edit"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:ems="10"
             android:hint="@string/editformula_name_hint"
             android:inputType="text" />
@@ -96,8 +92,9 @@
             android:id="@+id/formula_edit"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:ems="10"
+            android:maxLength="50"
+            android:singleLine="true"
             android:hint="@string/editformula_formula_hint"
             android:inputType="text" />
     </LinearLayout>
@@ -121,7 +118,6 @@
 	        android:id="@+id/category_spinner"
 	        android:layout_width="300dp"
 	        android:layout_height="wrap_content" 
-	        android:entries="@array/category_content"
 	        android:prompt="@string/category_prompt"/>
     </LinearLayout>
     

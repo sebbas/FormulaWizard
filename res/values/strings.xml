@@ -80,4 +80,6 @@
     <string name="proceed">Proceed</string>
     <string name="cancel">Cancel</string>
     <string name="input_not_complete2">Your input seems to be incomplete :(</string>
+    <string name="select_category">Select a category</string>
+    <string name="spinner_icon">Spinner icon</string>
 </resources>

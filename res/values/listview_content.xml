@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>    
+    <string-array name="area_list">
+        <item>Circle</item>
+        <item>Cone</item>
+        <item>Cube</item>
+        <item>Cylinder</item>
+        <item>Ellipse</item>
+        <item>Rectangle</item>
+        <item>Square</item>
+        <item>Trapezoid</item>
+        <item>Triangle</item>
+    </string-array>
+    
+    <string-array name="binomial_list">
+        <item>Exponent of 2</item>
+        <item>Exponent of 3</item>        
+    </string-array>
+    
+    <string-array name="exponent_list">
+        <item>Binomial theorem for a sum</item>
+        <item>Binomial theorem for a difference</item>
+    </string-array>
+    
+    <string-array name="perimeter_list">
+        <item>Circle</item>
+        <item>Ellipse</item>
+        <item>Rectangle</item>
+        <item>Square</item>
+        <item>Trapezoid</item>
+        <item>Triangle</item>
+    </string-array>
+    
+    <string-array name="volume_list">
+        <item>Cone</item>
+        <item>Cube</item>
+        <item>Cylinder</item>
+        <item>Ellipsoid</item>
+        <item>Prism</item>
+        <item>Pyramid</item>
+        <item>Sphere</item>
+    </string-array>
+    
+</resources>

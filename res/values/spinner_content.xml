@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="category_prompt">Choose a category</string>
+    <string name="category_prompt">Select a category</string>
     
     <string-array name="category_content">
-        <item>Geometry</item>
-        <item>Trigonometry</item>
-        <item>Temperature</item>
+        <item>General Formula</item>
         <item>Currency</item>
+        <item>Geometry</item>
+        <item>Temperature</item>
+        <item>Trigonometry</item>
         <item>Weight</item>
     </string-array>
     

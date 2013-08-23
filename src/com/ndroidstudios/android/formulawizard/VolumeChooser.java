@@ -1,6 +1,6 @@
 package com.ndroidstudios.android.formulawizard;
 
-import com.ndroidstudios.android.helper.MyAdapter;
+import com.ndroidstudios.android.helper.CustomArrayAdapter;
 
 import android.app.ListActivity;
 import android.content.Intent;
@@ -11,9 +11,6 @@ import android.view.View;
  
 public class VolumeChooser extends ListActivity {
  
-	static final String [] VOLUME = new String [] { "Cone", "Cube", "Cylinder", 
-		"Ellipsoid", "Prism", "Pyramid", "Sphere"};
- 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -21,15 +18,14 @@ public class VolumeChooser extends ListActivity {
 		getListView().setBackgroundColor(Color.WHITE);
 		getListView().setCacheColorHint(0);
  
-		setListAdapter(new MyAdapter(this, VOLUME));
- 
+		String[] values = this.getResources().getStringArray(R.array.volume_list);
+		setListAdapter(new CustomArrayAdapter(this, R.layout.list_view, values, R.id.label));
 	}
  
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
  
-		switch( position )
-	    {
+		switch( position ) {
 	       case 0:  Intent j = new Intent(this, ConeVolumeActivity.class);     
 	                startActivity(j);
 	                break;

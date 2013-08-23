@@ -14,11 +14,16 @@ import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.MenuItem;
+import com.ndroidstudios.android.helper.CustomArrayAdapter;
 import com.ndroidstudios.android.helper.FontHelper;
 import com.ndroidstudios.android.helper.UIHelper;
 
 public class CustomFormulaEdit extends SherlockActivity {
 	
+    int arr_images[] = { R.drawable.formulawizard_button,
+                         R.drawable.formulawizard_button, R.drawable.formulawizard_button,
+                         R.drawable.formulawizard_button, R.drawable.formulawizard_button, R.drawable.formulawizard_button};
+    
 	private TextView mFormulaHeading;
 	private EditText mFormulaName;	
 	private TextView mFormulaOnChalkboard;
@@ -76,6 +81,8 @@ public class CustomFormulaEdit extends SherlockActivity {
 		mFormulaOnChalkboard = (TextView)findViewById(R.id.formula_on_chalkboard);
 		mFormula = (EditText)findViewById(R.id.formula_edit);
 		mCategorySpinner = (Spinner)findViewById(R.id.category_spinner);
+		
+		styleSpinner();
 		
 		mFormula.addTextChangedListener(formulaWatcher);
 		mFormulaName.addTextChangedListener(nameWatcher);
@@ -177,6 +184,11 @@ public class CustomFormulaEdit extends SherlockActivity {
 		} else {
 			startAlertPrompt();
 		}
+	}
+	
+	private void styleSpinner() {
+		String[] values = this.getResources().getStringArray(R.array.category_content);
+		mCategorySpinner.setAdapter(new CustomArrayAdapter(this, R.layout.spinner_row, values, R.id.row_label));		
 	}
 }
 

@@ -1,6 +1,6 @@
 package com.ndroidstudios.android.formulawizard;
 
-import com.ndroidstudios.android.helper.MyAdapter;
+import com.ndroidstudios.android.helper.CustomArrayAdapter;
 
 import android.app.ListActivity;
 import android.content.Intent;
@@ -11,9 +11,6 @@ import android.view.View;
  
 public class Exponent3Activity extends ListActivity {
 
-	static final String [] EX3 = new String [] { "Binomial theorem for a sum", 
-		"Binomial theorem for a difference"};
- 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -21,22 +18,20 @@ public class Exponent3Activity extends ListActivity {
 		getListView().setBackgroundColor(Color.WHITE);
 		getListView().setCacheColorHint(0);
  
-		setListAdapter(new MyAdapter(this, EX3));
- 
+		String[] values = this.getResources().getStringArray(R.array.exponent_list);
+		setListAdapter(new CustomArrayAdapter(this, R.layout.list_view, values, R.id.label));
 	}
  
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
  
-		switch( position )
-	    {
+		switch( position ) {
 	       case 0:  Intent i = new Intent(this, Exponent3positiveActivity.class);     
 	                startActivity(i);
 	                break;
 	       case 1:  Intent j = new Intent(this, Exponent3negativeActivity.class);     
 	                startActivity(j);
 	                break;
-	       
 	    }
 	}
 }
