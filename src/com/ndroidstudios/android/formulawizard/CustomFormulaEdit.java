@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.MenuItem;
 import com.ndroidstudios.android.helper.CustomArrayAdapter;
+import com.ndroidstudios.android.helper.DBAdapter;
 import com.ndroidstudios.android.helper.FontHelper;
 import com.ndroidstudios.android.helper.UIHelper;
 
@@ -29,6 +30,9 @@ public class CustomFormulaEdit extends SherlockActivity {
 	private TextView mFormulaOnChalkboard;
 	private EditText mFormula;
 	private Spinner mCategorySpinner;
+	private boolean mIsEdited = false;
+	private String[] editTextState;
+	private DBAdapter myDB;
 	
 	private TextWatcher nameWatcher = new TextWatcher() {
 		@Override
@@ -81,19 +85,23 @@ public class CustomFormulaEdit extends SherlockActivity {
 		mFormulaOnChalkboard = (TextView)findViewById(R.id.formula_on_chalkboard);
 		mFormula = (EditText)findViewById(R.id.formula_edit);
 		mCategorySpinner = (Spinner)findViewById(R.id.category_spinner);
+		mCategorySpinner.setAdapter(getCustomSpinner());
 		
-		styleSpinner();
-		
+		// This happens when the activity is called to edit an exiting formula
+		tryPopulatingView(this.getIntent()); 
+		saveEditTextState();
 		mFormula.addTextChangedListener(formulaWatcher);
 		mFormulaName.addTextChangedListener(nameWatcher);
 		
+		openDB(); // So that we can make changes and save them
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
 		super.onCreateOptionsMenu(menu);
 		com.actionbarsherlock.view.MenuInflater inflater = getSupportMenuInflater();
-		inflater.inflate(R.menu.menu_save_cancel, menu);
+		inflater.inflate(R.menu.menu_save, menu);
+		inflater.inflate(R.menu.menu_cancel, menu);
 		return true;
 	}
 
@@ -112,10 +120,11 @@ public class CustomFormulaEdit extends SherlockActivity {
 		case R.id.menu_save: 
 			if (allFieldsSet()) {
 				Intent saveIntent = new Intent();
-				saveIntent.putExtra("formula_name", mFormulaName.getText().toString());		
+				saveIntent.putExtra("name", mFormulaName.getText().toString());		
 				saveIntent.putExtra("formula", mFormula.getText().toString());
 				saveIntent.putExtra("category", mCategorySpinner.getSelectedItem().toString());
 				
+				saveData();
 				setResult(RESULT_OK, saveIntent);
 				Toast.makeText(getApplicationContext(), this.getResources().
 						getString(R.string.saved_successfully), Toast.LENGTH_LONG).show();
@@ -131,6 +140,21 @@ public class CustomFormulaEdit extends SherlockActivity {
 		}
 	}
 	
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		closeDB();
+	}
+
+	private void openDB() {
+		myDB = new DBAdapter(this);
+		myDB.open();
+	}
+	
+	private void closeDB() {
+		myDB.close();
+	}
+	
 	private boolean allFieldsSet() {
 		if (UIHelper.isEmpty(mFormulaName) || UIHelper.isEmpty(mFormula)) {
 			return false;
@@ -140,7 +164,8 @@ public class CustomFormulaEdit extends SherlockActivity {
 	}
 	
 	private boolean noDataEntered() {
-		if (UIHelper.isEmpty(mFormulaName) && UIHelper.isEmpty(mFormula)) {
+		if (editTextState[0].equals(mFormulaName.getText().toString()) 
+				&& editTextState[1].equals(mFormula.getText().toString())) {
 			return true;
 		} else {
 			return false;
@@ -186,9 +211,52 @@ public class CustomFormulaEdit extends SherlockActivity {
 		}
 	}
 	
-	private void styleSpinner() {
+	private void tryPopulatingView(Intent intent) {
+		if (intent.getExtras() != null) {
+			String name = intent.getStringExtra("name");
+			String formula = intent.getStringExtra("formula");
+			String category = intent.getStringExtra("category");
+			
+			// Populate EditTexts
+			mFormulaName.setText(name);
+			mFormula.setText(formula);
+			
+			// Populate TextViews
+			mFormulaHeading.setText(name);
+			mFormulaOnChalkboard.setText(formula);
+			
+			// Set the selected Spinner item
+			mCategorySpinner.setSelection(getCustomSpinner().getPosition(category));
+			
+			// We are working with an existing formula -> we are editing
+			mIsEdited = true;
+		}
+	}
+	
+	private CustomArrayAdapter getCustomSpinner() {
 		String[] values = this.getResources().getStringArray(R.array.category_content);
-		mCategorySpinner.setAdapter(new CustomArrayAdapter(this, R.layout.spinner_row, values, R.id.row_label));		
+		return new CustomArrayAdapter(this, R.layout.spinner_row, values, R.id.row_label);		
+	}
+	
+	private void saveData() {
+		String name = mFormulaName.getText().toString();		
+		String formula =  mFormula.getText().toString();
+		String category = mCategorySpinner.getSelectedItem().toString();
+		if (mIsEdited) {
+			long rowID = getIntent().getLongExtra("rowID", 0);
+			myDB.updateRow(rowID, name, formula, category);
+		} else {
+			myDB.insertRow(name, formula, category);
+		}
+	}
+	
+	// Save the content of the EditTexts so that we can cancel the activity without alert
+	// if nothing changed
+	private String[] saveEditTextState() {
+		editTextState = new String[2];
+		editTextState[0] = (mFormulaName.getText().toString());
+		editTextState[1] = (mFormulaName.getText().toString());
+		return editTextState;
 	}
 }
 

@@ -10,13 +10,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
+import com.ndroidstudios.android.helper.CustomCursorAdapter;
 import com.ndroidstudios.android.helper.DBAdapter;
 import com.ndroidstudios.android.helper.FontHelper;
 
@@ -25,14 +25,13 @@ public class CustomFormulaFragment extends SherlockFragment {
 	private static int EDITFORMULA_REQ = 1;
 	private ListView listFromDB;
 	private TextView emptyListInfoText;
-	private View rootView;
-	
+	private View rootView;	
 	private DBAdapter myDB;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-				
+		
 		setHasOptionsMenu(true);
 		openDB();
 		rootView = inflater.inflate(R.layout.custom_list, container, false);
@@ -51,6 +50,7 @@ public class CustomFormulaFragment extends SherlockFragment {
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
+		super.onOptionsItemSelected(item);
 		switch(item.getItemId()) {
 		case R.id.menu_add: 
 			Intent intent = new Intent(this.getActivity(), CustomFormulaEdit.class);
@@ -65,15 +65,8 @@ public class CustomFormulaFragment extends SherlockFragment {
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		
-		System.out.println(data.getStringExtra("formula_name") + ", " + data.getStringExtra("formula") + ", " + data.getStringExtra("category"));
 		if (requestCode == EDITFORMULA_REQ) {
-			if (resultCode == MainActivity.RESULT_OK) {
-				
-				String name = data.getStringExtra("formula_name");
-				String formula = data.getStringExtra("formula");
-				String category = data.getStringExtra("category");
-				System.out.println(name + ", " + formula + ", " + category);
-				myDB.insertRow(name, formula, category);
+			if (resultCode == MainActivity.RESULT_OK) {	
 				populateViewFromDB();
 			}
 		}
@@ -107,25 +100,21 @@ public class CustomFormulaFragment extends SherlockFragment {
 				
 			// Allow activity to manage lifetime of cursor
 			this.getActivity().startManagingCursor(cursor);
-			
+						
 			// Setup mapping from cursor to fields in the UI
-			String[] fromDBFields = new String[] 
-					{DBAdapter.KEY_NAME, DBAdapter.KEY_CATEGORY};
-			
-			int[] toViewIDs = new int[]
-					{R.id.item_name, R.id.item_category};
+			String[] fromDBFields = new String[] {DBAdapter.KEY_NAME, DBAdapter.KEY_CATEGORY};
+			int[] toViewIDs = new int[] {R.id.item_name, R.id.item_category};
 			
 			// Create adapter to map columns from DB to elements in the UI
-			SimpleCursorAdapter myCursorAdapter = new SimpleCursorAdapter(
+			CustomCursorAdapter myCursorAdapter = new CustomCursorAdapter(
 					this.getActivity(), 
 					R.layout.custom_list_item,  // Row layout 
 					cursor,						// cursor (set of DB records to map)
 					fromDBFields,				// DB column names
 					toViewIDs					// View IDs to put information in
 					);
-				
+							
 			emptyListInfoText.setVisibility(View.GONE);
-			
 			listFromDB.setAdapter(myCursorAdapter);
 			registerListClickCallback(rootView);
 		}
@@ -142,10 +131,13 @@ public class CustomFormulaFragment extends SherlockFragment {
 				if(cursor.moveToFirst()) {
 					String name = cursor.getString(DBAdapter.COL_NAME);
 					String formula = cursor.getString(DBAdapter.COL_FORMULA);
+					String category = cursor.getString(DBAdapter.COL_CATEGORY);
 					
 					Intent customCalculator = new Intent(CustomFormulaFragment.this.getActivity(), CustomCalculator.class);
 					customCalculator.putExtra("name", name);
 					customCalculator.putExtra("formula", formula);
+					customCalculator.putExtra("category", category);
+					customCalculator.putExtra("rowID", idInDB);
 					startActivity(customCalculator);
 				}
 				cursor.close();

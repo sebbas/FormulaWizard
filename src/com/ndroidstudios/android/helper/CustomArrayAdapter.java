@@ -1,7 +1,5 @@
 package com.ndroidstudios.android.helper;
 
-import java.util.Arrays;
-
 import android.content.Context;
 import android.graphics.Color;
 import android.view.LayoutInflater;

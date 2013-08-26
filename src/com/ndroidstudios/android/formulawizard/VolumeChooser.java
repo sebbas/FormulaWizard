@@ -1,15 +1,15 @@
 package com.ndroidstudios.android.formulawizard;
 
-import com.ndroidstudios.android.helper.CustomArrayAdapter;
-
-import android.app.ListActivity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.widget.ListView;
 import android.view.View;
+import android.widget.ListView;
+
+import com.actionbarsherlock.app.SherlockListActivity;
+import com.ndroidstudios.android.helper.CustomArrayAdapter;
  
-public class VolumeChooser extends ListActivity {
+public class VolumeChooser extends SherlockListActivity {
  
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

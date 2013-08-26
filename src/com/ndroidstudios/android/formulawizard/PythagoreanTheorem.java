@@ -1,17 +1,17 @@
 package com.ndroidstudios.android.formulawizard;
 
-import com.ndroidstudios.android.helper.FormulaHelper;
-import com.ndroidstudios.android.helper.FontHelper;
-import com.ndroidstudios.android.helper.UIHelper;
-
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class PythagoreanTheorem extends Activity {
+import com.actionbarsherlock.app.SherlockActivity;
+import com.ndroidstudios.android.helper.FontHelper;
+import com.ndroidstudios.android.helper.FormulaHelper;
+import com.ndroidstudios.android.helper.UIHelper;
+
+public class PythagoreanTheorem extends SherlockActivity {
 	
 	// Private instance variables
 	private EditText mVariableA;

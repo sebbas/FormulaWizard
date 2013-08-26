@@ -85,5 +85,7 @@
     <string name="alert_deleteformula_title">Delete this formula</string>
     <string name="alert_deleteformula_subtitle">Do you really want to delete this formula?</string>
     <string name="delete">Delete</string>
+    <string name="share_formula">Share Formula</string>
+    <string name="edit_formula">Edit Formula</string>
     
 </resources>
