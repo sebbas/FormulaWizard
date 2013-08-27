@@ -30,6 +30,7 @@ public class DBAdapter {
 	public static final String KEY_FORMULA = "formula";
 	public static final String KEY_CATEGORY = "category";
 	
+	
 	// TODO: Setup your field numbers here (0 = KEY_ROWID, 1=...)
 	public static final int COL_NAME = 1;
 	public static final int COL_FORMULA = 2;

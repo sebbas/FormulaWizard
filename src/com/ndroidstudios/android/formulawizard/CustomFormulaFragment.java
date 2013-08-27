@@ -113,7 +113,6 @@ public class CustomFormulaFragment extends SherlockFragment {
 					fromDBFields,				// DB column names
 					toViewIDs					// View IDs to put information in
 					);
-							
 			emptyListInfoText.setVisibility(View.GONE);
 			listFromDB.setAdapter(myCursorAdapter);
 			registerListClickCallback(rootView);

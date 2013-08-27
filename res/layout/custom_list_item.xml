@@ -12,7 +12,7 @@
         android:maxHeight="80dp"
         android:maxWidth="80dp"
         android:layout_margin="10dp"
-        android:src="@drawable/formulawizard_weight"
+        android:src="@drawable/formulawizard_perimeter"
         android:background="@drawable/formulawizard_button" />
 
     <LinearLayout

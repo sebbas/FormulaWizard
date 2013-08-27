@@ -22,8 +22,8 @@
         	android:layout_height="wrap_content"
         	android:adjustViewBounds="true"
         	android:layout_marginBottom="10dp"
-        	android:layout_marginLeft="10dp"
-        	android:layout_marginRight="10dp"
+        	android:layout_marginLeft="20dp"
+        	android:layout_marginRight="20dp"
         	android:layout_marginTop="10dp"
         	android:layout_weight="1"
         	android:src="@drawable/area_selector" 
@@ -36,8 +36,8 @@
         	android:layout_height="wrap_content"
         	android:adjustViewBounds="true"
         	android:layout_marginBottom="10dp"
-        	android:layout_marginLeft="10dp"
-        	android:layout_marginRight="10dp"
+        	android:layout_marginLeft="20dp"
+        	android:layout_marginRight="20dp"
         	android:layout_marginTop="10dp"
         	android:layout_weight="1"
         	android:src="@drawable/binomial_selector" 
@@ -50,25 +50,11 @@
         	android:layout_height="wrap_content"
         	android:adjustViewBounds="true"
         	android:layout_marginBottom="10dp"
-        	android:layout_marginLeft="10dp"
-        	android:layout_marginRight="10dp"
+        	android:layout_marginLeft="20dp"
+        	android:layout_marginRight="20dp"
         	android:layout_marginTop="10dp"
         	android:layout_weight="1"
         	android:src="@drawable/length_selector" 
-        	android:background="@drawable/formulawizard_button"
-        	android:contentDescription="@string/app_name"/>
-    	
-    	<ImageView
-        	android:id="@+id/midpoint"
-        	android:layout_width="wrap_content"
-        	android:layout_height="wrap_content"
-        	android:adjustViewBounds="true"
-        	android:layout_marginBottom="10dp"
-        	android:layout_marginLeft="10dp"
-        	android:layout_marginRight="10dp"
-        	android:layout_marginTop="10dp"
-        	android:layout_weight="1"
-        	android:src="@drawable/midpoint_selector" 
         	android:background="@drawable/formulawizard_button"
         	android:contentDescription="@string/app_name"/>
 	
@@ -80,14 +66,28 @@
     		android:layout_weight="1"
     		android:orientation="horizontal" >
     	
+	    <ImageView
+        	android:id="@+id/midpoint"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:adjustViewBounds="true"
+        	android:layout_marginBottom="10dp"
+        	android:layout_marginLeft="20dp"
+        	android:layout_marginRight="20dp"
+        	android:layout_marginTop="10dp"
+        	android:layout_weight="1"
+        	android:src="@drawable/midpoint_selector" 
+        	android:background="@drawable/formulawizard_button"
+        	android:contentDescription="@string/app_name"/>
+    	
     	<ImageView
         	android:id="@+id/perimeter"
         	android:layout_width="wrap_content"
         	android:layout_height="wrap_content"
         	android:adjustViewBounds="true"
         	android:layout_marginBottom="10dp"
-        	android:layout_marginLeft="10dp"
-        	android:layout_marginRight="10dp"
+        	android:layout_marginLeft="20dp"
+        	android:layout_marginRight="20dp"
         	android:layout_marginTop="10dp"
         	android:layout_weight="1"
         	android:src="@drawable/perimeter_selector" 
@@ -100,22 +100,30 @@
         	android:layout_height="wrap_content"
         	android:adjustViewBounds="true"
         	android:layout_marginBottom="10dp"
-        	android:layout_marginLeft="10dp"
-        	android:layout_marginRight="10dp"
+        	android:layout_marginLeft="20dp"
+        	android:layout_marginRight="20dp"
         	android:layout_marginTop="10dp"
         	android:layout_weight="1"
         	android:src="@drawable/pythagoras_selector" 
         	android:background="@drawable/formulawizard_button"
         	android:contentDescription="@string/app_name"/>
+
+		</LinearLayout>
+		
+	    <LinearLayout 
+    		android:layout_width="match_parent"
+    		android:layout_height="match_parent"
+    		android:layout_weight="1"
+    		android:orientation="horizontal" >
     	
-    	<ImageView
+	    <ImageView
         	android:id="@+id/quadratic"
         	android:layout_width="wrap_content"
         	android:layout_height="wrap_content"
         	android:adjustViewBounds="true"
         	android:layout_marginBottom="10dp"
-        	android:layout_marginLeft="10dp"
-        	android:layout_marginRight="10dp"
+        	android:layout_marginLeft="20dp"
+        	android:layout_marginRight="20dp"
         	android:layout_marginTop="10dp"
         	android:layout_weight="1"
         	android:src="@drawable/quadratic_selector" 
@@ -128,21 +136,13 @@
         	android:layout_height="wrap_content"
         	android:adjustViewBounds="true"
         	android:layout_marginBottom="10dp"
-        	android:layout_marginLeft="10dp"
-        	android:layout_marginRight="10dp"
+        	android:layout_marginLeft="20dp"
+        	android:layout_marginRight="20dp"
         	android:layout_marginTop="10dp"
         	android:layout_weight="1"
         	android:src="@drawable/slope_selector" 
         	android:background="@drawable/formulawizard_button"
         	android:contentDescription="@string/app_name"/>
-
-		</LinearLayout>
-		
-	    <LinearLayout 
-    		android:layout_width="match_parent"
-    		android:layout_height="match_parent"
-    		android:layout_weight="1"
-    		android:orientation="horizontal" >
     	
     	<ImageView
         	android:id="@+id/volume"
@@ -150,57 +150,12 @@
         	android:layout_height="wrap_content"
         	android:adjustViewBounds="true"
         	android:layout_marginBottom="10dp"
-        	android:layout_marginLeft="10dp"
-        	android:layout_marginRight="10dp"
+        	android:layout_marginLeft="20dp"
+        	android:layout_marginRight="20dp"
         	android:layout_marginTop="10dp"
         	android:layout_weight="1"
         	android:src="@drawable/volume_selector" 
         	android:background="@drawable/formulawizard_button"
-        	android:contentDescription="@string/app_name"/>
-    	
-    	<ImageView
-        	android:id="@+id/dummy"
-        	android:layout_width="wrap_content"
-        	android:layout_height="wrap_content"
-        	android:adjustViewBounds="true"
-        	android:layout_marginBottom="10dp"
-        	android:layout_marginLeft="10dp"
-        	android:layout_marginRight="10dp"
-        	android:layout_marginTop="10dp"
-        	android:layout_weight="1"
-        	android:src="@drawable/pythagoras_selector" 
-        	android:background="@android:color/white"
-        	android:alpha="0.0"
-        	android:contentDescription="@string/app_name"/>
-    	
-    	<ImageView
-        	android:id="@+id/dummy2"
-        	android:layout_width="wrap_content"
-        	android:layout_height="wrap_content"
-        	android:adjustViewBounds="true"
-        	android:layout_marginBottom="10dp"
-        	android:layout_marginLeft="10dp"
-        	android:layout_marginRight="10dp"
-        	android:layout_marginTop="10dp"
-        	android:layout_weight="1"
-        	android:src="@drawable/pythagoras_selector" 
-        	android:background="@android:color/white"
-        	android:alpha="0.0"
-        	android:contentDescription="@string/app_name"/>
-    	
-    	<ImageView
-        	android:id="@+id/dummy3"
-        	android:layout_width="wrap_content"
-        	android:layout_height="wrap_content"
-        	android:adjustViewBounds="true"
-        	android:layout_marginBottom="10dp"
-        	android:layout_marginLeft="10dp"
-        	android:layout_marginRight="10dp"
-        	android:layout_marginTop="10dp"
-        	android:layout_weight="1"
-        	android:src="@drawable/pythagoras_selector" 
-        	android:background="@android:color/white"
-        	android:alpha="0.0"
         	android:contentDescription="@string/app_name"/>
     	
 	    </LinearLayout> 

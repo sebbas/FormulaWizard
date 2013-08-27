@@ -21,10 +21,10 @@ import com.ndroidstudios.android.helper.UIHelper;
 
 public class CustomFormulaEdit extends SherlockActivity {
 	
-    int arr_images[] = { R.drawable.formulawizard_button,
-                         R.drawable.formulawizard_button, R.drawable.formulawizard_button,
-                         R.drawable.formulawizard_button, R.drawable.formulawizard_button, R.drawable.formulawizard_button};
-    
+	int imageId[] = { R.drawable.formulawizard_volume,
+            R.drawable.formulawizard_volume, R.drawable.formulawizard_volume,
+            R.drawable.formulawizard_volume, R.drawable.formulawizard_volume, R.drawable.formulawizard_weight};
+
 	private TextView mFormulaHeading;
 	private EditText mFormulaName;	
 	private TextView mFormulaOnChalkboard;
@@ -255,7 +255,7 @@ public class CustomFormulaEdit extends SherlockActivity {
 	private String[] saveEditTextState() {
 		editTextState = new String[2];
 		editTextState[0] = (mFormulaName.getText().toString());
-		editTextState[1] = (mFormulaName.getText().toString());
+		editTextState[1] = (mFormula.getText().toString());
 		return editTextState;
 	}
 }
