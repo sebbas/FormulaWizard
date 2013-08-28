@@ -87,5 +87,6 @@
     <string name="delete">Delete</string>
     <string name="share_formula">Share Formula</string>
     <string name="edit_formula">Edit Formula</string>
+    <string name="about_voice">About Voice Calc</string>
     
 </resources>

@@ -12,7 +12,7 @@
         android:maxHeight="80dp"
         android:maxWidth="80dp"
         android:layout_margin="10dp"
-        android:src="@drawable/formulawizard_perimeter"
+        android:src="@drawable/formulawizard_general"
         android:background="@drawable/formulawizard_button" />
 
     <LinearLayout
@@ -27,6 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Name Text"
+        android:textColor="#000000"
         android:maxLines="2"
         android:ellipsize="end"
         android:textSize="20sp"/>
@@ -36,6 +37,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Formula Category"
+        android:textColor="#000000"
         android:maxLines="1"
         android:ellipsize="end"
         android:textSize="15sp" />

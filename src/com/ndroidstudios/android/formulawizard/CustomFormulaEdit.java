@@ -21,9 +21,9 @@ import com.ndroidstudios.android.helper.UIHelper;
 
 public class CustomFormulaEdit extends SherlockActivity {
 	
-	int imageId[] = { R.drawable.formulawizard_volume,
-            R.drawable.formulawizard_volume, R.drawable.formulawizard_volume,
-            R.drawable.formulawizard_volume, R.drawable.formulawizard_volume, R.drawable.formulawizard_weight};
+	int imageId[] = { R.drawable.formulawizard_volume2,
+            R.drawable.formulawizard_volume2, R.drawable.formulawizard_volume2,
+            R.drawable.formulawizard_volume2, R.drawable.formulawizard_volume2, R.drawable.formulawizard_weight};
 
 	private TextView mFormulaHeading;
 	private EditText mFormulaName;	

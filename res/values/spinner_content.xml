@@ -4,10 +4,11 @@
     
     <string-array name="category_content">
         <item>General Formula</item>
+        <item>Area</item>
         <item>Currency</item>
-        <item>Geometry</item>
+        <item>Perimeter</item>
         <item>Temperature</item>
-        <item>Trigonometry</item>
+        <item>Volume</item>
         <item>Weight</item>
     </string-array>
     

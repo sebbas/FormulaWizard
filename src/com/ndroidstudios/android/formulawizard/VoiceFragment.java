@@ -20,6 +20,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragment;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
 import com.ndroidstudios.android.helper.FontHelper;
 import com.ndroidstudios.android.helper.VoiceHelper;
 import com.wolfram.alpha.WAEngine;
@@ -81,9 +84,27 @@ public class VoiceFragment extends SherlockFragment {
                     	//startVoiceRecognitionActivity();
                     	testOnActivityResult();
                     }
-                });         
+                });  
+        this.setHasOptionsMenu(true);
     	return rootView;
     }
+
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+	   super.onCreateOptionsMenu(menu, inflater);
+	   inflater.inflate(R.menu.menu_about, menu);
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		super.onOptionsItemSelected(item);
+		switch(item.getItemId()) {
+		case R.id.menu_about: 
+			return true;
+		default: 	
+			return super.onOptionsItemSelected(item);
+		}
+	}
     
     // Alternate implementation with instance variable. Reason: setRetainInstance() was used in onCreateView()
     @Override
