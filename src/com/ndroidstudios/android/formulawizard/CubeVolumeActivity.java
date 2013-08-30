@@ -59,6 +59,7 @@ public class CubeVolumeActivity extends SherlockActivity {
     	try {
     		if (UIHelper.isEmpty(mVariableA)) {
 				UIHelper.setErrorText(mInfoText);
+				UIHelper.setEditTextAlert(this, mVariableA);
 			} else {
 				double side = Double.parseDouble(mVariableA.getText().toString());
 				result = FormulaHelper.cubeVolume(side);

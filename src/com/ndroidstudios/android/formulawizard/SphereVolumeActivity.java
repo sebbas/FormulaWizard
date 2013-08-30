@@ -59,6 +59,7 @@ public class SphereVolumeActivity extends SherlockActivity {
     	try {
     		if (UIHelper.isEmpty(mVariableA)) {
 				UIHelper.setErrorText(mInfoText);
+				UIHelper.setEditTextAlert(this, mVariableA);
 			} else {
 				double radius = Double.parseDouble(mVariableA.getText().toString());
 				result = FormulaHelper.sphereVolume(radius);

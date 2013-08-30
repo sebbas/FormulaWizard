@@ -63,6 +63,7 @@ public class PrismVolumeActivity extends SherlockActivity {
     	try {
     		if (UIHelper.isEmpty(mVariableA, mVariableB, mVariableC)) {
 				UIHelper.setErrorText(mInfoText);
+				UIHelper.setEditTextAlert(this, mVariableA, mVariableB, mVariableC);
 			} else {
 				double length = Double.parseDouble(mVariableA.getText().toString());
 		    	double width = Double.parseDouble(mVariableB.getText().toString());

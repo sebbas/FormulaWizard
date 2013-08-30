@@ -88,5 +88,6 @@
     <string name="share_formula">Share Formula</string>
     <string name="edit_formula">Edit Formula</string>
     <string name="about_voice">About Voice Calc</string>
+    <string name="enter_value">Enter a numeric value</string>
     
 </resources>

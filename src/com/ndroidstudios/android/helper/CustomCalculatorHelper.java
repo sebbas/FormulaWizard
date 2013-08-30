@@ -31,15 +31,14 @@ public class CustomCalculatorHelper {
 	}
 	
 	public static HashMap<String, Double> getValuesMap(Activity activity) {
-		HashMap<String, Double> valuesMap = new HashMap<String, Double>();
-		
+		HashMap<String, Double> valuesMap = new HashMap<String, Double>(); // HashMap that maps the variable names to their values	
 		LinearLayout parent = (LinearLayout) activity.findViewById(R.id.variable_container);
 		
 		for (int i = 0; i != parent.getChildCount(); i++) {
 			if (parent.getChildAt(i).getId() == R.id.variable_container_item) {
-				LinearLayout child = (LinearLayout) parent.findViewById(R.id.variable_container_item);
+				LinearLayout child = (LinearLayout) parent.findViewById(R.layout.variable_container_item);
 				TextView containerItemTextView = (TextView) child.getChildAt(0);
-				EditText containerItemEditText = (EditText) child.getChildAt(1);
+				EditText containerItemEditText = (EditText) child.findViewById(R.id.variable_edit);
 				
 				String name = containerItemTextView.getText().toString();
 				double value = Double.parseDouble(containerItemEditText.getText().toString());
@@ -50,13 +49,13 @@ public class CustomCalculatorHelper {
 	}
 	
 	public static LinkedList<EditText> getEditTextList(Activity activity) {
-		LinkedList<EditText> editTextList = new LinkedList<EditText>(); // List that will hold all EditTexts
-		
+		LinkedList<EditText> editTextList = new LinkedList<EditText>(); // List that will hold all EditTexts	
 		LinearLayout parent = (LinearLayout) activity.findViewById(R.id.variable_container);
+		
 		for (int i = 0; i != parent.getChildCount(); i++) {
 			if (parent.getChildAt(i).getId() == R.id.variable_container_item) {
-				LinearLayout child = (LinearLayout) parent.findViewById(R.id.variable_container_item);
-				EditText containerItemEditText = (EditText) child.getChildAt(1);
+				LinearLayout child = (LinearLayout) parent.getChildAt(i);
+				EditText containerItemEditText = (EditText) child.findViewById(R.id.variable_edit);
 				editTextList.add(i, containerItemEditText);
 			}
 		}

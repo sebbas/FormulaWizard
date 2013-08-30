@@ -63,6 +63,7 @@ public class EllipsoidVolumeActivity extends SherlockActivity {
     	try {
     		if (UIHelper.isEmpty(mVariableA, mVariableB, mVariableC)) {
 				UIHelper.setErrorText(mInfoText);
+				UIHelper.setEditTextAlert(this, mVariableA, mVariableB, mVariableC);
 			} else {
 				double radius1 = Double.parseDouble(mVariableA.getText().toString());
 				double radius2 = Double.parseDouble(mVariableB.getText().toString());

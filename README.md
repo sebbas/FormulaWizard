@@ -1,4 +1,3 @@
-![alt text](https://github.com/sebbas/Formula-Wizard/blob/master/res/drawable-xhdpi/formulawizard_icon.png "Formula Wizard")
 # Math Formula Wizard
 
 ## Easily solve mathematical equations using the built in formula calculator

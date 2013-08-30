@@ -63,6 +63,7 @@ public class TrianglePerimeterActivity extends SherlockActivity {
     	try {
     		if (UIHelper.isEmpty(mVariableA, mVariableB, mVariableC)) {
 				UIHelper.setErrorText(mInfoText);
+				UIHelper.setEditTextAlert(this, mVariableA, mVariableB, mVariableC);
 			} else {
 				double base = Double.parseDouble(mVariableA.getText().toString());
 		    	double side1 = Double.parseDouble(mVariableB.getText().toString());

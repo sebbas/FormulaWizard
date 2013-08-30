@@ -66,6 +66,7 @@ public class QuadraticCalculator extends SherlockActivity {
     	try {
     		if (UIHelper.isEmpty(mVariableA, mVariableB, mVariableC)) {
 				UIHelper.setErrorText(mInfoText);
+				UIHelper.setEditTextAlert(this, mVariableA, mVariableB, mVariableC);
 			} else {
 				double a = Double.parseDouble(mVariableA.getText().toString());
 		    	double b = Double.parseDouble(mVariableB.getText().toString());

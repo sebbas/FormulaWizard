@@ -61,6 +61,7 @@ public class EllipsePerimeterActivity extends SherlockActivity {
     	try {
     		if (UIHelper.isEmpty(mVariableA, mVariableB)) {
 				UIHelper.setErrorText(mInfoText);
+				UIHelper.setEditTextAlert(this, mVariableA, mVariableB);
 			} else {
 				double radius1 = Double.parseDouble(mVariableA.getText().toString());
 				double radius2 = Double.parseDouble(mVariableB.getText().toString());

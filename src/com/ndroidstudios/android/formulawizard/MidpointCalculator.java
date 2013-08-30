@@ -71,6 +71,7 @@ public class MidpointCalculator extends SherlockActivity {
     private void handleInput() {
     	if (UIHelper.isEmpty(mVariableA, mVariableB, mVariableC, mVariableD)) {
 			UIHelper.setErrorText(mInfoText);
+			UIHelper.setEditTextAlert(this, mVariableA, mVariableB, mVariableC, mVariableD);
 		} else {
 			double x1 = Double.parseDouble(mVariableA.getText().toString());
 			double x2 = Double.parseDouble(mVariableB.getText().toString());

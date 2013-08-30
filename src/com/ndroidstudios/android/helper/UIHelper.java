@@ -4,6 +4,7 @@ import java.util.LinkedList;
 
 import com.ndroidstudios.android.formulawizard.R;
 
+import android.content.Context;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -34,6 +35,22 @@ public class UIHelper {
 			} 
 		}
 		return false;
+	}
+	
+	public static void setEditTextAlert(Context context, EditText... args) {
+		for (int i = 0; i < args.length; i++) {
+			if (args[i].getText().toString().equals("")) {
+				args[i].setError(context.getResources().getString(R.string.enter_value));
+			}
+		}
+	}
+	
+	public static void setEditTextAlert(Context context, LinkedList<EditText> editTextList) {
+		for (int i = 0; i < editTextList.size(); i++) {
+			if (editTextList.get(i).getText().toString().equals("")) {
+				editTextList.get(i).setError(context.getResources().getString(R.string.enter_value));
+			}
+		}
 	}
 }
 

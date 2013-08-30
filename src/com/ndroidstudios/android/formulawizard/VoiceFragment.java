@@ -158,8 +158,8 @@ public class VoiceFragment extends SherlockFragment {
 		mVoicePrompt.setText(listToString(query));
     }
       
-    public static String listToString(List<String> list) {
-        String result = list.get(0);
+    public static <E> String listToString(List<E> list) {
+        String result = (String) list.get(0);
         for (int i = 1; i < list.size(); i++) {
             result += " " + list.get(i);
         }
@@ -221,7 +221,6 @@ public class VoiceFragment extends SherlockFragment {
     			public void onClick(View v) {
     				// Create the URL to the actual Wolfram Alpha results webpage
     				String queryWebsiteURL = mQuery.toWebsiteURL();
-    		        System.out.println("Website is: " + queryWebsiteURL);
 
     				Intent intent = new Intent();
     				intent.setAction(Intent.ACTION_VIEW);

@@ -122,23 +122,15 @@ public class CustomCalculator extends SherlockActivity {
 	
 	private void createVariableContainers() {
 		ArrayList<String> variableNames = CustomCalculatorHelper.getVariableArray(getFormulaString()); // Holds all variable names
-		LayoutInflater layoutInflater = (LayoutInflater)this.getSystemService(CustomCalculator.LAYOUT_INFLATER_SERVICE); // Setup the inflater
 		LinearLayout variableContainer = (LinearLayout)this.findViewById(R.id.variable_container);	// Major item container
 		
 		variableContainer.removeAllViews(); // Make sure our container is clean before inflating it
-		for (String variable : variableNames) {
+		for (int i = 0; i < variableNames.size(); i++) {
+			String variableName = variableNames.get(i);
 			
 			// Create a new container item that holds a TextView and an EditText. Then add it to main container
-			LinearLayout variableContainerItem = (LinearLayout) layoutInflater.inflate(R.layout.variable_container_item, null);
-			variableContainer.addView(variableContainerItem);
-			
-			// Set text for item container
-			TextView itemText = (TextView)variableContainerItem.findViewById(R.id.variable_text);
-			EditText itemEdit = (EditText)variableContainerItem.findViewById(R.id.variable_edit);
-			itemEdit.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_CLASS_NUMBER); // Restrict input type to numbers only
-			FontHelper.overrideFonts(this, itemText);
-			FontHelper.overrideFonts(this, itemEdit);
-			itemText.setText(variable + ":");
+			LinearLayout variableContainerItem = new ItemContainerLayout(this, variableName);
+			variableContainer.addView(variableContainerItem, i);
 		}
 	}
 	
@@ -156,9 +148,10 @@ public class CustomCalculator extends SherlockActivity {
 	private void handleInput() {
 		if (UIHelper.isEmpty(CustomCalculatorHelper.getEditTextList(this))) {
 			UIHelper.setErrorText(mInfoText);
+			UIHelper.setEditTextAlert(this, CustomCalculatorHelper.getEditTextList(this));
 		} else {
 			double result = CustomCalculatorHelper.calculateResult(getFormulaString());
-			mInfoText.setText("Result = " + result);
+			mInfoText.setText(getResources().getString(R.string.result) + " = " + result);
 		}
 	}
 }

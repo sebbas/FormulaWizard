@@ -61,6 +61,7 @@ public class ConeActivity extends SherlockActivity {
     	try {
     		if (UIHelper.isEmpty(mVariableA, mVariableB)) {
 				UIHelper.setErrorText(mInfoText);
+				UIHelper.setEditTextAlert(this, mVariableA, mVariableB);
 			} else {
 				double radius = Double.parseDouble(mVariableA.getText().toString());
 				double slant = Double.parseDouble(mVariableB.getText().toString());

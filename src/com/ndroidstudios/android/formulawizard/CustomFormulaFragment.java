@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -25,6 +26,7 @@ public class CustomFormulaFragment extends SherlockFragment {
 	private static int EDITFORMULA_REQ = 1;
 	private ListView listFromDB;
 	private TextView emptyListInfoText;
+	private ImageView logoLight;
 	private View rootView;	
 	private DBAdapter myDB;
 	
@@ -37,6 +39,7 @@ public class CustomFormulaFragment extends SherlockFragment {
 		rootView = inflater.inflate(R.layout.custom_list, container, false);
 		listFromDB = (ListView)rootView.findViewById(R.id.list_from_db);
 		emptyListInfoText = (TextView)rootView.findViewById(R.id.empty_list_info);
+		logoLight = (ImageView)rootView.findViewById(R.id.formurmulawizard_logo_light);
 		populateViewFromDB();
 		
 		return rootView;
@@ -90,6 +93,8 @@ public class CustomFormulaFragment extends SherlockFragment {
 	private void populateViewFromDB() {
 		listFromDB.setVisibility(View.VISIBLE);
 		emptyListInfoText.setVisibility(View.VISIBLE);
+		logoLight.setVisibility(View.VISIBLE);
+		logoLight.setAlpha(51); // Reduce opacity
 		
 		if (myDB.isEmpty()) {
 			FontHelper.overrideFonts(this.getActivity(), rootView.findViewById(R.id.empty_list_info));
@@ -113,7 +118,8 @@ public class CustomFormulaFragment extends SherlockFragment {
 					fromDBFields,				// DB column names
 					toViewIDs					// View IDs to put information in
 					);
-			emptyListInfoText.setVisibility(View.GONE);
+			emptyListInfoText.setVisibility(View.GONE); // Make them invisible because list IS visible
+			logoLight.setVisibility(View.GONE);
 			listFromDB.setAdapter(myCursorAdapter);
 			registerListClickCallback(rootView);
 		}

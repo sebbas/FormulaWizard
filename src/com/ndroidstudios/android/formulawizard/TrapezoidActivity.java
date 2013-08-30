@@ -63,6 +63,7 @@ public class TrapezoidActivity extends SherlockActivity {
     	try {
     		if (UIHelper.isEmpty(mVariableA, mVariableB, mVariableC)) {
 				UIHelper.setErrorText(mInfoText);
+				UIHelper.setEditTextAlert(this, mVariableA, mVariableB, mVariableC);
 			} else {
 				double base1 = Double.parseDouble(mVariableA.getText().toString());
 		    	double base2 = Double.parseDouble(mVariableB.getText().toString());
