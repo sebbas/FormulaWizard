@@ -35,6 +35,6 @@ public class ItemContainerLayout extends LinearLayout {
 		itemEdit.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_CLASS_NUMBER); // Restrict input type to numbers only
 		FontHelper.overrideFonts(context, itemText);
 		FontHelper.overrideFonts(context, itemEdit);
-		itemText.setText(this.itemName + ":");
+		itemText.setText(this.itemName);
 	}
 }

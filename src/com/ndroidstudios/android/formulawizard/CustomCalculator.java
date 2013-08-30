@@ -1,6 +1,8 @@
 package com.ndroidstudios.android.formulawizard;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map.Entry;
 
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -154,11 +156,20 @@ public class CustomCalculator extends SherlockActivity {
 		} else {
 			Calculable calc;
 			try {
-				calc = new ExpressionBuilder("3*sin(y) - 2 / (x - 2) + 3.45 ")
-					.withVariableNames("x", "y")
+				// Get an a String[] from the arraylist that contains all variables
+				String[] variableNames = CustomCalculatorHelper.getVariableArray(getFormulaString()).toArray(
+						new String[CustomCalculatorHelper.getVariableArray(getFormulaString()).size()]);
+				
+				// Create new calculable object
+				calc = new ExpressionBuilder(getFormulaString())
+					.withVariableNames(variableNames)
 					.build();
-				calc.setVariable("x",1);
-				calc.setVariable("y",2);
+				
+				// Create and loop over hashmap so that all variables with values are registered in calc object
+				HashMap<String, Double> valuesMap = CustomCalculatorHelper.getValuesMap(this);
+				for (Entry<String, Double> entry : valuesMap.entrySet()) {
+					calc.setVariable(entry.getKey(), entry.getValue());
+				}
 				double result = calc.calculate();
 				mInfoText.setText(getResources().getString(R.string.result) + " = " + result);
 				

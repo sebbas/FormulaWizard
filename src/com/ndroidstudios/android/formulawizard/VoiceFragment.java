@@ -89,6 +89,8 @@ public class VoiceFragment extends SherlockFragment {
     	return rootView;
     }
 
+    /*
+     * TODO Implement the "share formula" functionality
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 	   super.onCreateOptionsMenu(menu, inflater);
@@ -104,9 +106,9 @@ public class VoiceFragment extends SherlockFragment {
 		default: 	
 			return super.onOptionsItemSelected(item);
 		}
-	}
-    
-    // Alternate implementation with instance variable. Reason: setRetainInstance() was used in onCreateView()
+	}*/
+	
+    // Alternate implementation with instance variable (mSavedInstanceState). Reason: setRetainInstance() was used in onCreateView()
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
     	mSavedInstanceState = new Bundle();

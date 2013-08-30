@@ -3,6 +3,7 @@ package com.ndroidstudios.android.helper;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Locale;
 
 import android.app.Activity;
 import android.widget.EditText;
@@ -13,6 +14,11 @@ import com.ndroidstudios.android.formulawizard.R;
 
 public class CustomCalculatorHelper {
 	
+	private static final String[] functions = {"abs", "acos", "asin", "atan", "cbrt", "ceil", "cos", "cosh",
+		"exp", "floor", "log", "sin", "sinh", "sqrt", "tan", "tanh"};
+	
+	private static final String[] constants = {"pi", "e"};
+	
 	public static ArrayList<String> getVariableArray(String formula) {
 		ArrayList<String> variableNames = new ArrayList<String>();
 		String tmpWord = "";
@@ -21,13 +27,34 @@ public class CustomCalculatorHelper {
 			if(Character.isLetter(currentChar)) {
 				tmpWord = tmpWord + currentChar; // Append letter to temp String
 			} else {
-				if(tmpWord != "") variableNames.add(tmpWord); // Only add word to list if it is not empty
+				if(tmpWord != "") addVariableToList(variableNames, tmpWord); // Only add word to list if it is not empty
 				tmpWord = ""; // Clear temp String
 			}
 			// If last character is a letter and temp String is not empty, add that last word to the list
-			if(i == formula.length()-1 && tmpWord != "") variableNames.add(tmpWord);
+			if(i == formula.length()-1 && tmpWord != "") addVariableToList(variableNames, tmpWord);
 		}
 		return variableNames;
+	}
+	
+	private static void addVariableToList(ArrayList<String> variableNames, String variable) {
+		if (!isKeyword(variable)) {
+			variableNames.add(variable);
+		}
+	}
+	
+	private static boolean isKeyword(String word) {
+		word = word.toLowerCase(Locale.getDefault());
+		for (String item : functions) {
+			if (item.equals(word)) {
+				return true;
+			}
+		}
+		for (String item : constants) {
+			if (item.equals(word)) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	public static HashMap<String, Double> getValuesMap(Activity activity) {
@@ -36,8 +63,8 @@ public class CustomCalculatorHelper {
 		
 		for (int i = 0; i != parent.getChildCount(); i++) {
 			if (parent.getChildAt(i).getId() == R.id.variable_container_item) {
-				LinearLayout child = (LinearLayout) parent.findViewById(R.layout.variable_container_item);
-				TextView containerItemTextView = (TextView) child.getChildAt(0);
+				LinearLayout child = (LinearLayout) parent.getChildAt(i);
+				TextView containerItemTextView = (TextView) child.findViewById(R.id.variable_text);
 				EditText containerItemEditText = (EditText) child.findViewById(R.id.variable_edit);
 				
 				String name = containerItemTextView.getText().toString();
