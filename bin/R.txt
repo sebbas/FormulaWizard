@@ -606,6 +606,9 @@ int string trapezoid_area 0x7f090027
 int string trapezoid_perimeter 0x7f090039
 int string triangle_area 0x7f090029
 int string triangle_perimeter 0x7f09003c
+int string unknown_error 0x7f09006a
+int string unknown_function 0x7f090068
+int string unparsable_error 0x7f090069
 int string variable_a 0x7f090010
 int string variable_b 0x7f090011
 int string variable_base 0x7f090028

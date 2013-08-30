@@ -89,5 +89,8 @@
     <string name="edit_formula">Edit Formula</string>
     <string name="about_voice">About Voice Calc</string>
     <string name="enter_value">Enter a numeric value</string>
+    <string name="unknown_function">One of your functions is unknown. Check your formula!</string>
+    <string name="unparsable_error">Your formula is unparsable :( Please, check it again!</string>
+    <string name="unknown_error">An unknown error occured :( Check your formula!</string>
     
 </resources>

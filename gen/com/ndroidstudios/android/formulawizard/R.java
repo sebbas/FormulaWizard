@@ -1307,6 +1307,9 @@ containing a value of this type.
         public static final int trapezoid_perimeter=0x7f090039;
         public static final int triangle_area=0x7f090029;
         public static final int triangle_perimeter=0x7f09003c;
+        public static final int unknown_error=0x7f09006a;
+        public static final int unknown_function=0x7f090068;
+        public static final int unparsable_error=0x7f090069;
         public static final int variable_a=0x7f090010;
         public static final int variable_b=0x7f090011;
         public static final int variable_base=0x7f090028;

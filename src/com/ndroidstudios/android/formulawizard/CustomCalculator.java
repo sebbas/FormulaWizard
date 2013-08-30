@@ -5,11 +5,8 @@ import java.util.ArrayList;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.text.InputType;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -19,6 +16,11 @@ import com.actionbarsherlock.view.MenuItem;
 import com.ndroidstudios.android.helper.CustomCalculatorHelper;
 import com.ndroidstudios.android.helper.FontHelper;
 import com.ndroidstudios.android.helper.UIHelper;
+
+import de.congrace.exp4j.Calculable;
+import de.congrace.exp4j.ExpressionBuilder;
+import de.congrace.exp4j.UnknownFunctionException;
+import de.congrace.exp4j.UnparsableExpressionException;
 
 public class CustomCalculator extends SherlockActivity {
 
@@ -150,8 +152,26 @@ public class CustomCalculator extends SherlockActivity {
 			UIHelper.setErrorText(mInfoText);
 			UIHelper.setEditTextAlert(this, CustomCalculatorHelper.getEditTextList(this));
 		} else {
-			double result = CustomCalculatorHelper.calculateResult(getFormulaString());
-			mInfoText.setText(getResources().getString(R.string.result) + " = " + result);
+			Calculable calc;
+			try {
+				calc = new ExpressionBuilder("3*sin(y) - 2 / (x - 2) + 3.45 ")
+					.withVariableNames("x", "y")
+					.build();
+				calc.setVariable("x",1);
+				calc.setVariable("y",2);
+				double result = calc.calculate();
+				mInfoText.setText(getResources().getString(R.string.result) + " = " + result);
+				
+			} catch (UnknownFunctionException e) {
+				mInfoText.setText(getResources().getString(R.string.unknown_function));
+				e.printStackTrace();
+			} catch (UnparsableExpressionException e) {
+				mInfoText.setText(getResources().getString(R.string.unparsable_error));
+				e.printStackTrace();
+			} catch (Exception e) {
+				mInfoText.setText(getResources().getString(R.string.unknown_error));
+				e.printStackTrace();
+			}
 		}
 	}
 }

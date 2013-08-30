@@ -61,9 +61,4 @@ public class CustomCalculatorHelper {
 		}
 		return editTextList;
 	}
-	
-	public static double calculateResult(String formula) {
-		double result = 0;
-		return result;
-	}
 }

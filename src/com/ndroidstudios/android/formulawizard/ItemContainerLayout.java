@@ -25,8 +25,6 @@ public class ItemContainerLayout extends LinearLayout {
 		init(context);
 	}
 	
-	
-	
 	private void init(Context context) {
 		inflate(context, R.layout.variable_container_item, this);
 		this.setId(R.id.variable_container_item);
