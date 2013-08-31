@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map.Entry;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
@@ -47,10 +48,15 @@ public class CustomCalculator extends SherlockActivity {
 	}
 	
 	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+	    super.onConfigurationChanged(newConfig);
+	}
+
+	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
 		com.actionbarsherlock.view.MenuInflater inflater = getSupportMenuInflater();
-		inflater.inflate(R.menu.menu_share, menu);
+		// TODO inflater.inflate(R.menu.menu_share, menu);
 		inflater.inflate(R.menu.menu_edit, menu);
 		return true;
 	}
@@ -133,7 +139,7 @@ public class CustomCalculator extends SherlockActivity {
 			String variableName = variableNames.get(i);
 			
 			// Create a new container item that holds a TextView and an EditText. Then add it to main container
-			LinearLayout variableContainerItem = new ItemContainerLayout(this, variableName);
+			LinearLayout variableContainerItem = new ItemContainerLayout(this, variableName, i);
 			variableContainer.addView(variableContainerItem, i);
 		}
 	}

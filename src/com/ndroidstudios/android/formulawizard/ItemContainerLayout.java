@@ -12,22 +12,25 @@ import android.widget.TextView;
 public class ItemContainerLayout extends LinearLayout {
 
 	private String itemName;
+	private int id;
 	
-	public ItemContainerLayout(Context context, AttributeSet attrs, String itemName) {
+	public ItemContainerLayout(Context context, AttributeSet attrs, String itemName, int id) {
 		super(context, attrs);
 		this.itemName = itemName;
+		this.id = id;
 		init(context);
 	}
 	
-	public ItemContainerLayout(Context context, String itemName) {
+	public ItemContainerLayout(Context context, String itemName, int id) {
 		super(context);
 		this.itemName = itemName;
+		this.id = id;
 		init(context);
 	}
 	
 	private void init(Context context) {
 		inflate(context, R.layout.variable_container_item, this);
-		this.setId(R.id.variable_container_item);
+		this.setId(id);
 		
 		// Set text for item container
 		TextView itemText = (TextView)this.findViewById(R.id.variable_text);

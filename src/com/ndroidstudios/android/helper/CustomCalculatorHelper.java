@@ -37,7 +37,7 @@ public class CustomCalculatorHelper {
 	}
 	
 	private static void addVariableToList(ArrayList<String> variableNames, String variable) {
-		if (!isKeyword(variable)) {
+		if (!isKeyword(variable) && !variableAlreadyAdded(variableNames, variable)) {
 			variableNames.add(variable);
 		}
 	}
@@ -57,12 +57,19 @@ public class CustomCalculatorHelper {
 		return false;
 	}
 	
+	private static boolean variableAlreadyAdded(ArrayList<String> variableNames, String variable) {
+		if (variableNames.contains(variable)) {
+			return true;
+		}
+		return false;
+	}
+	
 	public static HashMap<String, Double> getValuesMap(Activity activity) {
 		HashMap<String, Double> valuesMap = new HashMap<String, Double>(); // HashMap that maps the variable names to their values	
 		LinearLayout parent = (LinearLayout) activity.findViewById(R.id.variable_container);
 		
 		for (int i = 0; i != parent.getChildCount(); i++) {
-			if (parent.getChildAt(i).getId() == R.id.variable_container_item) {
+			if (parent.getChildAt(i).getId() == i) {
 				LinearLayout child = (LinearLayout) parent.getChildAt(i);
 				TextView containerItemTextView = (TextView) child.findViewById(R.id.variable_text);
 				EditText containerItemEditText = (EditText) child.findViewById(R.id.variable_edit);
@@ -80,7 +87,7 @@ public class CustomCalculatorHelper {
 		LinearLayout parent = (LinearLayout) activity.findViewById(R.id.variable_container);
 		
 		for (int i = 0; i != parent.getChildCount(); i++) {
-			if (parent.getChildAt(i).getId() == R.id.variable_container_item) {
+			if (parent.getChildAt(i).getId() == i) {
 				LinearLayout child = (LinearLayout) parent.getChildAt(i);
 				EditText containerItemEditText = (EditText) child.findViewById(R.id.variable_edit);
 				editTextList.add(i, containerItemEditText);
