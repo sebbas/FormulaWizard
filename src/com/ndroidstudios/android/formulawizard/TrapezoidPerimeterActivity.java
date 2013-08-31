@@ -72,10 +72,11 @@ public class TrapezoidPerimeterActivity extends SherlockActivity {
 		    	double base3 = Double.parseDouble(mVariableC.getText().toString());
 		    	double base4 = Double.parseDouble(mVariableC.getText().toString());
 				result = FormulaHelper.trapezoidPerimeter(base1, base2, base3, base4);
-				mInfoText.setText("Perimeter = " + result);				  
+				mInfoText.setText(this.getResources().getString(R.string.perimeter) + " = " + result);		  
 			}
     	} catch (InvalidInputException e) {
-    		mInfoText.setText("The base  can't be negative! Enter a positive value!");
+    		mInfoText.setText(this.getResources().getString(R.string.base_not_negative) 
+    				+ " " + this.getResources().getString(R.string.enter_positive_value));
     	}
     }
 }

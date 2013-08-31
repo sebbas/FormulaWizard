@@ -66,10 +66,11 @@ public class ConeActivity extends SherlockActivity {
 				double radius = Double.parseDouble(mVariableA.getText().toString());
 				double slant = Double.parseDouble(mVariableB.getText().toString());
 				result = FormulaHelper.coneSurface(radius, slant);
-				mInfoText.setText("Surface = " + result);				  
+				mInfoText.setText(this.getResources().getString(R.string.surface) + " = " + result);				  
 			}
     	} catch (InvalidInputException e) {
-    		mInfoText.setText("The radius / slant can't be negative! Enter a positive value!");
+    		mInfoText.setText(this.getResources().getString(R.string.radiusslant_not_negative) 
+    				+ " " + this.getResources().getString(R.string.enter_positive_value));
     	}
     }
 }

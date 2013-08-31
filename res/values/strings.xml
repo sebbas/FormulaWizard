@@ -92,5 +92,25 @@
     <string name="unknown_function">One of your functions is unknown.\nCheck your formula!</string>
     <string name="unparsable_error">The formula is unparsable.\nPlease, check it again!</string>
     <string name="unknown_error">An unknown error occurred.\nCheck your formula!</string>
+    <string name="area">Area</string>
+    <string name="perimeter">Perimeter</string>
+    <string name="surface">Surface</string>
+    <string name="volume">Volume</string>
+    <string name="distance">Distance</string>
+    <string name="midpoint">Midpoint</string>
+    <string name="slope">Slope</string>
+    
+    <string name="no_real_roots">There are no real roots!</string>
+    <string name="radius_not_negative">The radius can\'t be negative!</string>
+    <string name="baseheight_not_negative">The base/ height can\'t be negative!</string>
+    <string name="baseareaheight_not_negative">The base area / height can\'t be negative!</string>
+    <string name="side_not_negative">The side can\'t be negative!</string>
+    <string name="base_not_negative">The base can\'t be negative!</string>
+    <string name="basesides_not_negative">The base/ sides can\'t be negative!</string>
+    <string name="widthheight_not_negative">The width/ height can\'t be negative!</string>
+    <string name="radiusslant_not_negative">The radius/ slant can\'t be negative!</string>
+    <string name="lengthwidthheight_not_negative">The length/ width/ height can\'t be negative!</string>
+    <string name="radiusheight_not_negative">The radius/ height can\'t be negative!</string>
+    <string name="enter_positive_value">Enter a positive value!</string>
     
 </resources>

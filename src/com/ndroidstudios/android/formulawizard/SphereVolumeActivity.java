@@ -63,10 +63,11 @@ public class SphereVolumeActivity extends SherlockActivity {
 			} else {
 				double radius = Double.parseDouble(mVariableA.getText().toString());
 				result = FormulaHelper.sphereVolume(radius);
-				mInfoText.setText("Volume = " + result);				  
+				mInfoText.setText(this.getResources().getString(R.string.volume) + " = " + result);				  
 			}
     	} catch (InvalidInputException e) {
-    		mInfoText.setText("The radius can't be negative! Enter a positive value!");
+    		mInfoText.setText(this.getResources().getString(R.string.radius_not_negative) 
+    				+ " " + this.getResources().getString(R.string.enter_positive_value));
     	}
     }
 }

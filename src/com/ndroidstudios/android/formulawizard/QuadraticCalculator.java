@@ -76,7 +76,7 @@ public class QuadraticCalculator extends SherlockActivity {
 				mInfoText2.setText(Html.fromHtml("<body>x<sub><small><small>2</small></small></sub> = </body>" + results[1]));			  
 			}
     	} catch (InvalidInputException e) {
-    		mInfoText.setText("There are no real roots!");
+    		mInfoText.setText(this.getResources().getString(R.string.no_real_roots));
     		mInfoText2.setText("");
     	}
     }

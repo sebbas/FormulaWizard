@@ -63,10 +63,11 @@ public class CubeActivity extends SherlockActivity {
 			} else {
 				double side = Double.parseDouble(mVariableA.getText().toString());
 				result = FormulaHelper.cubeSurface(side);
-				mInfoText.setText("Surface = " + result);				  
+				mInfoText.setText(this.getResources().getString(R.string.surface) + " = " + result);				  
 			}
     	} catch (InvalidInputException e) {
-    		mInfoText.setText("The side can't be negative! Enter a positive value!");
+    		mInfoText.setText(this.getResources().getString(R.string.side_not_negative) 
+    				+ " " + this.getResources().getString(R.string.enter_positive_value));
     	}
     }
 }

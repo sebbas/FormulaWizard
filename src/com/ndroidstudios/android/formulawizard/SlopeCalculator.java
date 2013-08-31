@@ -80,7 +80,7 @@ public class SlopeCalculator extends SherlockActivity {
 		    	double y1 = Double.parseDouble(mVariableC.getText().toString());
 		    	double y2 = Double.parseDouble(mVariableD.getText().toString());
 				result = FormulaHelper.slope(x1, x2, y1, y2);
-				mInfoText.setText("Slope = " + result);				  
+				mInfoText.setText(this.getResources().getString(R.string.slope) + " = " + result);			  
 			}
     	} catch (InvalidInputException e) {
     		mInfoText.setText(Html.fromHtml("<body>x<sub><small><small>2</small></small></sub>" +

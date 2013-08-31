@@ -78,7 +78,7 @@ public class DistanceCalculator extends SherlockActivity {
 			double y1 = Double.parseDouble(mVariableC.getText().toString());
 			double y2 = Double.parseDouble(mVariableD.getText().toString());
 			result = FormulaHelper.distance(x1, x2, y1, y2);
-			mInfoText.setText("Distance = " + result);				  
+			mInfoText.setText(this.getResources().getString(R.string.distance) + " = " + result);			  
 		}
     }
 }

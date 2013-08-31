@@ -66,10 +66,11 @@ public class TriangleActivity extends SherlockActivity {
 				double base = Double.parseDouble(mVariableA.getText().toString());
 		    	double height = Double.parseDouble(mVariableB.getText().toString());
 				result = FormulaHelper.triangleArea(base, height);
-				mInfoText.setText("Area = " + result);				  
+				mInfoText.setText(this.getResources().getString(R.string.area) + " = " + result);				  
 			}
     	} catch (InvalidInputException e) {
-    		mInfoText.setText("The base / height can't be negative! Enter a positive value!");
+    		mInfoText.setText(this.getResources().getString(R.string.baseheight_not_negative) 
+    				+ " " + this.getResources().getString(R.string.enter_positive_value));
     	}
     }
 }

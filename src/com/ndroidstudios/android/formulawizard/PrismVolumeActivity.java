@@ -69,10 +69,11 @@ public class PrismVolumeActivity extends SherlockActivity {
 		    	double width = Double.parseDouble(mVariableB.getText().toString());
 		    	double height = Double.parseDouble(mVariableC.getText().toString());
 				result = FormulaHelper.prismVolume(length, width, height);
-				mInfoText.setText("Volume = " + result);				  
+				mInfoText.setText(this.getResources().getString(R.string.volume) + " = " + result);				  
 			}
     	} catch (InvalidInputException e) {
-    		mInfoText.setText("The length/ width/ height can't be negative! Enter a positive value!");
+    		mInfoText.setText(this.getResources().getString(R.string.lengthwidthheight_not_negative) 
+    				+ " " + this.getResources().getString(R.string.enter_positive_value));
     	}
     }
 }

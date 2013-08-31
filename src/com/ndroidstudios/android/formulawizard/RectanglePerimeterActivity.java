@@ -66,10 +66,11 @@ public class RectanglePerimeterActivity extends SherlockActivity {
 				double width = Double.parseDouble(mVariableA.getText().toString());
 				double height = Double.parseDouble(mVariableB.getText().toString());
 				result = FormulaHelper.rectanglePerimeter(width, height);
-				mInfoText.setText("Perimeter = " + result);				  
+				mInfoText.setText(this.getResources().getString(R.string.perimeter) + " = " + result);
 			}
     	} catch (InvalidInputException e) {
-    		mInfoText.setText("The width / height can't be negative! Enter a positive value!");
+    		mInfoText.setText(this.getResources().getString(R.string.widthheight_not_negative) 
+    				+ " " + this.getResources().getString(R.string.enter_positive_value));
     	}
     }
 }

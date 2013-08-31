@@ -69,10 +69,11 @@ public class EllipsoidVolumeActivity extends SherlockActivity {
 				double radius2 = Double.parseDouble(mVariableB.getText().toString());
 				double radius3 = Double.parseDouble(mVariableC.getText().toString());
 				result = FormulaHelper.ellipsoidVolume(radius1, radius2, radius3);
-				mInfoText.setText("Volume = " + result);				  
+				mInfoText.setText(this.getResources().getString(R.string.volume) + " = " + result);				  
 			}
     	} catch (InvalidInputException e) {
-    		mInfoText.setText("The radius can't be negative! Enter a positive value!");
+    		mInfoText.setText(this.getResources().getString(R.string.radius_not_negative) 
+    				+ " " + this.getResources().getString(R.string.enter_positive_value));
     	}
     }
 }

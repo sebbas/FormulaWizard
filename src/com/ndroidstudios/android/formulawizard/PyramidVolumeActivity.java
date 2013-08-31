@@ -66,10 +66,11 @@ public class PyramidVolumeActivity extends SherlockActivity {
 				double baseArea = Double.parseDouble(mVariableA.getText().toString());
 				double height = Double.parseDouble(mVariableB.getText().toString());
 				result = FormulaHelper.pyramidVolume(baseArea, height);
-				mInfoText.setText("Volume = " + result);				  
+				mInfoText.setText(this.getResources().getString(R.string.volume) + " = " + result);				  
 			}
     	} catch (InvalidInputException e) {
-    		mInfoText.setText("The base area / height can't be negative! Enter a positive value!");
+    		mInfoText.setText(this.getResources().getString(R.string.baseareaheight_not_negative) 
+    				+ " " + this.getResources().getString(R.string.enter_positive_value));
     	}
     }
 }

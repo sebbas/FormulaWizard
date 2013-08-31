@@ -63,10 +63,11 @@ public class CircleActivity extends SherlockActivity {
 			} else {
 				double radius = Double.parseDouble(mVariableA.getText().toString());
 				result = FormulaHelper.circleArea(radius);
-				mInfoText.setText("Area = " + result);				  
+				mInfoText.setText(this.getResources().getString(R.string.area) + " = " + result);				  
 			}
     	} catch (InvalidInputException e) {
-    		mInfoText.setText("The radius can't be negative! Enter a positive value!");
+    		mInfoText.setText(this.getResources().getString(R.string.radius_not_negative) 
+    				+ " " + this.getResources().getString(R.string.enter_positive_value));
     	}
     }
 }

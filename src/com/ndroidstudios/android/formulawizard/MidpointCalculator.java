@@ -78,7 +78,7 @@ public class MidpointCalculator extends SherlockActivity {
 			double y1 = Double.parseDouble(mVariableC.getText().toString());
 			double y2 = Double.parseDouble(mVariableD.getText().toString());
 			results = FormulaHelper.midpoint(x1, x2, y1, y2);
-			mInfoText.setText("Midpoint = " + results[0] + ", " + results[1]);				  
+			mInfoText.setText(this.getResources().getString(R.string.midpoint) + " = " + results[0] + ", " + results[1]);				  
 		}
     }
 }

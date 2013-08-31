@@ -66,10 +66,11 @@ public class CylinderVolumeActivity extends SherlockActivity {
 				double radius = Double.parseDouble(mVariableA.getText().toString());
 				double height = Double.parseDouble(mVariableB.getText().toString());
 				result = FormulaHelper.cylinderVolume(radius, height);
-				mInfoText.setText("Volume = " + result);				  
+				mInfoText.setText(this.getResources().getString(R.string.volume) + " = " + result);				  
 			}
     	} catch (InvalidInputException e) {
-    		mInfoText.setText("The radius / height can't be negative! Enter a positive value!");
+    		mInfoText.setText(this.getResources().getString(R.string.radiusheight_not_negative) 
+    				+ " " + this.getResources().getString(R.string.enter_positive_value));
     	}
     }
 }

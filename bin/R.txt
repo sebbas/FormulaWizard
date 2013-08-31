@@ -547,6 +547,11 @@ int string alert_notsaved_subtitle 0x7f09005b
 int string alert_notsaved_title 0x7f09005a
 int string analyze 0x7f090047
 int string app_name 0x7f09000e
+int string area 0x7f09006b
+int string base_not_negative 0x7f090077
+int string baseareaheight_not_negative 0x7f090075
+int string baseheight_not_negative 0x7f090074
+int string basesides_not_negative 0x7f090078
 int string calculate_button 0x7f090014
 int string cancel 0x7f09005d
 int string cancel_formula 0x7f090050
@@ -562,6 +567,7 @@ int string cube_volume 0x7f09002c
 int string cylinder_surface 0x7f09001c
 int string cylinder_volume 0x7f09002d
 int string delete 0x7f090063
+int string distance 0x7f09006f
 int string distance_points 0x7f09002a
 int string edit_formula 0x7f090065
 int string editformula_formula_hint 0x7f090053
@@ -570,6 +576,7 @@ int string ellipse_area 0x7f090020
 int string ellipse_perimeter 0x7f090035
 int string ellipsoid_volume 0x7f09002e
 int string empty_board 0x7f090015
+int string enter_positive_value 0x7f09007d
 int string enter_value 0x7f090067
 int string exponent2 0x7f09003f
 int string exponent3 0x7f090040
@@ -577,11 +584,15 @@ int string formula 0x7f090057
 int string input_not_complete 0x7f090045
 int string input_not_complete2 0x7f09005e
 int string input_prompt 0x7f090044
+int string lengthwidthheight_not_negative 0x7f09007b
+int string midpoint 0x7f090070
 int string midpoint_points 0x7f090043
 int string more_info 0x7f09004c
 int string name 0x7f090056
 int string no_custom_formulas 0x7f090059
+int string no_real_roots 0x7f090072
 int string no_result 0x7f09004b
+int string perimeter 0x7f09006c
 int string prism_volume 0x7f090030
 int string proceed 0x7f09005c
 int string pyramid_volume 0x7f090032
@@ -589,6 +600,9 @@ int string pythagorean_theorem 0x7f090041
 int string quadratic_formula 0x7f090013
 int string query_error 0x7f090048
 int string query_notunderstood 0x7f090049
+int string radius_not_negative 0x7f090073
+int string radiusheight_not_negative 0x7f09007c
+int string radiusslant_not_negative 0x7f09007a
 int string rectangle_area 0x7f090021
 int string rectangle_perimeter 0x7f090037
 int string result 0x7f09004a
@@ -596,11 +610,14 @@ int string save_formula 0x7f090051
 int string saved_successfully 0x7f090054
 int string select_category 0x7f09005f
 int string share_formula 0x7f090064
+int string side_not_negative 0x7f090076
+int string slope 0x7f090071
 int string slope_line 0x7f090042
 int string sphere_volume 0x7f090036
 int string spinner_icon 0x7f090060
 int string square_area 0x7f090023
 int string square_perimeter 0x7f090038
+int string surface 0x7f09006d
 int string title_activity_main 0x7f09000f
 int string trapezoid_area 0x7f090027
 int string trapezoid_perimeter 0x7f090039
@@ -631,6 +648,8 @@ int string variable_slant 0x7f090019
 int string variable_square 0x7f090024
 int string variable_width 0x7f090022
 int string voice_prompt 0x7f090046
+int string volume 0x7f09006e
+int string widthheight_not_negative 0x7f090079
 int string wolfram_icon 0x7f09004d
 int string your_custom_formula 0x7f090055
 int style AppTheme 0x7f0a0059

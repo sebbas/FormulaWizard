@@ -64,7 +64,7 @@ public class PythagoreanTheorem extends SherlockActivity {
 			double a = Double.parseDouble(mVariableA.getText().toString());
 			double b = Double.parseDouble(mVariableB.getText().toString());
 			result = FormulaHelper.pythagoreanTheorem(a, b);
-			mInfoText.setText("c = " + result);				  
+			mInfoText.setText(this.getResources().getString(R.string.variable_c) + " = " + result);				  
 		}
     }
 }

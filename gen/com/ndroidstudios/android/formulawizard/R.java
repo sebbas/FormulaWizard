@@ -1248,6 +1248,11 @@ containing a value of this type.
         public static final int alert_notsaved_title=0x7f09005a;
         public static final int analyze=0x7f090047;
         public static final int app_name=0x7f09000e;
+        public static final int area=0x7f09006b;
+        public static final int base_not_negative=0x7f090077;
+        public static final int baseareaheight_not_negative=0x7f090075;
+        public static final int baseheight_not_negative=0x7f090074;
+        public static final int basesides_not_negative=0x7f090078;
         public static final int calculate_button=0x7f090014;
         public static final int cancel=0x7f09005d;
         public static final int cancel_formula=0x7f090050;
@@ -1263,6 +1268,7 @@ containing a value of this type.
         public static final int cylinder_surface=0x7f09001c;
         public static final int cylinder_volume=0x7f09002d;
         public static final int delete=0x7f090063;
+        public static final int distance=0x7f09006f;
         public static final int distance_points=0x7f09002a;
         public static final int edit_formula=0x7f090065;
         public static final int editformula_formula_hint=0x7f090053;
@@ -1271,6 +1277,7 @@ containing a value of this type.
         public static final int ellipse_perimeter=0x7f090035;
         public static final int ellipsoid_volume=0x7f09002e;
         public static final int empty_board=0x7f090015;
+        public static final int enter_positive_value=0x7f09007d;
         public static final int enter_value=0x7f090067;
         public static final int exponent2=0x7f09003f;
         public static final int exponent3=0x7f090040;
@@ -1278,11 +1285,15 @@ containing a value of this type.
         public static final int input_not_complete=0x7f090045;
         public static final int input_not_complete2=0x7f09005e;
         public static final int input_prompt=0x7f090044;
+        public static final int lengthwidthheight_not_negative=0x7f09007b;
+        public static final int midpoint=0x7f090070;
         public static final int midpoint_points=0x7f090043;
         public static final int more_info=0x7f09004c;
         public static final int name=0x7f090056;
         public static final int no_custom_formulas=0x7f090059;
+        public static final int no_real_roots=0x7f090072;
         public static final int no_result=0x7f09004b;
+        public static final int perimeter=0x7f09006c;
         public static final int prism_volume=0x7f090030;
         public static final int proceed=0x7f09005c;
         public static final int pyramid_volume=0x7f090032;
@@ -1290,6 +1301,9 @@ containing a value of this type.
         public static final int quadratic_formula=0x7f090013;
         public static final int query_error=0x7f090048;
         public static final int query_notunderstood=0x7f090049;
+        public static final int radius_not_negative=0x7f090073;
+        public static final int radiusheight_not_negative=0x7f09007c;
+        public static final int radiusslant_not_negative=0x7f09007a;
         public static final int rectangle_area=0x7f090021;
         public static final int rectangle_perimeter=0x7f090037;
         public static final int result=0x7f09004a;
@@ -1297,11 +1311,14 @@ containing a value of this type.
         public static final int saved_successfully=0x7f090054;
         public static final int select_category=0x7f09005f;
         public static final int share_formula=0x7f090064;
+        public static final int side_not_negative=0x7f090076;
+        public static final int slope=0x7f090071;
         public static final int slope_line=0x7f090042;
         public static final int sphere_volume=0x7f090036;
         public static final int spinner_icon=0x7f090060;
         public static final int square_area=0x7f090023;
         public static final int square_perimeter=0x7f090038;
+        public static final int surface=0x7f09006d;
         public static final int title_activity_main=0x7f09000f;
         public static final int trapezoid_area=0x7f090027;
         public static final int trapezoid_perimeter=0x7f090039;
@@ -1332,6 +1349,8 @@ containing a value of this type.
         public static final int variable_square=0x7f090024;
         public static final int variable_width=0x7f090022;
         public static final int voice_prompt=0x7f090046;
+        public static final int volume=0x7f09006e;
+        public static final int widthheight_not_negative=0x7f090079;
         public static final int wolfram_icon=0x7f09004d;
         public static final int your_custom_formula=0x7f090055;
     }

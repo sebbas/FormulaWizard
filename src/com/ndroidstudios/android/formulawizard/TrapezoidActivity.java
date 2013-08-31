@@ -69,10 +69,11 @@ public class TrapezoidActivity extends SherlockActivity {
 		    	double base2 = Double.parseDouble(mVariableB.getText().toString());
 		    	double height = Double.parseDouble(mVariableC.getText().toString());
 				result = FormulaHelper.trapezoidArea(base1, base2, height);
-				mInfoText.setText("Area = " + result);				  
+				mInfoText.setText(this.getResources().getString(R.string.area) + " = " + result);				  
 			}
     	} catch (InvalidInputException e) {
-    		mInfoText.setText("The base / height can't be negative! Enter a positive value!");
+    		mInfoText.setText(this.getResources().getString(R.string.baseheight_not_negative) 
+    				+ " " + this.getResources().getString(R.string.enter_positive_value));
     	}
     }
 }

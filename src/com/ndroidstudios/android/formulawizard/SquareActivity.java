@@ -63,10 +63,11 @@ public class SquareActivity extends SherlockActivity {
 			} else {
 				double side = Double.parseDouble(mVariableA.getText().toString());
 				result = FormulaHelper.squareArea(side);
-				mInfoText.setText("Area = " + result);				  
+				mInfoText.setText(this.getResources().getString(R.string.area) + " = " + result); 
 			}
     	} catch (InvalidInputException e) {
-    		mInfoText.setText("The sides can't be negative! Enter a positive value!");
+    		mInfoText.setText(this.getResources().getString(R.string.side_not_negative) 
+    				+ " " + this.getResources().getString(R.string.enter_positive_value));
     	}
     }
 }

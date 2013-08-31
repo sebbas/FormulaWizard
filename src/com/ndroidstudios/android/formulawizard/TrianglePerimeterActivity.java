@@ -69,10 +69,11 @@ public class TrianglePerimeterActivity extends SherlockActivity {
 		    	double side1 = Double.parseDouble(mVariableB.getText().toString());
 		    	double side2 = Double.parseDouble(mVariableC.getText().toString());
 				result = FormulaHelper.trianglePerimeter(base, side1, side2);
-				mInfoText.setText("Perimeter = " + result);				  
+				mInfoText.setText(this.getResources().getString(R.string.perimeter) + " = " + result); 			  
 			}
     	} catch (InvalidInputException e) {
-    		mInfoText.setText("The base/ sides can't be negative! Enter a positive value!");
+    		mInfoText.setText(this.getResources().getString(R.string.basesides_not_negative) 
+    				+ " " + this.getResources().getString(R.string.enter_positive_value));
     	}
     }
 }

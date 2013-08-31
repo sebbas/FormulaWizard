@@ -66,10 +66,11 @@ public class EllipsePerimeterActivity extends SherlockActivity {
 				double radius1 = Double.parseDouble(mVariableA.getText().toString());
 				double radius2 = Double.parseDouble(mVariableB.getText().toString());
 				result = FormulaHelper.ellipsePerimeter(radius1, radius2);
-				mInfoText.setText("Perimeter = " + result);				  
+				mInfoText.setText(this.getResources().getString(R.string.perimeter) + " = " + result);				  
 			}
     	} catch (InvalidInputException e) {
-    		mInfoText.setText("The radius can't be negative! Enter a positive value!");
+    		mInfoText.setText(this.getResources().getString(R.string.radius_not_negative) 
+    				+ " " + this.getResources().getString(R.string.enter_positive_value));
     	}
     }
 }

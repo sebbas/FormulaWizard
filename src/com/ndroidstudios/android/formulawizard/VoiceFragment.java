@@ -20,9 +20,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragment;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
-import com.actionbarsherlock.view.MenuItem;
 import com.ndroidstudios.android.helper.FontHelper;
 import com.ndroidstudios.android.helper.VoiceHelper;
 import com.wolfram.alpha.WAEngine;
