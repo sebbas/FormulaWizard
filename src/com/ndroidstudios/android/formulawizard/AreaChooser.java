@@ -1,6 +1,8 @@
 package com.ndroidstudios.android.formulawizard;
 
+import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockListActivity;
+import com.actionbarsherlock.view.MenuItem;
 import com.ndroidstudios.android.helper.CustomArrayAdapter;
 
 import android.content.Intent;
@@ -20,6 +22,10 @@ public class AreaChooser extends SherlockListActivity {
 		
 		String[] values = this.getResources().getStringArray(R.array.area_list);
 		setListAdapter(new CustomArrayAdapter(this, R.layout.listview_item, values, R.id.label));	
+		
+		// TODO Add back functionality
+		/*ActionBar bar = this.getSupportActionBar();
+	    bar.setDisplayHomeAsUpEnabled(true);*/
 	}
  
 	@Override

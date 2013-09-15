@@ -26,9 +26,9 @@ public class VoiceHelper {
         if (activities.size() != 0) {
         	voiceCapability = true;
         }
-        //return voiceCapability; 
+        return voiceCapability; 
         //FOR TESTING PURPOSES ONLY
-        return !voiceCapability;
+        //return !voiceCapability;
     }
 	
 	public boolean isNetworkConnected() {

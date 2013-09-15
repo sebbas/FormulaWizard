@@ -8,7 +8,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
-import android.widget.TextView;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
@@ -19,8 +18,6 @@ public class MainActivity extends SherlockFragmentActivity {
 
 	ViewPager mViewPager;
 	TabsAdapter mTabsAdapter;
-	TextView tabCenter;
-	TextView tabText;
 	VoiceHelper voiceHelper = new VoiceHelper(this);
 
 	@Override
@@ -34,7 +31,6 @@ public class MainActivity extends SherlockFragmentActivity {
 		bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		
 		mTabsAdapter = new TabsAdapter(this, mViewPager);
-
 		mTabsAdapter.addTab(
 				bar.newTab().setText("Formulas"),
 				FormulaFragment.class, null);

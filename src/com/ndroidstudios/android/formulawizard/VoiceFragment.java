@@ -2,6 +2,7 @@ package com.ndroidstudios.android.formulawizard;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import android.app.Activity;
 import android.net.Uri;
@@ -18,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.ndroidstudios.android.helper.FontHelper;
@@ -78,8 +80,8 @@ public class VoiceFragment extends SherlockFragment {
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                    	//startVoiceRecognitionActivity();
-                    	testOnActivityResult();
+                    	startVoiceRecognitionActivity();
+                    	//testOnActivityResult();
                     }
                 });  
         this.setHasOptionsMenu(true);
@@ -125,6 +127,9 @@ public class VoiceFragment extends SherlockFragment {
     		mVoiceResult.setText(mSavedInstanceState.getString(KEY_RESULT_TEXT));
     		mProgressBar.setVisibility(mSavedInstanceState.getInt(KEY_PROGRESSBAR_VISIBILITY));
     		mMoreInfo.setVisibility(mSavedInstanceState.getInt(KEY_MORELAYOUT_VISIBILITY));
+    		if (!voiceHelper.isNetworkConnected()) {
+    			mVoiceResult.setVisibility(View.GONE);
+    		}
     	} else {
     		mVoicePrompt.setText(R.string.voice_prompt);
     	}
@@ -134,10 +139,11 @@ public class VoiceFragment extends SherlockFragment {
     	if (voiceHelper.isNetworkConnected()) {
     		Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
             intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-            intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Voice recognition Demo...");
+            intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Ask the wizard a question ...");
             startActivityForResult(intent, REQUEST_CODE);
     	} else {
     		mVoicePrompt.setText(this.getResources().getString(R.string.connection_error));
+    		mVoiceResult.setVisibility(View.GONE);
     	}
     }
  
@@ -146,15 +152,16 @@ public class VoiceFragment extends SherlockFragment {
 		if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK) {
 			ArrayList<String> query = data.getStringArrayListExtra(
 	                RecognizerIntent.EXTRA_RESULTS);
-			setQueryText(query);
+			setQueryText(query.get(0));
 			WolframTask wolframTask = new WolframTask();
-			wolframTask.execute(listToString(query));
+			wolframTask.execute(query.get(0));
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
     
-    private void setQueryText(ArrayList<String> query) {
-		mVoicePrompt.setText(listToString(query));
+    private void setQueryText(String query) {
+    	String output = query.substring(0, 1).toUpperCase(Locale.getDefault()) + query.substring(1) + "?";  // Make 1st word capital
+		mVoicePrompt.setText(output);
     }
       
     public static <E> String listToString(List<E> list) {
@@ -176,7 +183,7 @@ public class VoiceFragment extends SherlockFragment {
 		wordList.add("earth?");
 
 		String query = listToString(wordList);
-		setQueryText(wordList);
+		setQueryText(wordList.get(0));
 		WolframTask wolframTask = new WolframTask();
 		wolframTask.execute(query);
     }
@@ -209,6 +216,7 @@ public class VoiceFragment extends SherlockFragment {
         protected void onPreExecute() {
         	super.onPreExecute();
         	mMoreInfo.setVisibility(View.GONE);
+        	mVoiceResult.setVisibility(View.VISIBLE);
         	mVoiceResult.setText(getResources().getString(R.string.analyze));
         	mProgressBar.setVisibility(View.VISIBLE);
         }
