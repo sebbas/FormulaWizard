@@ -99,7 +99,24 @@
     <string name="distance">Distance</string>
     <string name="midpoint">Midpoint</string>
     <string name="slope">Slope</string>
+    <string name="account_blocked">Your query cannot be processed right now.</string>
+    <string name="find_out_why">Click here, to find out why!</string>
+    <string name="limit_of_queries">Limit of queries in the Wolfram API</string>
+    <string name="go_back">Go back</string>
+    <string name="visit_wolfram">Visit Wolfram Alpha</string>
+    <string name="api_problem">The Wolfram API limits the number of queries per application to 2000 per month.
+        This means that the users of ”Formula Wizard” altogether just have 2000 queries per month! Unfortunately, 
+        right now, those queries are used up. \n\nSince ”Formula Wizard” is a non-profit, open source project that aims
+        at education, it would be great if Wolfram Alpha increased (or better removed) the limit of queries per month. 
+       	\n\nUntil then, please vist Wolfram Alpha\'s webpage directly.</string>
     
+    <string name="using_functions">Using functions</string>
+    <string name="formulas">Functions</string>
+    <string name="info_message">When creating a custom formula you can use all kinds of functions! \nHere is a list of what
+        you can use: \n\nabs, acos, asin, atan, cbrt, ceil, cos, cosh,
+		exp, floor, log, sin, sinh, sqrt, tan, tanh\n\nJust make sure to use parentheses with all functions. Otherwise you might
+		confuse the Formula Wizard :)</string>
+	<string name="ok">OK!</string>
     <string name="no_real_roots">There are no real roots!</string>
     <string name="radius_not_negative">The radius can\'t be negative!</string>
     <string name="baseheight_not_negative">The base/ height can\'t be negative!</string>

@@ -1,7 +1,10 @@
 package com.ndroidstudios.android.formulawizard;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
 import java.util.Map.Entry;
 
 import android.content.Intent;
@@ -120,7 +123,7 @@ public class CustomCalculator extends SherlockActivity {
 	private void populateViews(Intent i) {
 		// Override fonts again, for specific content
 		Typeface chalkdust = Typeface.createFromAsset(this.getAssets(), "fonts/chalkduster.ttf");
-		FontHelper.overrideFonts(this, mFormulaText, chalkdust);
+		FontHelper.overrideFonts(this,chalkdust, mFormulaText);
 		
 		mNameText.setText(i.getStringExtra("name"));
 		mFormulaText.setText(i.getStringExtra("formula"));
@@ -131,7 +134,7 @@ public class CustomCalculator extends SherlockActivity {
 	}
 	
 	private void createVariableContainers() {
-		ArrayList<String> variableNames = CustomCalculatorHelper.getVariableArray(getFormulaString()); // Holds all variable names
+		ArrayList<String> variableNames = CustomCalculatorHelper.getVariableArray(getEquationString()); // Holds all variable names
 		LinearLayout variableContainer = (LinearLayout)this.findViewById(R.id.variable_container);	// Major item container
 		
 		variableContainer.removeAllViews(); // Make sure our container is clean before inflating it
@@ -155,6 +158,38 @@ public class CustomCalculator extends SherlockActivity {
 		});
     }
 	
+	/* This takes the entire formula as a string and split it at the "=" sign. 
+	 * The substrings are then put into the array. If the "=" was not present
+	 * we just get an array of size 1
+	 */
+	private String[] getFormulaStringArray() {
+		String[] formulaAsArray = CustomCalculatorHelper.splitStringAtEqualSign(getFormulaString());
+		formulaAsArray = CustomCalculatorHelper.replaceUnicode(formulaAsArray);
+		
+		return formulaAsArray;
+	}
+	
+	// The name of the result variable is the name of the variable whose value is calculates by an equation string
+	private String getNameOfResultVariable() {
+		String[] formulaAsArray = getFormulaStringArray();
+		if (formulaAsArray.length > 1) {
+			return formulaAsArray[0];
+		} 
+		return "";
+	}
+	
+	// The equation string is the side of an equation that contains the calculations
+	private String getEquationString() {
+		String resultString;
+		String[] formulaAsArray = getFormulaStringArray();
+		if (formulaAsArray.length > 1) {
+			resultString = formulaAsArray[1];
+		} else {
+			resultString = formulaAsArray[0];
+		}
+		return resultString;
+	}
+	
 	private void handleInput() {
 		if (UIHelper.isEmpty(CustomCalculatorHelper.getEditTextList(this))) {
 			UIHelper.setErrorText(mInfoText);
@@ -162,22 +197,23 @@ public class CustomCalculator extends SherlockActivity {
 		} else {
 			Calculable calc;
 			try {
-				// Get an a String[] from the arraylist that contains all variables
-				String[] variableNames = CustomCalculatorHelper.getVariableArray(getFormulaString()).toArray(
-						new String[CustomCalculatorHelper.getVariableArray(getFormulaString()).size()]);
+				// Get a String[] from the arraylist that contains all variables
+				ArrayList<String> variableNamesList = CustomCalculatorHelper.getVariableArray(getEquationString());
+				String[] variableNames = variableNamesList.toArray(new String[variableNamesList.size()]);
 				
+				// A String array that holds all names of constants
+				String[] constants = CustomCalculatorHelper.constants;
+								
 				// Create new calculable object
-				calc = new ExpressionBuilder(getFormulaString())
+				calc = new ExpressionBuilder(getEquationString())
 					.withVariableNames(variableNames)
+					.withVariableNames(constants)
 					.build();
 				
-				// Create and loop over hashmap so that all variables with values are registered in calc object
-				HashMap<String, Double> valuesMap = CustomCalculatorHelper.getValuesMap(this);
-				for (Entry<String, Double> entry : valuesMap.entrySet()) {
-					calc.setVariable(entry.getKey(), entry.getValue());
-				}
+				setVariablesInCalcObject(calc);
+				
 				double result = calc.calculate();
-				mInfoText.setText(getResources().getString(R.string.result) + " = " + result);
+				setResultText(result);
 				
 			} catch (UnknownFunctionException e) {
 				mInfoText.setText(getResources().getString(R.string.unknown_function));
@@ -189,6 +225,33 @@ public class CustomCalculator extends SherlockActivity {
 				mInfoText.setText(getResources().getString(R.string.unknown_error));
 				e.printStackTrace();
 			}
+		}
+	}
+	
+	private void setResultText(double result) {
+		String nameOfResultVariable = getNameOfResultVariable();
+		if (nameOfResultVariable != "") {
+			nameOfResultVariable = CustomCalculatorHelper.removeWhiteSpaceFromString(nameOfResultVariable);
+			mInfoText.setText(nameOfResultVariable + " = " + result);
+		} else {
+			mInfoText.setText(getResources().getString(R.string.result) + " = " + result);
+		}
+	}
+
+	// Set the values for the variables in a calculable object 
+	private void setVariablesInCalcObject(Calculable calc) {
+		// Create and loop over hashmap so that all variables with values are registered in calc object
+		HashMap<String, Double> valuesMap = CustomCalculatorHelper.getValuesMap(this);
+		HashMap<String, Double> constantsMap = CustomCalculatorHelper.constantsMap;
+		
+		// Add all entries from valuesMap
+		for (Entry<String, Double> entry : valuesMap.entrySet()) {
+			calc.setVariable(entry.getKey(), entry.getValue());
+		}
+		
+		// Add all entries from constantsMap
+		for (Entry<String, Double> entry : constantsMap.entrySet()) {
+			calc.setVariable(entry.getKey(), entry.getValue());
 		}
 	}
 }

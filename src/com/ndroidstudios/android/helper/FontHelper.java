@@ -9,39 +9,41 @@ import android.widget.TextView;
 public class FontHelper {
     
     // Override fonts and set to chalkduster (for entire activity!)
-    public static void overrideFonts(final Context context, final View v) {
+    public static void overrideFonts(final Context context, View... views) {
         try {
-          if (v instanceof ViewGroup) {
-            ViewGroup vg = (ViewGroup) v;
-            
-               for (int i = 0; i < vg.getChildCount(); i++) {
-               View child = vg.getChildAt(i);
-               overrideFonts(context, child);
-               }
-               
-          	} else if (v instanceof TextView ) {
-            	((TextView) v).setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/chalkboardse.ttc"));
-          	}
-
+        	for (View v : views) {
+        		if (v instanceof ViewGroup) {
+                    ViewGroup vg = (ViewGroup) v;
+                    
+                       for (int i = 0; i < vg.getChildCount(); i++) {
+                       View child = vg.getChildAt(i);
+                       overrideFonts(context, child);
+                       }
+                       
+                  	} else if (v instanceof TextView ) {
+                    	((TextView) v).setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/chalkboardse.ttc"));
+                  	}
+        	}
         } catch (Exception e) {
         }
     }
     
     // Override fonts and set to defined font 
-    public static void overrideFonts(final Context context, final View v, Typeface t) {
+    public static void overrideFonts(final Context context, Typeface t, View... views) {
         try {
-          if (v instanceof ViewGroup) {
-            ViewGroup vg = (ViewGroup) v;
-            
-               for (int i = 0; i < vg.getChildCount(); i++) {
-               View child = vg.getChildAt(i);
-               overrideFonts(context, child);
-               }
-               
-          	} else if (v instanceof TextView ) {
-            	((TextView) v).setTypeface(t);
-          	}
-
+        	for (View v : views) {
+        		if (v instanceof ViewGroup) {
+                    ViewGroup vg = (ViewGroup) v;
+                    
+                       for (int i = 0; i < vg.getChildCount(); i++) {
+                       View child = vg.getChildAt(i);
+                       overrideFonts(context, child);
+                       }
+                       
+                  	} else if (v instanceof TextView ) {
+                    	((TextView) v).setTypeface(t);
+                  	}
+        	}
         } catch (Exception e) {
         }
     }

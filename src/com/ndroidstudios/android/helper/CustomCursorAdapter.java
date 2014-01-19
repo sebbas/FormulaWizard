@@ -17,7 +17,8 @@ public class CustomCursorAdapter extends SimpleCursorAdapter {
 	int imageId[] = { R.drawable.formulawizard_general,
             R.drawable.formulawizard_area2, R.drawable.formulawizard_currency,
             R.drawable.formulawizard_perimeter2, R.drawable.formulawizard_temperature, 
-            R.drawable.formulawizard_volume2, R.drawable.formulawizard_weight};
+            R.drawable.formulawizard_volume2, R.drawable.formulawizard_weight,
+            R.drawable.formulawizard_length};
 	
 	public CustomCursorAdapter(Context context, int layout, Cursor cursor, String[] fromDB, int[] toView) {
 	    super(context, layout, cursor, fromDB, toView);

@@ -1,12 +1,15 @@
 package com.ndroidstudios.android.formulawizard;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -20,7 +23,7 @@ import com.ndroidstudios.android.helper.FontHelper;
 import com.ndroidstudios.android.helper.UIHelper;
 
 public class CustomFormulaEdit extends SherlockActivity {
-	
+		
 	int imageId[] = { R.drawable.formulawizard_volume2,
             R.drawable.formulawizard_volume2, R.drawable.formulawizard_volume2,
             R.drawable.formulawizard_volume2, R.drawable.formulawizard_volume2, R.drawable.formulawizard_weight};
@@ -32,7 +35,9 @@ public class CustomFormulaEdit extends SherlockActivity {
 	private Spinner mCategorySpinner;
 	private boolean mIsEdited = false;
 	private String[] editTextState;
-	private DBAdapter myDB;
+	private DBAdapter myDB;	
+	private AlertDialog mAlertDialog;
+	private AlertDialog mInfoDialog;
 	
 	private TextWatcher nameWatcher = new TextWatcher() {
 		@Override
@@ -74,11 +79,12 @@ public class CustomFormulaEdit extends SherlockActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
 		setContentView(R.layout.custom_edit);
 		
 		FontHelper.overrideFonts(this, findViewById(android.R.id.content));
 		Typeface chalkdust = Typeface.createFromAsset(this.getAssets(), "fonts/chalkduster.ttf");
-		FontHelper.overrideFonts(this, findViewById(R.id.formula_on_chalkboard), chalkdust);
+		FontHelper.overrideFonts(this, chalkdust, findViewById(R.id.formula_on_chalkboard));
 		
 		mFormulaHeading = (TextView)findViewById(R.id.formula_name_heading);
 		mFormulaName = (EditText)findViewById(R.id.formula_name_edit);
@@ -86,13 +92,14 @@ public class CustomFormulaEdit extends SherlockActivity {
 		mFormula = (EditText)findViewById(R.id.formula_edit);
 		mCategorySpinner = (Spinner)findViewById(R.id.category_spinner);
 		mCategorySpinner.setAdapter(getCustomSpinner());
-		
+				
 		// This happens when the activity is called to edit an exiting formula
 		tryPopulatingView(this.getIntent()); 
 		saveEditTextState();
 		mFormula.addTextChangedListener(formulaWatcher);
 		mFormulaName.addTextChangedListener(nameWatcher);
 		
+		// DB setup
 		openDB(); // So that we can make changes and save them
 	}
 
@@ -100,6 +107,7 @@ public class CustomFormulaEdit extends SherlockActivity {
 	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
 		super.onCreateOptionsMenu(menu);
 		com.actionbarsherlock.view.MenuInflater inflater = getSupportMenuInflater();
+		inflater.inflate(R.menu.menu_about, menu);
 		inflater.inflate(R.menu.menu_save, menu);
 		inflater.inflate(R.menu.menu_cancel, menu);
 		return true;
@@ -134,6 +142,10 @@ public class CustomFormulaEdit extends SherlockActivity {
 						getString(R.string.input_not_complete2), Toast.LENGTH_LONG).show();	
 			}
 			return true;
+		
+		case R.id.menu_about:
+			startInfoPrompt();
+			return true;
 			
 		default: 	
 			return super.onOptionsItemSelected(item);
@@ -144,6 +156,17 @@ public class CustomFormulaEdit extends SherlockActivity {
 	public void onDestroy() {
 		super.onDestroy();
 		closeDB();
+	}
+	
+	@Override
+	public void onPause() {
+		super.onPause();
+		if(mAlertDialog != null && mAlertDialog.isShowing()) {
+			mAlertDialog.dismiss(); 
+		}
+		if(mInfoDialog != null && mInfoDialog.isShowing()) {
+			mInfoDialog.dismiss(); 
+		}
 	}
 
 	private void openDB() {
@@ -173,15 +196,16 @@ public class CustomFormulaEdit extends SherlockActivity {
 	}
 	
 	private void startAlertPrompt() {
+		LayoutInflater inflater = getLayoutInflater();
 		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
 		alertDialogBuilder
-			.setTitle(R.string.alert_notsaved_title)
-			.setMessage(R.string.alert_notsaved_subtitle)
+			.setView(inflater.inflate(R.layout.cancel_alert, null))
 			.setCancelable(false)
 			.setPositiveButton(R.string.proceed, new DialogInterface.OnClickListener() {
 				
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
+					dialog.dismiss();
 					cancelActivity();
 				}
 			})
@@ -189,11 +213,42 @@ public class CustomFormulaEdit extends SherlockActivity {
 				
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					dialog.cancel();
+					dialog.dismiss();
 				}
 			});
-		AlertDialog alertDialog = alertDialogBuilder.create();
-		alertDialog.show();
+		mAlertDialog = alertDialogBuilder.create();
+		mAlertDialog.show();
+		
+		TextView title = (TextView) mAlertDialog.findViewById(R.id.title);
+		TextView message = (TextView) mAlertDialog.findViewById(R.id.message);
+		TextView button1 = (TextView) mAlertDialog.findViewById(android.R.id.button1);
+		TextView button2 = (TextView) mAlertDialog.findViewById(android.R.id.button2);
+		TextView[] views = {message, title, button1, button2};
+		FontHelper.overrideFonts(this, views);
+		
+	}
+	
+	private void startInfoPrompt() {
+		LayoutInflater inflater = getLayoutInflater();
+		AlertDialog.Builder infoDialogBuilder = new AlertDialog.Builder(this);
+		infoDialogBuilder
+			.setView(inflater.inflate(R.layout.info_dialog, null))
+			.setCancelable(false)
+			.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					dialog.dismiss();
+			}
+		});
+		mInfoDialog = infoDialogBuilder.create();
+		mInfoDialog.show();
+		
+		TextView title = (TextView) mInfoDialog.findViewById(R.id.info_title);
+		TextView message = (TextView) mInfoDialog.findViewById(R.id.info_message);
+		TextView button1 = (TextView) mInfoDialog.findViewById(android.R.id.button1);
+		TextView[] views = {message, title, button1};
+		FontHelper.overrideFonts(this, views);
 	}
 	
 	private void cancelActivity() {

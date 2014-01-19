@@ -1,4 +1,24 @@
 <resources>
-    <style name="AppTheme" parent="android:Theme" >
-	</style>        
+    <style name="AppTheme" parent="@style/Theme.Sherlock.Light.DarkActionBar">
+        <item name="actionBarTabBarStyle">@style/Widget.MyTheme.ActionBar.TabBar</item>
+        <item name="actionBarStyle">@style/Widget.MyTheme.ActionBar</item>
+	</style>
+
+    <!-- Style the tabs -->
+	<style name="Widget.MyTheme.ActionBar.TabBar" parent="Widget.Sherlock.ActionBar.TabBar">
+    	<item name="android:background">#101010</item>
+    	<item name="background">#101010</item>
+	</style>
+	
+	<!-- Style the actionbar -->
+	<style name="Widget.MyTheme.ActionBar" parent="Widget.Sherlock.ActionBar">
+    	<item name="android:background">#101010</item>
+    	<item name="background">#101010</item>
+    	<item name="titleTextStyle">@style/MyTheme.ActionBar.TitleTextStyle</item>
+	</style>
+	
+	<!-- Style the actionbar text color -->
+	<style name="MyTheme.ActionBar.TitleTextStyle" parent="TextAppearance.Sherlock.Widget.ActionBar.Title">
+    	<item name="android:textColor">#FFFFFF</item>
+  	</style>
 </resources>

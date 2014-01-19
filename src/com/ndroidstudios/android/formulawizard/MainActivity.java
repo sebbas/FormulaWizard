@@ -3,19 +3,27 @@ package com.ndroidstudios.android.formulawizard;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.TextView;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.app.ActionBar.Tab;
+import com.ndroidstudios.android.helper.FontHelper;
 import com.ndroidstudios.android.helper.VoiceHelper;
 
 public class MainActivity extends SherlockFragmentActivity {
 
+	private static String[] tabNames = {"Formulas","Custom","Voice Calc"};
 	ViewPager mViewPager;
 	TabsAdapter mTabsAdapter;
 	VoiceHelper voiceHelper = new VoiceHelper(this);
@@ -39,12 +47,13 @@ public class MainActivity extends SherlockFragmentActivity {
 				bar.newTab().setText("Custom"),
 				CustomFormulaFragment.class, null);
 		
-		// Only add voice tab if the device is voice recog capable
+		// Only add voice tab if the device is voice recognition capable
 		if(voiceHelper.isVoiceCapable()) {
 			mTabsAdapter.addTab(
 				bar.newTab().setText("Voice Calc"),
 				VoiceFragment.class, null);
 		}	
+		styleTabs(bar);
 	}
 	
 	@Override
@@ -52,11 +61,25 @@ public class MainActivity extends SherlockFragmentActivity {
 		getSherlock().dispatchDestroy();
 		try {
 			super.onDestroy();
-		} catch (Exception $e) {
+		} catch (Exception e) {
 	    }
 	}
+	
+	private void styleTabs(ActionBar bar) {
+		// Apply a custom font to the tabs
+		for (int i = 0; i < bar.getTabCount(); i++){
+		    LayoutInflater inflater = LayoutInflater.from(this);
+		    View customView = inflater.inflate(R.layout.tab_title, null);
 
-	public static class TabsAdapter extends FragmentPagerAdapter implements
+		    TextView tabTitle = (TextView) customView.findViewById(R.id.action_custom_title);
+		    tabTitle.setText(tabNames[i]);
+		    FontHelper.overrideFonts(getApplicationContext(), tabTitle);
+
+		    bar.getTabAt(i).setCustomView(customView);
+		}
+	}
+
+	private static class TabsAdapter extends FragmentPagerAdapter implements
 			ActionBar.TabListener, ViewPager.OnPageChangeListener {
 		private final Context mContext;
 		private final ActionBar mActionBar;

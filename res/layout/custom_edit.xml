@@ -70,7 +70,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/editformula_name_hint"
-            android:inputType="text" />
+            android:inputType="textCapSentences|textFilter" />
     </LinearLayout>
     
     <LinearLayout
@@ -96,9 +96,10 @@
             android:maxLength="50"
             android:singleLine="true"
             android:hint="@string/editformula_formula_hint"
-            android:inputType="text" />
+            android:inputType="textCapSentences|textFilter" />
+        
     </LinearLayout>
-
+    
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

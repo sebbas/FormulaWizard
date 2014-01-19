@@ -10,6 +10,7 @@
         <item>Temperature</item>
         <item>Volume</item>
         <item>Weight</item>
+        <item>Length</item>
     </string-array>
     
 </resources>

@@ -1,10 +1,12 @@
 package com.ndroidstudios.android.formulawizard;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,17 +25,26 @@ import com.ndroidstudios.android.helper.FontHelper;
 
 public class CustomFormulaFragment extends SherlockFragment {
 	
+	private static final String DELETE_DIALOG_VISIBILITY = "dialog visibility";
+	private static final String DELETE_ROW_ITEM_ID = "row item id";
+	
 	private static int EDITFORMULA_REQ = 1;
 	private ListView listFromDB;
 	private TextView emptyListInfoText;
 	private ImageView logoLight;
 	private View rootView;	
 	private DBAdapter myDB;
+	private AlertDialog mDeleteDialog;
+	private long mCurrentRowToDelete;
+	private boolean mIsShowingDeleteDialog = false;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		
+		if (savedInstanceState != null) {
+			setupDeleteDialog(savedInstanceState);
+		}
 		setHasOptionsMenu(true);
 		openDB();
 		rootView = inflater.inflate(R.layout.custom_list, container, false);
@@ -65,6 +76,16 @@ public class CustomFormulaFragment extends SherlockFragment {
 	}
 	
 	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		if (mDeleteDialog != null) {
+			System.out.println("entered");
+			outState.putBoolean(DELETE_DIALOG_VISIBILITY, mIsShowingDeleteDialog);
+			outState.putLong(DELETE_ROW_ITEM_ID, mCurrentRowToDelete);
+		}
+	}
+
+	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		
@@ -72,6 +93,14 @@ public class CustomFormulaFragment extends SherlockFragment {
 			if (resultCode == MainActivity.RESULT_OK) {	
 				populateViewFromDB();
 			}
+		}
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		if (mDeleteDialog != null) {
+			mDeleteDialog.dismiss();
 		}
 	}
 
@@ -154,22 +183,30 @@ public class CustomFormulaFragment extends SherlockFragment {
 			@Override
 			public boolean onItemLongClick(AdapterView<?> parent, View viewClicked,
 					int position, long idInDB) {
+				vibrate();
+				mCurrentRowToDelete = idInDB;
 				startAlertPrompt(idInDB);
-				return false;
+				return true;
 			}
 		});
 	}
 	
+	private void vibrate() {
+		Vibrator vibrator = (Vibrator) this.getActivity().getSystemService(Context.VIBRATOR_SERVICE);
+		vibrator.vibrate(50);
+	}
+	
 	private void startAlertPrompt(final long idInDB) {
+		LayoutInflater inflater = this.getActivity().getLayoutInflater();
 		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this.getActivity());
 		alertDialogBuilder
-			.setTitle(R.string.alert_deleteformula_title)
-			.setMessage(R.string.alert_deleteformula_subtitle)
+			.setView(inflater.inflate(R.layout.delete_formula, null))
 			.setCancelable(false)
 			.setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
 				
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
+					mIsShowingDeleteDialog = false;
 					deleteFormula(idInDB);
 					populateViewFromDB(); // refresh the UI
 				}
@@ -178,15 +215,31 @@ public class CustomFormulaFragment extends SherlockFragment {
 				
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					dialog.cancel();
+					mIsShowingDeleteDialog = false;
+					dialog.dismiss();
 				}
 			});
-		AlertDialog alertDialog = alertDialogBuilder.create();
-		alertDialog.show();
+		mDeleteDialog = alertDialogBuilder.create();
+		mDeleteDialog.show();
+		mIsShowingDeleteDialog = true;
+		
+		TextView title = (TextView) mDeleteDialog.findViewById(R.id.delete_title);
+		TextView message = (TextView) mDeleteDialog.findViewById(R.id.delete_message);
+		TextView button1 = (TextView) mDeleteDialog.findViewById(android.R.id.button1);
+		TextView button2 = (TextView) mDeleteDialog.findViewById(android.R.id.button2);
+		TextView[] views = {message, title, button1, button2};
+		FontHelper.overrideFonts(this.getActivity(), views);
 	}
 	
 	private void deleteFormula(long idInDB) {
 		myDB.deleteRow(idInDB);
+	}
+	
+	private void setupDeleteDialog(Bundle savedInstanceState) {
+		mCurrentRowToDelete = savedInstanceState.getLong(DELETE_ROW_ITEM_ID);
+		if(savedInstanceState.getBoolean(DELETE_DIALOG_VISIBILITY)) {
+			startAlertPrompt(mCurrentRowToDelete);
+		}
 	}
 }
 

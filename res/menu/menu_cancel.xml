@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/menu_cancel"
-        android:icon="@drawable/content_remove"
+        android:icon="@drawable/ic_action_cancel"
         android:showAsAction="always"
         android:title="@string/cancel_formula"
         android:titleCondensed="@string/cancel_formula">

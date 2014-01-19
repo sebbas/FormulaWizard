@@ -1,8 +1,10 @@
 package com.ndroidstudios.android.helper;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Locale;
 
 import android.app.Activity;
@@ -17,7 +19,14 @@ public class CustomCalculatorHelper {
 	private static final String[] functions = {"abs", "acos", "asin", "atan", "cbrt", "ceil", "cos", "cosh",
 		"exp", "floor", "log", "sin", "sinh", "sqrt", "tan", "tanh"};
 	
-	private static final String[] constants = {"pi", "e"};
+	public static final String[] constants = {"pi", "e"};
+	
+	public static final HashMap<String, Double> constantsMap;
+    static {
+    	constantsMap = new HashMap<String, Double>();
+    	constantsMap.put("pi", 3.14159265359);
+    	constantsMap.put("e", 2.71828182845);
+    }
 	
 	public static ArrayList<String> getVariableArray(String formula) {
 		ArrayList<String> variableNames = new ArrayList<String>();
@@ -34,6 +43,29 @@ public class CustomCalculatorHelper {
 			if(i == formula.length()-1 && tmpWord != "") addVariableToList(variableNames, tmpWord);
 		}
 		return variableNames;
+	}
+	
+	public static String listToString(List<String> variables) {
+    	String result = "[";
+    	for (String a : variables) {
+    		result += a + ", ";    		
+    	}
+    	return result += "]";
+    }
+	
+	public static String[] splitStringAtEqualSign(String formula) {
+		return formula.split("=");
+	}
+	
+	public static String removeWhiteSpaceFromString(String s) {
+		return s.replaceAll("\\s+","");
+	}
+	
+	public static String[] replaceUnicode(String[] stringArray) {
+		for (int i = 0; i < stringArray.length; i++) {
+			stringArray[i] = stringArray[i].replace("\u00F7", "/").replace("\u00D7", "*").replace("\u221A", "sqrt"); 
+		}
+		return stringArray;
 	}
 	
 	private static void addVariableToList(ArrayList<String> variableNames, String variable) {

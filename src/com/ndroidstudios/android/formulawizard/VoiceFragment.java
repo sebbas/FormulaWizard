@@ -5,10 +5,14 @@ import java.util.List;
 import java.util.Locale;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.speech.RecognizerIntent;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
@@ -19,7 +23,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.ndroidstudios.android.helper.FontHelper;
@@ -42,16 +45,22 @@ public class VoiceFragment extends SherlockFragment {
 	private static final String KEY_RESULT_TEXT = "result_text";
 	private static final String KEY_PROGRESSBAR_VISIBILITY = "progressbar_visibility";
 	private static final String KEY_MORELAYOUT_VISIBILITY = "more_visibility";
+	private static final String KEY_DIALOG_VISIBILITY = "dialog_visibility";
 	
 	private TextView mVoicePrompt;
 	private TextView mVoiceResult;
 	private ProgressBar mProgressBar;
 	private LinearLayout mMoreInfo;
 	private ImageView mWolframIcon;
+	private AlertDialog mAlertDialog;
 	private VoiceHelper voiceHelper;
+	private WAQuery mQuery;
     private static final int REQUEST_CODE = 1234;
     private Bundle mSavedInstanceState; // Since onRetainInstance does not support savedInstanceState, 
     									//	this is an alternative
+    
+    // Result object from our query to Wolfram Alpha
+    public WAQueryResult queryResult;
 
 	/**
      * Called with the activity is first created.
@@ -87,7 +96,7 @@ public class VoiceFragment extends SherlockFragment {
         this.setHasOptionsMenu(true);
     	return rootView;
     }
-
+  
     /*
      * TODO Implement the "share formula" functionality
 	@Override
@@ -106,8 +115,16 @@ public class VoiceFragment extends SherlockFragment {
 			return super.onOptionsItemSelected(item);
 		}
 	}*/
-	
-    // Alternate implementation with instance variable (mSavedInstanceState). Reason: setRetainInstance() was used in onCreateView()
+
+    @Override
+    public void onResume() {
+    	super.onResume();
+    	// Make sure we set dialog visibility to false so that dialog won't pop up when app was exited with dialog still opened
+    	// Comment: Little hacky...
+    	if (mSavedInstanceState != null) mSavedInstanceState.putBoolean(KEY_DIALOG_VISIBILITY, false);
+    }
+    
+	// Alternate implementation with instance variable (mSavedInstanceState). Reason: setRetainInstance() was used in onCreateView()
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
     	mSavedInstanceState = new Bundle();
@@ -115,21 +132,23 @@ public class VoiceFragment extends SherlockFragment {
         mSavedInstanceState.putString(KEY_RESULT_TEXT, mVoiceResult.getText().toString());
         mSavedInstanceState.putInt(KEY_PROGRESSBAR_VISIBILITY, mProgressBar.getVisibility());
         mSavedInstanceState.putInt(KEY_MORELAYOUT_VISIBILITY, mMoreInfo.getVisibility());
+        if (mAlertDialog != null) mSavedInstanceState.putBoolean(KEY_DIALOG_VISIBILITY, mAlertDialog.isShowing());
     }
-    
-    @Override
+
+	@Override
     public void onActivityCreated(Bundle savedInstanceState) {
     	super.onActivityCreated(savedInstanceState);
     	voiceHelper = new VoiceHelper(getActivity());
     	
-    	if (mSavedInstanceState != null) {
+    	if (mSavedInstanceState != null && queryResult != null) {
     		mVoicePrompt.setText(mSavedInstanceState.getString(KEY_PROMPT_TEXT));
     		mVoiceResult.setText(mSavedInstanceState.getString(KEY_RESULT_TEXT));
     		mProgressBar.setVisibility(mSavedInstanceState.getInt(KEY_PROGRESSBAR_VISIBILITY));
     		mMoreInfo.setVisibility(mSavedInstanceState.getInt(KEY_MORELAYOUT_VISIBILITY));
-    		if (!voiceHelper.isNetworkConnected()) {
-    			mVoiceResult.setVisibility(View.GONE);
-    		}
+    		setIconLink();
+    		if (!querySuccess()) setDialogLink(); 
+    		if (mSavedInstanceState.getBoolean(KEY_DIALOG_VISIBILITY) == true) openInfoDialog();
+    		if (!voiceHelper.isNetworkConnected()) mVoiceResult.setVisibility(View.GONE);
     	} else {
     		mVoicePrompt.setText(R.string.voice_prompt);
     	}
@@ -139,7 +158,7 @@ public class VoiceFragment extends SherlockFragment {
     	if (voiceHelper.isNetworkConnected()) {
     		Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
             intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-            intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Ask the wizard a question ...");
+            intent.putExtra(RecognizerIntent.EXTRA_PROMPT, R.string.voice_prompt);
             startActivityForResult(intent, REQUEST_CODE);
     	} else {
     		mVoicePrompt.setText(this.getResources().getString(R.string.connection_error));
@@ -188,12 +207,68 @@ public class VoiceFragment extends SherlockFragment {
 		wolframTask.execute(query);
     }
     
+    public void openInfoDialog() {
+    	AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(VoiceFragment.this.getActivity());
+		alertDialogBuilder
+			.setTitle(R.string.limit_of_queries)
+			.setMessage(R.string.api_problem)
+			.setCancelable(false)
+			.setPositiveButton(R.string.visit_wolfram, new DialogInterface.OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					Uri uri = Uri.parse(mQuery.toWebsiteURL()                   );
+					Intent i = new Intent(Intent.ACTION_VIEW, uri);
+					startActivity(i);
+				}
+			})
+			.setNegativeButton(R.string.go_back, new DialogInterface.OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					dialog.cancel();
+				}
+			});
+		mAlertDialog = alertDialogBuilder.create();
+		mAlertDialog.show();
+    }
+    
+    private void setIconLink() {	
+        mWolframIcon.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// Create the URL to the actual Wolfram Alpha results webpage
+				String queryWebsiteURL = mQuery.toWebsiteURL();
+
+				Intent intent = new Intent();
+				intent.setAction(Intent.ACTION_VIEW);
+				intent.addCategory(Intent.CATEGORY_BROWSABLE);
+				intent.setData(Uri.parse(queryWebsiteURL));
+				startActivity(intent);
+			}
+		});
+    }
+    
+    private void setDialogLink() {
+    	mVoiceResult.setOnClickListener(new View.OnClickListener() {	
+			@Override
+			public void onClick(View v) {
+				openInfoDialog();
+			}
+		});
+    }
+    
+    private boolean querySuccess() {
+    	if (queryResult.getErrorCode() == 10) return false;
+    	return true;
+    }
+    
     private class WolframTask extends AsyncTask<String, Void, String> {
 
-        private static final String appid = "OMITTED";
+        private static final String appid = "omitted"; 
         private String output;
-        private WAQuery mQuery;
-
+        
         @Override
     	protected String doInBackground(String... args) {
         	for (int i = 0 ; i < args.length; i++) {
@@ -219,23 +294,6 @@ public class VoiceFragment extends SherlockFragment {
         	mVoiceResult.setVisibility(View.VISIBLE);
         	mVoiceResult.setText(getResources().getString(R.string.analyze));
         	mProgressBar.setVisibility(View.VISIBLE);
-        }
-        
-        private void setIconLink() {	
-            mWolframIcon.setOnClickListener(new View.OnClickListener() {
-
-    			@Override
-    			public void onClick(View v) {
-    				// Create the URL to the actual Wolfram Alpha results webpage
-    				String queryWebsiteURL = mQuery.toWebsiteURL();
-
-    				Intent intent = new Intent();
-    				intent.setAction(Intent.ACTION_VIEW);
-    				intent.addCategory(Intent.CATEGORY_BROWSABLE);
-    				intent.setData(Uri.parse(queryWebsiteURL));
-    				startActivity(intent);
-    			}
-    		});
         }
         
         public String getResultFromQuery(String queryString) {
@@ -269,43 +327,61 @@ public class VoiceFragment extends SherlockFragment {
                 
                 // This sends the URL to the Wolfram|Alpha server, gets the XML result
                 // and parses it into an object hierarchy held by the WAQueryResult object.
-                WAQueryResult queryResult = engine.performQuery(mQuery);
+                queryResult = engine.performQuery(mQuery);
                 
                 if (queryResult.isError()) {
-                    System.out.println("Query error");
-                    System.out.println("  error code: " + queryResult.getErrorCode());
-                    System.out.println("  error message: " + queryResult.getErrorMessage());
-                    output = getResources().getString(R.string.query_error);
+                    handleQueryError();
                 } else if (!queryResult.isSuccess()) {
-                    System.out.println("Query was not understood; no results available.");
-                    output = getResources().getString(R.string.query_notunderstood);
+                	handleQueryNotSuccessful();
                 } else {
-                    // Got a result.
-                    System.out.println("Successful query. Pods follow:\n");
-                    for (WAPod pod : queryResult.getPods()) {
-                        if (!pod.isError()) {
-                            System.out.println(pod.getTitle());
-                            System.out.println("------------");
-                            String title = pod.getTitle();
-                            for (WASubpod subpod : pod.getSubpods()) {
-                                for (Object element : subpod.getContents()) {
-                                    if (element instanceof WAPlainText) {
-                                        System.out.println(((WAPlainText) element).getText());
-                                        System.out.println("");                                    
-                                        output = pod.getTitle() + " = " + ((WAPlainText) element).getText();
-                                    }
-                                }
-                            }
-                            System.out.println("");
-                        }
-                    }
-                    // We ignored many other types of Wolfram|Alpha output, such as warnings, assumptions, etc.
-                    // These can be obtained by methods of WAQueryResult or objects deeper in the hierarchy.
+                    handleQuerySuccess(queryResult);
                 }
             } catch (WAException e) {
                 e.printStackTrace();
             }
             return defineOutput(output);
+        }
+        
+        private void handleQueryError() {
+        	System.out.println("Query error");
+            System.out.println("  error code: " + queryResult.getErrorCode());
+            System.out.println("  error message: " + queryResult.getErrorMessage());
+            if (queryResult.getErrorCode() == 10) {
+            	output = getResources().getString(R.string.account_blocked) + " " 
+            			+ getResources().getString(R.string.find_out_why);
+            	setDialogLink();
+            } else {
+            	output = getResources().getString(R.string.query_error);
+            }
+        }
+        
+        private void handleQueryNotSuccessful() {
+        	System.out.println("Query was not understood; no results available.");
+            output = getResources().getString(R.string.query_notunderstood);
+        }
+        
+        private void handleQuerySuccess(WAQueryResult queryResult) {
+        	// Got a result.
+            System.out.println("Successful query. Pods follow:\n");
+            for (WAPod pod : queryResult.getPods()) {
+                if (!pod.isError()) {
+                    System.out.println(pod.getTitle());
+                    System.out.println("------------");
+                    String title = pod.getTitle();
+                    for (WASubpod subpod : pod.getSubpods()) {
+                        for (Object element : subpod.getContents()) {
+                            if (element instanceof WAPlainText) {
+                                System.out.println(((WAPlainText) element).getText());
+                                System.out.println("");                                    
+                                output = pod.getTitle() + " = " + ((WAPlainText) element).getText();
+                            }
+                        }
+                    }
+                    System.out.println("");
+                }
+            }
+            // We ignored many other types of Wolfram|Alpha output, such as warnings, assumptions, etc.
+            // These can be obtained by methods of WAQueryResult or objects deeper in the hierarchy.
         }
         
         private String defineOutput(String output) {
