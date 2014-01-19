@@ -1,7 +1,6 @@
 package com.ndroidstudios.android.helper;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -61,9 +60,48 @@ public class CustomCalculatorHelper {
 		return s.replaceAll("\\s+","");
 	}
 	
+	// Replace unicode characters since they cannot be handled by the processing library
 	public static String[] replaceUnicode(String[] stringArray) {
 		for (int i = 0; i < stringArray.length; i++) {
-			stringArray[i] = stringArray[i].replace("\u00F7", "/").replace("\u00D7", "*").replace("\u221A", "sqrt"); 
+			stringArray[i] = stringArray[i]
+					.replace("\u00F7", "/")
+					.replace("\u2215", "/")
+					.replace("\u2044", "/")
+					.replace("\u00D7", "*")
+					.replace("\u2212", "-")
+					.replace("\u221A", "sqrt")
+					.replace("\u03A0", "pi")
+					.replace("\u03C0", "pi")
+					.replace("\u1D70B", "pi")
+					.replace("\u1D6D1", "pi")
+					
+					.replace("\u00BC", "(1/4)")
+					.replace("\u00BD", "(1/2)")
+					.replace("\u00BE", "(3/4)")
+					.replace("\u2153", "(1/3)")
+					.replace("\u2154", "(2/3)")
+					.replace("\u2155", "(1/5)")
+					.replace("\u2156", "(2/5)")
+					.replace("\u2157", "(3/5)")
+					.replace("\u2158", "(4/5)")
+					.replace("\u2159", "(1/6)")
+					.replace("\u215A", "(5/6)")
+					.replace("\u215B", "(1/8)")
+					.replace("\u215C", "(3/8)")
+					.replace("\u215D", "(5/8)")
+					.replace("\u215E", "(7/8)")
+					
+					.replace("\u2070", "^0")
+					.replace("\u00B9", "^1")
+					.replace("\u00B2", "^2")
+					.replace("\u00B3", "^3")
+					.replace("\u2074", "^4")
+					.replace("\u2075", "^5")
+					.replace("\u2076", "^6")
+					.replace("\u2077", "^7")
+					.replace("\u2078", "^8")
+					.replace("\u2079", "^9");
+					
 		}
 		return stringArray;
 	}

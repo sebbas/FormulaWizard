@@ -1311,6 +1311,7 @@ containing a value of this type.
         public static final int midpoint_points=0x7f090043;
         public static final int more_info=0x7f09004c;
         public static final int name=0x7f090056;
+        public static final int nan_error=0x7f090088;
         public static final int no_custom_formulas=0x7f090059;
         public static final int no_real_roots=0x7f09007c;
         public static final int no_result=0x7f09004b;

@@ -1,10 +1,8 @@
 package com.ndroidstudios.android.formulawizard;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Editable;
@@ -34,7 +32,7 @@ public class CustomFormulaEdit extends SherlockActivity {
 	private EditText mFormula;
 	private Spinner mCategorySpinner;
 	private boolean mIsEdited = false;
-	private String[] editTextState;
+	private String[] initialState;
 	private DBAdapter myDB;	
 	private AlertDialog mAlertDialog;
 	private AlertDialog mInfoDialog;
@@ -95,7 +93,7 @@ public class CustomFormulaEdit extends SherlockActivity {
 				
 		// This happens when the activity is called to edit an exiting formula
 		tryPopulatingView(this.getIntent()); 
-		saveEditTextState();
+		saveEditTextState(this.getIntent());
 		mFormula.addTextChangedListener(formulaWatcher);
 		mFormulaName.addTextChangedListener(nameWatcher);
 		
@@ -187,8 +185,9 @@ public class CustomFormulaEdit extends SherlockActivity {
 	}
 	
 	private boolean noDataEntered() {
-		if (editTextState[0].equals(mFormulaName.getText().toString()) 
-				&& editTextState[1].equals(mFormula.getText().toString())) {
+		if (initialState[0].equals(mFormulaName.getText().toString()) 
+				&& initialState[1].equals(mFormula.getText().toString())
+				&& initialState[2].equals(mCategorySpinner.getSelectedItem().toString())) {
 			return true;
 		} else {
 			return false;
@@ -305,13 +304,14 @@ public class CustomFormulaEdit extends SherlockActivity {
 		}
 	}
 	
-	// Save the content of the EditTexts so that we can cancel the activity without alert
-	// if nothing changed
-	private String[] saveEditTextState() {
-		editTextState = new String[2];
-		editTextState[0] = (mFormulaName.getText().toString());
-		editTextState[1] = (mFormula.getText().toString());
-		return editTextState;
+	// Save the content of the EditTexts and the Spinner so that we can cancel the activity 
+	// without alert if nothing changed
+	private String[] saveEditTextState(Intent intent) {
+		initialState = new String[3];
+		initialState[0] = (mFormulaName.getText().toString());
+		initialState[1] = (mFormula.getText().toString());
+		initialState[2] = mCategorySpinner.getSelectedItem().toString();
+		return initialState;
 	}
 }
 

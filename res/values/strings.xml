@@ -115,7 +115,7 @@
     <string name="info_message">When creating a custom formula you can use all kinds of functions! \nHere is a list of what
         you can use: \n\nabs, acos, asin, atan, cbrt, ceil, cos, cosh,
 		exp, floor, log, sin, sinh, sqrt, tan, tanh\n\nJust make sure to use parentheses with all functions. Otherwise you might
-		confuse the Formula Wizard :)</string>
+		confuse the Formula Wizard :)\n\nAnd one last word of advice: The functions (like sin) operate on radians! Not on degrees!</string>
 	<string name="ok">OK!</string>
     <string name="no_real_roots">There are no real roots!</string>
     <string name="radius_not_negative">The radius can\'t be negative!</string>
@@ -129,5 +129,7 @@
     <string name="lengthwidthheight_not_negative">The length/ width/ height can\'t be negative!</string>
     <string name="radiusheight_not_negative">The radius/ height can\'t be negative!</string>
     <string name="enter_positive_value">Enter a positive value!</string>
+    <string name="nan_error">Your input doesn\'t make sense to the wizard. Please, check it again or hit the \'Info Button\' at the top
+        to learn more.</string>
     
 </resources>

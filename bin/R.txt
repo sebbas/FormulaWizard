@@ -610,6 +610,7 @@ int string midpoint 0x7f090070
 int string midpoint_points 0x7f090043
 int string more_info 0x7f09004c
 int string name 0x7f090056
+int string nan_error 0x7f090088
 int string no_custom_formulas 0x7f090059
 int string no_real_roots 0x7f09007c
 int string no_result 0x7f09004b

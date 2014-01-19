@@ -1,16 +1,17 @@
 package com.ndroidstudios.android.formulawizard;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map.Entry;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -34,6 +35,7 @@ public class CustomCalculator extends SherlockActivity {
 	private TextView mNameText;
 	private TextView mFormulaText;
 	private TextView mInfoText;
+	private AlertDialog mInfoDialog;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +62,7 @@ public class CustomCalculator extends SherlockActivity {
 		super.onCreateOptionsMenu(menu);
 		com.actionbarsherlock.view.MenuInflater inflater = getSupportMenuInflater();
 		// TODO inflater.inflate(R.menu.menu_share, menu);
+		inflater.inflate(R.menu.menu_about, menu);
 		inflater.inflate(R.menu.menu_edit, menu);
 		return true;
 	}
@@ -72,7 +75,8 @@ public class CustomCalculator extends SherlockActivity {
 			putIntentExtras(intent);
 			startActivityForResult(intent, EDITFORMULA_REQ);
 			return true;
-		case R.id.menu_share:
+		case R.id.menu_about:
+			startInfoPrompt();
 			return true;
 		default: 	
 			return super.onOptionsItemSelected(item);
@@ -168,7 +172,7 @@ public class CustomCalculator extends SherlockActivity {
 		
 		return formulaAsArray;
 	}
-	
+		
 	// The name of the result variable is the name of the variable whose value is calculates by an equation string
 	private String getNameOfResultVariable() {
 		String[] formulaAsArray = getFormulaStringArray();
@@ -180,14 +184,12 @@ public class CustomCalculator extends SherlockActivity {
 	
 	// The equation string is the side of an equation that contains the calculations
 	private String getEquationString() {
-		String resultString;
 		String[] formulaAsArray = getFormulaStringArray();
 		if (formulaAsArray.length > 1) {
-			resultString = formulaAsArray[1];
+			return formulaAsArray[1];
 		} else {
-			resultString = formulaAsArray[0];
+			return formulaAsArray[0];
 		}
-		return resultString;
 	}
 	
 	private void handleInput() {
@@ -197,22 +199,25 @@ public class CustomCalculator extends SherlockActivity {
 		} else {
 			Calculable calc;
 			try {
+				// Create a lowercase string of the formula. Only that can be processed.
+				String lowerCaseFormula = getEquationString().toLowerCase(Locale.getDefault());
+				System.out.println(lowerCaseFormula);
 				// Get a String[] from the arraylist that contains all variables
-				ArrayList<String> variableNamesList = CustomCalculatorHelper.getVariableArray(getEquationString());
+				ArrayList<String> variableNamesList = CustomCalculatorHelper.getVariableArray(lowerCaseFormula);
 				String[] variableNames = variableNamesList.toArray(new String[variableNamesList.size()]);
 				
 				// A String array that holds all names of constants
 				String[] constants = CustomCalculatorHelper.constants;
 								
 				// Create new calculable object
-				calc = new ExpressionBuilder(getEquationString())
+				calc = new ExpressionBuilder(lowerCaseFormula)
 					.withVariableNames(variableNames)
 					.withVariableNames(constants)
 					.build();
 				
 				setVariablesInCalcObject(calc);
 				
-				double result = calc.calculate();
+				double result = calc.calculate();	
 				setResultText(result);
 				
 			} catch (UnknownFunctionException e) {
@@ -233,6 +238,8 @@ public class CustomCalculator extends SherlockActivity {
 		if (nameOfResultVariable != "") {
 			nameOfResultVariable = CustomCalculatorHelper.removeWhiteSpaceFromString(nameOfResultVariable);
 			mInfoText.setText(nameOfResultVariable + " = " + result);
+		} else if (Double.isNaN(result)){
+			mInfoText.setText(R.string.nan_error);
 		} else {
 			mInfoText.setText(getResources().getString(R.string.result) + " = " + result);
 		}
@@ -246,13 +253,37 @@ public class CustomCalculator extends SherlockActivity {
 		
 		// Add all entries from valuesMap
 		for (Entry<String, Double> entry : valuesMap.entrySet()) {
-			calc.setVariable(entry.getKey(), entry.getValue());
+			// Get key / value pair and make sure that the key is LOWERCASE!
+			calc.setVariable(entry.getKey().toLowerCase(Locale.getDefault()), entry.getValue());
 		}
 		
 		// Add all entries from constantsMap
 		for (Entry<String, Double> entry : constantsMap.entrySet()) {
 			calc.setVariable(entry.getKey(), entry.getValue());
 		}
+	}
+	
+	private void startInfoPrompt() {
+		LayoutInflater inflater = getLayoutInflater();
+		AlertDialog.Builder infoDialogBuilder = new AlertDialog.Builder(this);
+		infoDialogBuilder
+			.setView(inflater.inflate(R.layout.info_dialog, null))
+			.setCancelable(false)
+			.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					dialog.dismiss();
+			}
+		});
+		mInfoDialog = infoDialogBuilder.create();
+		mInfoDialog.show();
+		
+		TextView title = (TextView) mInfoDialog.findViewById(R.id.info_title);
+		TextView message = (TextView) mInfoDialog.findViewById(R.id.info_message);
+		TextView button1 = (TextView) mInfoDialog.findViewById(android.R.id.button1);
+		TextView[] views = {message, title, button1};
+		FontHelper.overrideFonts(this, views);
 	}
 }
 
