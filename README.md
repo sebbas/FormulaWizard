@@ -24,4 +24,12 @@ Get Formula Wizard for mathematics now and make your life easier! Whether you us
 
 ☆ Perimeter calculator
 
-☆ Compatible with any Android OS higher than 2.1
+☆ Midpoint calculator 
+
+☆ Pythagoras calculator 
+
+☆ Slope calculator 
+
+☆ Custom calculator for any formula you can imagine
+
+☆ Voice calculator
